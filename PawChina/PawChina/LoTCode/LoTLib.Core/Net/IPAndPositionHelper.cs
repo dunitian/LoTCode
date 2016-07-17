@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text;
 
-public class IPAndPositionHelper
+public partial class IPAndPositionHelper
 {
     #region Resource
     public static bool EnableFileWatch = false;

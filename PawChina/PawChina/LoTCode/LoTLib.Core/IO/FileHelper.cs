@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-public static class FileHelper
+public static partial class FileHelper
 {
     /*头文件参考：（我自己测是如有偏差请联系我）
         7790：exe，dll

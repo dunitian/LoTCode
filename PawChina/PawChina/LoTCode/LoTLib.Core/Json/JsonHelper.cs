@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-public static class JsonHelper
+public static partial class JsonHelper
 {
     /// <summary>
     ///把指定类型转换为Json

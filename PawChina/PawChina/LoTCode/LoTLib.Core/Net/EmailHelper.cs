@@ -32,7 +32,7 @@ public class MailModel
 }
 #endregion
 
-public class EmailHelper
+public partial class EmailHelper
 {
     private static string mailFrom = ConfigurationManager.AppSettings["EmailForm"]; //登陆用户名
     private static string mailPass = ConfigurationManager.AppSettings["EmailPass"]; //登陆密码

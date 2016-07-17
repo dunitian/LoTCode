@@ -1,8 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 public static partial class FunHelper
 {
+
+    #region 时间系列
+    /// <summary>
+    /// long格式的时间戳转换成DateTime
+    /// </summary>
+    /// <param name="ticks"></param>
+    /// <returns></returns>
+    public static DateTime ToDateTime(this long ticks)
+    {
+        return new DateTime(ticks);
+    }
+    /// <summary>
+    /// 把time格式转换long格式的Time
+    /// </summary>
+    /// <param name="time"></param>
+    /// <returns></returns>
+    public static long ToLong(this DateTime time)
+    {
+        return time.Ticks;
+    } 
+    #endregion
+
     /// <summary>  
     /// 判断字符串input 在 input字符串中出现的次数(递归调用)
     /// </summary>  

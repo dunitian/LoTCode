@@ -1,7 +1,7 @@
 namespace PawChina.Model
 {
     /// <summary>
-    /// 11¸ö×Ö¶Î
+    /// 12¸ö×Ö¶Î
     /// </summary>
     public class NoteInfo
     {
@@ -45,6 +45,10 @@ namespace PawChina.Model
         /// SEOÍâ¼üID
         /// </summary>
         public int NSeoId { get; set; }
+        /// <summary>
+        /// SEOInfo
+        /// </summary>
+        public SeoTKD SeoInfo { get; set; }
         /// <summary>
         /// ×´Ì¬
         /// </summary>
