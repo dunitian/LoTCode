@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "添加文章分类";
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+@model IQueryable<LoT.Model.ArticleType>
+<div class="pub_module">
+    <div class="top">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="middle">
+        <ul class="list_info">
+            <li>
+                <span class="tit">分类名称：</span>
+                <input type="text" id="typeName" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">所属分类：</span>
+                <select id="SelectTypeId" onchange="getChildType(this);">
+                    @if (Model != null)
+                    {
+                        <option value="0">顶级目录</option>
+                        foreach (var item in Model)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                </select>
+                <select id="SelectChildTypeId" style="display: none;" onchange="getChildType(this);"></select>
+                <font style="color: Red">*</font>
+            </li>
+            <li class="pub_btn">
+                <input type="button" id="mybtn" value="保存" class="input_30 p_btn" style="width: 100px; float: left; margin-left: 35px;" />
+                <input type="button" id="mybtnfh" value="返回" class="input_30 p_btn" style="width: 100px; margin-left: 35px;" />
+            </li>
+        </ul>
+    </div>
+</div>
+@section JsScript{
+    <script type="text/javascript">
+        $(function () {
+            //返回
+            $("#mybtnfh").click(function () {
+                location.href = "/ArticleType/Index";
+            })
+            //保存
+            $("#mybtn").click(function () {
+                var TypeName = $.trim($("#typeName").val());
+                if (TypeName.length < 1) {
+                    $.messager.alert('提示', "分类名称不能为空", "warning")
+                    return false;
+                }
+
+                var cPid = $("#SelectChildTypeId").val();
+                var Pid = $("#SelectTypeId").val();
+                if (cPid != null && cPid > 0) {
+                    Pid = cPid;
+                }
+
+                $.post('@Url.Action("Add")', { Name: TypeName, Pid: Pid }, function (data) {
+                    if (data.IsSuccess) {
+                        $.messager.alert('提示', "添加成功", "warning");
+                        setTimeout(function () {
+                            window.location.href = '@Url.Action("Index")';
+                        }, 2000);
+                    } else {
+                        $.messager.alert('提示', data.ErrorMessage, "warning")
+                    }
+                })
+            })
+        });
+
+        //获取当前分类的子分类
+        function getChildType(temp) {
+            var id = $(temp).attr("id");
+            //是顶级分类调用的
+            if (id == "SelectTypeId") {
+                //顶级分类的id
+                var pid = $('#SelectTypeId').val();
+                if (pid != null && pid != 0) {
+                    $.post('@Url.Action("GetChildType")', { Pid: pid }, function (data) {
+
+                        if (data.IsSuccess) {
+                            //这边是pid，不要设置0，会混乱的
+                            $("#SelectChildTypeId").html('<option value="' + pid + '">--全部--</option>');
+                            $.each(data.Data, function (key, value) {
+                                $("#SelectChildTypeId").append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                            });
+                            $("#SelectChildTypeId").show();
+                        }
+                        else {
+                            $("#SelectChildTypeId").val("0").hide();
+                            $.messager.alert("提示", data.ErrorMessage, "info");
+                        }
+                    });
+                } else {
+                    //没有选择分类~隐藏子分类
+                    $('#SelectChildTypeId').val(0).hide();
+                }
+            }
+        }
+    </script>
+}

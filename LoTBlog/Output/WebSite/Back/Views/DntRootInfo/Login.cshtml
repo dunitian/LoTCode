@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "欢迎登录LoTBlog";
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+@section HeadCss{
+    <link href="/Styles/Login.css" rel="stylesheet" type="text/css" />
+    <link href="/Styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
+}
+<div id="loginbox">
+    <form id="form2">
+        <div ><span style="color:#ff6a00;">LoTBlog后台管理系统</span></div>
+        <div style="height: 1px; border-top: 1px solid #3f4952; line-height: 1px; margin-top: 10px;
+            width: 90%;">
+        </div>
+        <div class="control-group normal_text" style="padding-bottom:0px;padding-top:0px;padding-right:20px;">
+            <h3>
+                <img src="/Images/LogoBack.png" alt="Logo" style="vertical-align: middle;" />
+            </h3>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <div class="main_input_box">
+                    <div style="float: left;">
+                        <span class="add-on bg_lg"><i class="icon-user"></i></span>
+                    </div>
+                    <div style="width: 80%; float: left;">
+                        <input type="text" id="txt_userName" style="-webkit-border-radius: 0px;
+                            background-color: White;" />
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="control-group">
+            <div class="controls">
+                <div class="main_input_box">
+                    <div style="float: left;">
+                        <span class="add-on bg_dy"><i class="icon-lock"></i></span>
+                    </div>
+                    <div style="width: 80%; float: left;">
+                        <input type="password" id="txt_pwd" style="-webkit-border-radius: 0px;
+                            background-color: White;" />
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="control-group" style="padding-top: 30px;">
+            <div class="controls">
+                <div class="main_input_box" style="text-align: center;">
+                    <div style="float: left;">
+                        <span class="add-on bg_db"><i class="icon-camera"></i></span>
+                    </div>
+                    <div style="width: 82%; float: left;">
+                        <input type="button" id="button1" class="btn btn-success" value='登    录  ' style="-webkit-border-radius: 0px;
+                            height: 39px; font-weight: bold;" onclick="login()" />
+                        <br />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@section JsScript{
+    <script type="text/javascript">
+        function login() {
+            if ($.trim($("#txt_userName").val()) == "" || $.trim($("#txt_pwd").val()) == "") {
+                $.messager.alert("提示", "请填写用户名或密码", "info");
+
+                return;
+            }
+            $.post('@Url.Action("LoginOn")', { "name": $("#txt_userName").val(), "pwd": $("#txt_pwd").val() }, function (data) {
+                if (data.IsSuccess == false) {
+                    $.messager.alert("提示", data.ErrorMessage, "info");
+                } else {
+                    window.top.location.href = '/LoTBack/Index';
+                }
+            });
+        }
+    </script>
+}

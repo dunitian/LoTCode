@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <div>
+        @using (Ajax.BeginForm("Create", "UserRegInfo", new AjaxOptions { }))
+        {
+            <table>
+                <tr><td>没加校验，简单演示一下</td></tr>
+                <tr>
+                    <td>
+                        用户名： <input type="text" name="Name" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        密码：  <input type="text" name="Pass" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        邮箱： <input type="text" name="Email" />
+                        <input type="hidden" name="Status" value="0" />
+                        <input type="hidden" name="GroupId" value="1" />
+                    </td>
+                </tr>
+                <tr><td><input type="submit" /></td></tr>
+            </table>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,335 @@
+﻿@{
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+@{ int tempId = ViewBag.GroupType;
+ switch (tempId)
+ {
+     case 1:
+         ViewBag.Title = "资讯添加页面";
+         ViewBag.NewUrl = "Index";
+         break;
+     case 2:
+         ViewBag.Title = "笔记添加页面";
+         ViewBag.NewUrl = "NotePad";
+         break;
+     case 3:
+         ViewBag.Title = "网络资源添加";
+         ViewBag.NewUrl = "Resource";
+         break;
+     default:
+         ViewBag.Title = "文章添加页面";
+         ViewBag.NewUrl = "Index";
+         break;
+ }
+}
+@section HeadCss{
+    @*文本编辑器引用的2个css开始*@
+    <link rel="stylesheet" href="/Script/kindeditor/themes/default/default.css" />
+    <link rel="stylesheet" href="/Script/kindeditor/plugins/code/prettify.css" />
+    @*文本编辑器引用的2个css结束*@
+}
+<div class="pub_module">
+    <div class="top">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="middle">
+        <ul class="list_info" style="padding-left:30px;">
+            <li>
+                <span class="tit">文章标题：</span>
+                <input type="text" id="Title" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">文章作者：</span>
+                <input type="text" id="Author" /><font style="color: Red">*</font>
+                <label><input style="width:30px;height:20px;" type="radio" onclick="setAuthor();" /><font>For Me</font></label>
+            </li>
+            <li>
+                <span class="tit">浏览总量：</span>
+                <input type="text" id="HitCount" value="@ViewBag.HitNum" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">排序：</span>
+                <input type="text" id="Sort" value="1"/><font style="color: Red">*(999~0)</font>
+            </li>
+            <li>
+                <span class="tit">文章分类：</span>
+                <select id="SelectTypeId" onchange="getChildType(this);">
+                    @if (ViewBag.ArticleTopType != null)
+                    {
+                        IQueryable<LoT.Model.ArticleType> ArticleTopTypes = ViewBag.ArticleTopType as IQueryable<LoT.Model.ArticleType>;
+                        <option value="0">=请选择=</option>
+                        foreach (var item in ArticleTopTypes)
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                </select>
+                <select id="SelectChildTypeId" style="display: none;" onchange="getChildType(this);"></select>
+                <select id="SelectChildTwoId" style="display: none;"></select>
+                <font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">推荐类型：</span>
+                <label><input type="radio" style="width: 20px" name="Recommend" value="0" checked="checked" /><font>不用推荐</font></label>
+                <label><input type="radio" style="width: 20px" name="Recommend" value="1" /><font>编辑推荐</font></label>
+                <label><input type="radio" style="width: 20px" name="Recommend" value="2" /><font>逆天推荐</font></label>
+                <label><input type="radio" style="width: 20px" name="Recommend" value="3" /><font>网友推荐</font></label>
+                <label><input type="radio" style="width: 20px" name="Recommend" value="4" /><font>首页置顶</font></label>
+            </li>
+            <li>
+                <span class="tit">访问级别：</span>
+                <label><input type="radio" style="width: 20px" name="Status" value="0" checked="checked" /><font>所有人可见</font></label>
+                <label><input type="radio" style="width: 20px" name="Status" value="1" /><font>仅好友可见</font></label>
+                <label><input type="radio" style="width: 20px" name="Status" value="2" /><font>仅自己可见</font></label>
+            </li>
+            <li>
+                <span class="tit">SEO关键字：</span>
+                <input type="text" id="SeoKeywords" value="dnt,dunitian,dkill.net,毒逆天," /><font style="color: Red">*</font><strong>逗号分隔</strong>
+                <label><input style="width:30px;height:20px;" type="radio" onclick="addDot();" /><font>加逗号</font></label>
+            </li>
+            <li>
+                <span class="tit">SEO的描述：</span>
+                <input type="text" id="Seodescription" /><font style="color: Red">*</font><strong>249字内</strong>
+                <label><input style="width:30px;height:20px;" type="radio" onclick="copyTitle();" /><font>引用标题</font></label>
+            </li>
+            <li>
+                <span class="tit">文章展图：</span>
+                <input type="button" class="input_30 p_btn" value="点我就上传默认展图" id="disPhoto" />
+                <input type="hidden" id="DisplayPic" /><img id="DisplayPhoto" style="width:50px;height:30px;" />
+                <font style="color: Red">不上传则随机上传图库里面的美图</font>
+            </li>
+        </ul>
+        <div style="padding-left:50px;">
+            <textarea rows="30" cols="97" id="editor_id" name="TContent"></textarea>
+        </div>
+        <ul class="middle" style="padding-left:30px;">
+            <li>&nbsp;</li>
+            <li>
+                <span class="tit"><strong>Tag 标签</strong>：</span>
+                @if (ViewBag.ArticleTags != null)
+                {
+                    IQueryable<LoT.Model.ArticleTag> articleTags = ViewBag.ArticleTags as IQueryable<LoT.Model.ArticleTag>;
+                    int tagi = 1;
+                    foreach (var item in articleTags)
+                    {
+                        if (tagi % 11 == 0)
+                        {
+                            <br />
+                        }
+                        <label><input type="checkbox" style="width:20px;height:15px;" name='TagIds' id="@item.Id" value="@item.Id" /><font>@item.Name</font></label>
+                        tagi++;
+                    }
+                }
+            </li>
+            <li>
+                <input type="hidden" id="GroupType" value="@ViewBag.GroupType" />
+                <input type="hidden" id="NewUrl" value="@ViewBag.NewUrl" />
+            </li>
+            <li>&nbsp;</li>
+            <li class="pub_btn">
+                <input type="button" id="mybtn" value="保 存" class="input_30 p_btn" style="width: 130px;height:50px; float: left; margin-left: 153px;font-size:16px;" />
+                <input type="button" id="mybtnfh" value="返 回" class="input_30 p_btn" style="width: 130px;height:50px; margin-left: 53px;font-size:16px;" />
+            </li>
+            <li>&nbsp;</li>
+        </ul>
+    </div>
+</div>
+@section JsScript{
+
+    @*文本编辑器引用的几个js文件开始*@
+    <script charset="utf-8" src="/Script/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="/Script/kindeditor/lang/zh_CN.js"></script>
+    <script charset="utf-8" src="/Script/kindeditor/plugins/code/prettify.js"></script>
+    @*文本编辑器引用的几个js文件结束*@
+
+    <script type="text/javascript">
+        var newUrl = $.trim($('#NewUrl').val());
+        if (newUrl == null || newUrl == "") {
+            newUrl = "Index";
+        }
+
+        //文本编辑器初始化
+        var editor = "";
+        KindEditor.ready(function (K) {
+            editor = K.create('#editor_id', {
+                uploadJson: '/Script/kindeditor/upload_json.ashx',
+                fileManagerJson: '/Script/kindeditor/file_manager_json.ashx',
+                allowFileManager: true
+            });
+            //默认展图
+            K('#disPhoto').click(function () {
+                editor.loadPlugin('image', function () {
+                    editor.plugin.imageDialog({
+                        imageUrl: K('#DisplayPic').val(),
+                        clickFn: function (url, title, width, height, border, align) {
+                            K('#DisplayPic').val(url);
+                            K('#disPhoto').val('默认展图设置完毕');
+                            K('#DisplayPhoto').attr("src", url);
+                            editor.hideDialog();
+                        }
+                    });
+                });
+            });
+        });
+
+        $(function () {
+            //返回
+            $("#mybtnfh").click(function () {
+                location.href = "/Article/" + newUrl;
+            })
+            //保存
+            $("#mybtn").click(function () {
+                //文章标题
+                var Title = $.trim($("#Title").val());
+                if (Title.length < 1) {
+                    $.messager.alert('提示', "文章标题不能为空", "warning")
+                    return false;
+                }
+                //文章作者
+                var Author = $.trim($("#Author").val());
+                if (Author.length < 1) {
+                    $.messager.alert('提示', "文章作者不能为空", "warning")
+                    return false;
+                }
+                //浏览次数
+                var HitCount = $.trim($("#HitCount").val());
+                var $regex = /^\d+$/;
+                if (!$regex.test(HitCount)) {
+                    $.messager.alert('提示', "请输入正确的浏览次数", "warning");
+                    return false;
+                }
+                //排序，默认升序排列，0在最前面
+                var Sort = $.trim($("#Sort").val());
+                var $regex = /^\d+$/;
+                if (!$regex.test(Sort)) {
+                    $.messager.alert('提示', "请输入正确的排列数字", "warning");
+                    return false;
+                }
+                //文章分类 TypeIds(typeId,分隔)
+                var Pid = $("#SelectTypeId").val();
+                var cPid = $("#SelectChildTypeId").val();
+                var cPPid = $("#SelectChildTwoId").val();
+                //记得加pid！=0
+                if (cPid != null && cPid > 0 && cPid != Pid && Pid != 0) {
+                    Pid = Pid + "," + cPid;
+                    if (cPPid != null && cPPid != cPid && cPPid != 0) {
+                        Pid = Pid + "," + cPPid;
+                    }
+                }
+                if (Pid == 0) {
+                    $.messager.alert('提示', "请选择文章分类", "warning");
+                    return false;
+                }
+                //推荐类型
+                var Recommend = $("input[name='Recommend']:checked").val();
+                //访问级别
+                var Status = $("input[name='Status']:checked").val();
+                //SEO关键字
+                var SeoKeywords = $.trim($("#SeoKeywords").val());
+                if (SeoKeywords.length < 1) {
+                    $.messager.alert('提示', "SEO关键字不能为空", "warning")
+                    return false;
+                }
+                //SEO的描述
+                var Seodescription = $.trim($("#Seodescription").val());
+                if (Seodescription.length < 1) {
+                    $.messager.alert('提示', "SEO的描述不能为空", "warning")
+                    return false;
+                }
+                //文章内容
+                var TContent = $.trim(escape(editor.html()));
+                if (TContent.length < 1) {
+                    $.messager.alert('提示', "文章内容不能为空", "warning")
+                    return false;
+                }
+                //文章Tag TagIds (tagid用,分隔)
+                var TagIds = '';
+                $('input[name="TagIds"]:checked').each(function () {
+                    TagIds += $(this).val() + ',';
+                });
+                var GroupType = $('#GroupType').val();
+                //文章默认展图 DisplayPic
+                var DisplayPic = $("#DisplayPic").val();
+                //添加
+                $.post('@Url.Action("Add")', { Title: Title, Author: Author, TContent: TContent, TypeIds: Pid, TagIds: TagIds, GroupType: GroupType, Recommend: Recommend, HitCount: HitCount, Sort: Sort, Status: Status, DisplayPic: DisplayPic, SeoKeywords: SeoKeywords, Seodescription: Seodescription }, function (data) {
+                    if (data.IsSuccess) {
+                        $.messager.alert('提示', "添加成功", "warning");
+                        setTimeout(function () {
+                            window.location.href = '/Article/' + newUrl;
+                        }, 2000);
+                    } else {
+                        $.messager.alert('提示', data.ErrorMessage, "warning")
+                    }
+                })
+            })
+        });
+
+        //获取当前分类的子分类
+        function getChildType(temp) {
+            var id = $(temp).attr("id");
+            //是顶级分类调用的
+            if (id == "SelectTypeId") {
+                //顶级分类的id
+                var pid = $('#SelectTypeId').val();
+                if (pid != null && pid != 0) {
+                    $.post('@Url.Action("GetChildType","ArticleType")', { Pid: pid }, function (data) {
+
+                        if (data.IsSuccess) {
+                            //这边是pid，不要设置0，会混乱的
+                            $("#SelectChildTypeId").html('<option value="' + pid + '">--全部--</option>');
+                            $.each(data.Data, function (key, value) {
+                                $("#SelectChildTypeId").append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                            });
+                            $("#SelectChildTypeId").show();
+                        }
+                        else {
+                            $("#SelectChildTypeId").val("0").hide();
+                            $.messager.alert("提示", data.ErrorMessage, "info");
+                        }
+                    });
+                } else {
+                    //没有选择分类~隐藏子分类
+                    $('#SelectChildTypeId').val(0).hide();
+                    $('#SelectChildTwoId').val(0).hide();
+                }
+            } else if (id = "SelectChildTypeId") {
+                //二级分类调用的
+                var pid = $('#SelectChildTypeId').val();
+                if (pid != null && pid != 0) {
+                    $.post('@Url.Action("GetChildType","ArticleType")', { Pid: pid }, function (data) {
+
+                        if (data.IsSuccess) {
+                            //这边是pid，不要设置0，会混乱的
+                            $("#SelectChildTwoId").html('<option value="' + pid + '">--全部--</option>');
+                            $.each(data.Data, function (key, value) {
+                                $("#SelectChildTwoId").append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                            });
+                            $("#SelectChildTwoId").show();
+                        }
+                        else {
+                            $("#SelectChildTwoId").val("0").hide();
+                            $.messager.alert("提示", data.ErrorMessage, "info");
+                        }
+                    });
+                } else {
+                    //没有选择分类~隐藏子分类
+                    $('#SelectChildTwoId').val(0).hide();
+                }
+            }
+        }
+
+        //后台部分自动化操作的添加（方便自己添加文章）
+        function copyTitle() {
+            $("#Seodescription").val($("#Title").val())
+        }
+
+        function setAuthor() {
+            $("#Author").val("dunitian");
+        }
+
+        function addDot() {
+            $("#SeoKeywords").val($("#SeoKeywords").val() + ",");
+            $("#SeoKeywords").fouce();
+        }
+    </script>
+}

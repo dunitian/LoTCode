@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BB8ED3AC-C497-460C-A95C-778168AC3EC5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LoT.IDal</RootNamespace>
+    <AssemblyName>LoT.IDal</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IActionInfoDal.cs" />
+    <Compile Include="IAdminRecordDal.cs" />
+    <Compile Include="IArticleDal.cs" />
+    <Compile Include="IAdvertisementDal.cs" />
+    <Compile Include="IArticleDisPhotoDal.cs" />
+    <Compile Include="IArticleTagDal.cs" />
+    <Compile Include="IArticleTypeDal.cs" />
+    <Compile Include="IBaseDal.cs" />
+    <Compile Include="IBaseInfoDal.cs" />
+    <Compile Include="ICensusDal.cs" />
+    <Compile Include="ICommentDal.cs" />
+    <Compile Include="IDbSession.cs" />
+    <Compile Include="IDDosDal.cs" />
+    <Compile Include="IDntRootInfoDal.cs" />
+    <Compile Include="IFriendLinkDal.cs" />
+    <Compile Include="IHotWordDal.cs" />
+    <Compile Include="IImgFlashDal.cs" />
+    <Compile Include="IPeopleDisPhotoDal.cs" />
+    <Compile Include="IPhotoDal.cs" />
+    <Compile Include="IPhotoTypeDal.cs" />
+    <Compile Include="IPublicRecordDal.cs" />
+    <Compile Include="IQQModelDal.cs" />
+    <Compile Include="IRoleGroupDal.cs" />
+    <Compile Include="IRootAndActionDal.cs" />
+    <Compile Include="ISeoTKDDal.cs" />
+    <Compile Include="ITalkingDal.cs" />
+    <Compile Include="IUserRegInfoDal.cs" />
+    <Compile Include="IXSSDal.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LoT.Model\LoT.Model.csproj">
+      <Project>{b23a3120-4692-4daf-93bf-0801dda09903}</Project>
+      <Name>LoT.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

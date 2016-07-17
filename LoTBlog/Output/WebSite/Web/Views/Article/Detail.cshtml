@@ -1,0 +1,154 @@
+﻿@*文章详细页*@
+@{
+    Layout = "~/Views/Shared/_LoTBlog.cshtml";
+}
+@model LoT.Model.Article
+@{
+    ViewBag.Title = Model.Title;
+    if (Model.SeoInfo != null)
+    {
+        ViewBag.Keywords = Model.SeoInfo.SeoKeywords;
+        ViewBag.Description = Model.SeoInfo.Sedescription;
+    }
+}
+@section HeadCss{
+    <link rel="stylesheet" href="/Css/style.css">
+    @*代码高亮插件CSS开始*@
+    <link href="/Javascript/Code/styles/shCoreEclipse.css" rel="stylesheet" />
+    @*代码高亮插件CSS结束*@
+}
+<article>
+    <h2 class="about_h">您现在的位置是：<a href="@Url.Action("Index","Index")">首页</a>><a href="@ViewBag.NavTypeUrl" target="_blank">@ViewBag.NavTypeName</a>>&nbsp;当前文章</h2>
+    <div class="index_about">
+        <h2 class="c_titile">@Model.Title</h2>
+        <p class="box_c">
+            <span>作者：@Model.Author</span>
+            <span class="d_time">发布时间：@Model.CreateTime.ToString("yyy/MM/dd hh:mm")</span>
+            <span>点击量：@Model.HitCount</span>
+            <br />
+            <br />
+            <span>
+                分类：
+                @if (ViewBag.ArticleTypeList != null)
+                {
+                    IList<LoT.Model.ArticleType> articleTypes = ViewBag.ArticleTypeList as IList<LoT.Model.ArticleType>;
+                    if (articleTypes != null && articleTypes.Count > 0)
+                    {
+                        ViewBag.NavTypeId = articleTypes[articleTypes.Count - 1].Id;
+                        for (int i = articleTypes.Count - 1; i >= 0; i--)
+                        {
+                            <a href="@Url.Action("Type", "Article", new { id = articleTypes[i].Id })">>&nbsp;@articleTypes[i].Name</a>
+                        }
+                    }
+                }
+            </span>
+        </p>
+        <ul class="infos">
+            <li>
+                @Html.Raw(HttpUtility.HtmlDecode(Model.TContent))
+            </li>
+        </ul>
+        <div class="keybq">
+            <p>
+                <span>关键字词</span>：
+                <span class="dntA">
+                    @if (ViewBag.ArticleTags != null)
+                    {
+                        IQueryable<LoT.Model.ArticleTag> tags = ViewBag.ArticleTags as IQueryable<LoT.Model.ArticleTag>;
+                        if (tags != null)
+                        {
+                            foreach (var item in tags)
+                            {
+                                <a href="@Url.Action("Tag", "Article", new { id = item.Id })">&nbsp;@item.Name</a>
+                            }
+                        }
+                    }
+                </span>
+            </p>
+        </div>
+        <div class="nextinfo">
+            @if (ViewBag.ArticleLast != null)
+            {
+                LoTBlog.Models.Temp item = ViewBag.ArticleLast as LoTBlog.Models.Temp;
+                <p class="dntHideTitle" style="float:left;">上一篇：<a href="@Url.Action("Detail", "Article", new { id = item.Id })">@item.Name</a></p>
+            }
+            else
+            {
+                <p class="dntHideTitle" style="float:left;">上一篇：<a href="#">已经是第一篇文章了</a></p>
+            }
+            @if (ViewBag.ArticleNext != null)
+            {
+                LoTBlog.Models.Temp item = ViewBag.ArticleNext as LoTBlog.Models.Temp;
+                <p class="dntHideTitle" style="float:right;">下一篇：<a href="@Url.Action("Detail", "Article", new { id = item.Id })">@item.Name</a></p>
+            }
+            else
+            {
+                <p class="dntHideTitle" style="float:right;">下一篇：<a href="#">已经是最后一篇文章了</a></p>
+            }
+        </div>
+        <div class="clear"><p>&nbsp;</p></div>
+        <div class="otherlink">
+            <h2>相关文章</h2>
+            @{Html.RenderAction("RelatedArticle", "PartialView", new { id = Model.GroupType, articleId = Model.Id });}
+        </div>
+        @{Html.RenderAction("DuoShuo", "PartialView", new { id = Model.Id, title = Model.Title });}
+    </div>
+</article>
+<aside>
+    @*导航分类*@
+    @if (ViewBag.NavTypeId == null)
+    {
+        ViewBag.NavTypeId = 0;
+    }
+    @{Html.RenderAction("NavForType", "PartialView", new { id = ViewBag.NavTypeId });}
+    <div class="ph_news">
+        <h2>
+            <p>逆天吐槽</p>
+        </h2>
+        @{Html.RenderAction("TalkingLT", "PartialView");}
+        <div style="border-bottom: dotted; color:#262424;"></div>
+        @*右侧基本信息*@
+        @{Html.RenderAction("BlogBaseInfo", "PartialView");}
+        <h2>
+            <p class="tj_t1">最新文章</p>
+        </h2>
+        @{Html.RenderAction("NewArticle", "PartialView");}
+        <h2>
+            <p>点击排行</p>
+        </h2>
+        @{Html.RenderAction("HotArticle", "PartialView");}
+        <h2>
+            <p>网友推荐</p>
+        </h2>
+        @{Html.RenderAction("RecommendedArticle", "PartialView");}
+        <h2>
+            <p>编辑推荐</p>
+        </h2>
+        @{Html.RenderAction("CompilerLikeArticle", "PartialView");}
+        <h2>
+            <p>最近访客</p>
+            @{Html.RenderAction("DSPeople", "PartialView", new { count = 24 });}
+        </h2>
+    </div>
+    <br />
+    @*友情链接*@
+    @{Html.RenderAction("FriendLink", "PartialView");}
+    @*版权信息*@
+    @{Html.RenderAction("CopyRight", "PartialView");}
+</aside>
+@section JsScript{
+    <script type="text/javascript" src="/Javascript/easydialog.min.js"></script>
+    <script type="text/javascript" src="/Javascript/detail.js"></script>
+    @*代码高亮相关插件的js部分 开始*@
+    <script type="text/javascript" src="/Javascript/Code/scripts/shCore.js"></script>
+    <script type="text/javascript" src="/Javascript/Code/scripts/shBrushCSharp.js"></script>
+    @*代码高亮相关插件的js部分 结束*@
+    <script type="text/javascript">
+        SyntaxHighlighter.config.bloggerMode = true; //博客模式 将 <br /> 替换为新行'\n'
+        SyntaxHighlighter.defaults['toolbar'] = false;//不显示工具栏
+        SyntaxHighlighter.defaults['collapse'] = "collapse";//标识是否在页面加载时默认将代码折叠起来
+        SyntaxHighlighter.defaults['gutter'] = false;//不显示标识行号
+        //SyntaxHighlighter.defaults['pad-line-numbers'] = true; //标识行号至少2位数去显示
+        SyntaxHighlighter.all();
+    </script>
+}

@@ -1,0 +1,30 @@
+﻿<div class="rnav">
+    @{
+        IList<LoT.Model.ArticleType> articleTypes = ViewBag.MenuTypes as IList<LoT.Model.ArticleType>;
+        LoT.Model.ArticleType articleType = ViewBag.articleTypeMe as LoT.Model.ArticleType;
+        <ul>
+            @*父分类*@
+            @if (articleType != null)
+            {
+                //不是顶级分类就显示父类
+                if (articleType.Pid != null && articleType.Pid != 0)
+                {
+                    <li class="rnav0 dntHideTitle"><a href="@Url.Action("Type", "Article", new { id = articleType.Pid })">@articleType.Name</a></li>
+                }
+                else
+                {
+                    <li class="rnav0 dntHideTitle"><a href="@Url.Action("Type", "Article", new { id = articleType.Id })">@articleType.Name</a></li>
+                }
+            }
+            @*子分类*@
+            @if (articleTypes != null)
+            {
+                for (int i = 0; i < articleTypes.Count; i++)
+                {
+                    string nav = "rnav" + (i + 1);
+                    <li class="@nav dntHideTitle"><a href="@Url.Action("Type", "Article", new { id = articleTypes[i].Id })">@articleTypes[i].Name</a></li>
+                }
+            }
+        </ul>
+    }
+</div>

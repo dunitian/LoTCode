@@ -1,0 +1,50 @@
+@charset "gb2312";
+/* 共用css */
+* { margin: 0; padding: 0 }
+body { font: 12px "宋体", Arial, Helvetica, sans-serif; background: #f5f5f5 }
+img { border: 0; display: block }
+ul { list-style: none; }
+h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: normal; }
+a { outline: none; }
+a:link, a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+.clear { clear: both; }
+.blank { height: 5px; overflow: hidden; width: 100%; margin: auto; clear: both }
+/* 头部信息 */
+.ibody { background: url(../Images/bg.png) repeat-y; width: 1000px; margin: auto; box-shadow: -2px -1px 5px #666; }
+header { position: relative; background: url(../Images/ibodybg.png) top right no-repeat  }
+header h1 { padding: 15px 0 0 80px; font-size: 22px; font-family: "Microsoft Yahei", Arial, Helvetica, sans-serif; }
+header h2 { margin: 20px 80px; color: #8e8d8d }
+/* logo */
+.logo { background: url(../Images/logo.png) no-repeat #000 center; width: 145px; height: 145px; border-radius: 50%; position: absolute; left: -72px; top: 40px; box-shadow: 0px 2px 2px #414141; }
+.logo:hover { background: url(../Images/home.png) no-repeat #000 center; }
+.logo a { width: 100%; height: 100%; display: block }
+/* 导航 */
+nav { background: rgba(0,0,0,0.8); height: 48px; line-height: 48px; padding-left: 80px; filter: progid:DXImageTransform.Microsoft.gradient(gradientType = 0, startColorstr = #3333333, endColorstr = #3333333);
+}/* 兼容IE6 透明 */
+nav a { display: inline-block; font-size: 18px; font-family: "Microsoft Yahei", Arial, Helvetica, sans-serif; color: #FFF; padding: 0 20px; -webkit-transition: all 1s; -moz-transition: all 1s; -o-transition: all 1s; transition: all 1s; }
+nav a:hover { background: #E66A17; }
+#topnav_current { background: #e41635 }/* 高亮选中颜色 */
+article { width: 73%; float: left; background: url(../Images/ibodybg.png) 560px -147px no-repeat; }/* 左侧栏 */
+aside { width: 27%; background: url(../Images/ibodybg.png) -170px -147px no-repeat #000; float: right; }/* 右侧栏 */
+/* 版权信息 */
+.copyright { background: #0d0d0d; border-radius: 50%; text-align: center; color: #d8d8d8; padding: 20px; margin: 60px 20px 0 20px; border: #1b1a1a 1px solid; }
+.copyright p { line-height: 26px; text-shadow: #000 1px 1px 1px }
+.copyright p a { color: #d8d8d8; }
+/*置顶系列*/
+#tbox { width: 54px; float: right; position: fixed; right: 50px; bottom: 85px; _position: absolute; _bottom: auto; _top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop, 10)||0)-(parseInt(this.currentStyle.marginBottom, 10)||0)));
+_margin-bottom: 15px; }/*解决IE6下不兼容 position:fixed 的问题*/
+#togbook, #gotop { width: 54px; height: 56px; display: block; background:url(../Images/icons.png) no-repeat  #111 ;box-shadow: 0px 1px 0px rgba(255,255,255,.1), inset 0px 1px 1px rgba(0,0,0,.7); border-radius: 6px;}
+#togbook { margin: 5px 0 ;background-position:10px -407px;}
+#gotop {background-position:12px -365px;}
+#togbook:hover, #gotop:hover { opacity: 0.5 }
+/*消息框*/
+#msgwrap{position: fixed;margin-bottom: 5px;right: 5px;	margin: 0px auto;border: 1px solid #555; border-radius: 5px 5px 5px 5px; -moz-border-radius: 5px 5px 5px 5px;-webkit-border-radius: 5px 5px 5px 5px;padding: 5px; line-height: 25px; border-color: #888 -moz-use-text-color #888 #888; border-style: solid none solid solid; border-width: 1px medium 1px 1px; box-shadow: 0 0 10px #CCC; background: #222; width: 100px; bottom: 0px; color: #CCC;}
+#msglatest{overflow-y: hidden;}
+#msgtitle{padding: 0 5px;	font-size: 12px;letter-spacing: 2px;color: #2B99E6;	text-shadow: 0px 0px 5px #2B99E6;}
+#msgclose{display: visible;	background: url(../Images/icon_plus.png) no-repeat scroll 0 0 transparent; position: absolute; width: 15px; height: 15px; right: 5px; top: 10px; overflow: hidden;}
+#msgclose:hover{background-position: left bottom;}
+.includetitle{font-size: 12px;font-weight: normal;margin: 0;}
+.includetitle a{padding: 5px 0;text-decoration: none;color: #5DB0E6;}
+.dntTxtCenter{text-align:center;}
+.dntDivCenter{margin:auto auto;}

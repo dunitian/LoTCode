@@ -1,0 +1,13 @@
+﻿.dntTextCenter{text-align:center;}
+.dntDivCenter{margin:auto,auto;}
+.dntBlock{display:block;}
+.dntText {
+    position: absolute;
+    left: 0px;
+    display: inline-block;
+    float: left;
+    padding-right: 10px;
+    zoom: 1;
+}
+table tr td{ padding-left : 15px;}
+table tr{ height:40px;}

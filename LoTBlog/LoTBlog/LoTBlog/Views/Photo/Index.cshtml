@@ -1,0 +1,188 @@
+﻿@*个人相册，照片墙*@
+@{
+    ViewBag.Title = "个人相册，照片墙~毒逆天的个人博客";
+    Layout = "~/Views/Shared/_LoTBlog.cshtml";
+    ViewBag.Keywords = "毒逆天,逆天,dunitian,dnt,个人博客,Net,分享,经验,资源,免费,dkill,dkill.net,个人相册,相册,照片墙";
+    ViewBag.Description = "个人相册，照片墙，主要放一些日常照片等。逆天的个人博客，本博客主要以一些经验和技术分享为主，如有疏漏欢迎指出~";
+}
+
+@section HeadCss{
+    <link href="/Css/index.css" rel="stylesheet">
+    <link href="/Css/style.css" rel="stylesheet">
+    <link href="/Css/media.css" rel="stylesheet">
+<link href="/Css/Photo.css" rel="stylesheet" />
+}
+<article>
+    <h2 class="about_h" style="margin-bottom:0px;">您现在的位置是：<a href="@Url.Action("Index","Index")">首页</a>><a href="@Url.Action("Index","Photo")">回忆相册</a></h2>
+    @*头部照片墙*@
+    <div class="photowall">
+        <ul class="wall_a">
+            <li>
+                <a href="#">
+                    <img src="/images/Photo/p01.jpg">
+                    <figcaption>
+                        <h2>不再因为别人过得好而焦虑，在没有人看得到你的时候依旧能保持节奏 </h2>
+                    </figcaption>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="/images/Photo/p02.jpg">
+                    <figcaption>
+                        <h2>不再因为别人过得好而焦虑，在没有人看得到你的时候依旧能保持节奏 </h2>
+                    </figcaption>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="/images/Photo/p03.jpg">
+                    <figcaption>
+                        <h2>不再因为别人过得好而焦虑，在没有人看得到你的时候依旧能保持节奏 </h2>
+                    </figcaption>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <img src="/images/Photo/p04.jpg">
+                    <figcaption>
+                        <h2>不再因为别人过得好而焦虑，在没有人看得到你的时候依旧能保持节奏 </h2>
+                    </figcaption>
+                </a>
+            </li>
+            <li>
+                <p class="text_b"><a href="#">逃避自己的人，最终只能导致自己世界的崩塌，而变得越来越没有安全感。</a></p>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="/images/Photo/p05.jpg">
+                    <figcaption>
+                        <h2>不再因为别人过得好而焦虑，在没有人看得到你的时候依旧能保持节奏 </h2>
+                    </figcaption>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+    <div class="about">
+    <ul>
+        @*点点点*@
+        <div id="fountainG">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </div>
+        <div class="about_girl">
+            <span><a href="#"><img src="/images/Photo/girl.jpg"></a></span>
+            <p>初遇时，他的幽默，他往日的深情、承诺和傻劲儿，两个人共度的美丽时刻，一一印在我的回忆里....</p>
+        </div>
+        <div class="template">
+            <h3>
+                <p>孤独<span>心事</span></p>
+                <a href="#" class="more">更多>></a>
+            </h3>
+            <div class="blog">
+                <figure>
+                    <a href="#"><img src="/images/Photo/t01.jpg"></a>
+                    <p><a href="#">愿有人陪你一起颠沛流离</a></p>
+                </figure>
+                <figure>
+                    <a href="#"><img src="/images/Photo/t02.jpg"></a>
+                    <p><a href="#">你要去相信，没有到不了的明天</a></p>
+                </figure>
+                <div class="clear"></div>               
+                <figure>
+                    <a href="#"><img src="/images/Photo/t04.png"></a>
+                    <p><a href="#">清风捎去衷心祝福，流云奉上真挚情意</a></p>
+                </figure>  
+                <figure>
+                    <a href="#"><img src="/images/Photo/t03.jpg"></a>
+                    <p><a href="#">让世界拥有它的脚步，让我保佑我的茧</a></p>
+                </figure>           
+            </div>           
+        </div>
+        <div class="about_boy">
+            <span><a href="#"><img src="/images/Photo/boy.jpg"></a></span>
+            <p>初遇时，她的热情，她腼腆的微笑、可爱和气质，两个人共度的愉快时刻，一一印在我的回忆里...</p>
+        </div>
+        <div class="template">
+            <h3>
+                <p><span>爱犬</span>图集</p>
+                <a href="#" class="more">更多>></a>
+            </h3>
+            <div class="blog">
+                <figure>
+                    <a href="#"><img src="/images/Photo/t05.jpg"></a>
+                    <p><a href="#">岁月蹉跎，气质已经深入骨髓</a></p>
+                </figure>
+                <figure>
+                    <a href="#"><img src="/images/Photo/t06.jpg"></a>
+                    <p><a href="#">你知道吗，我现在就想跟你走</a></p>
+                </figure>
+                <div class="clear"></div>
+                <figure>
+                    <a href="#"><img src="/images/Photo/t07.jpg"></a>
+                    <p><a href="#">我累了呀，快给我准备床床哦</a></p>
+                </figure>
+                <figure>
+                    <a href="#"><img src="/images/Photo/t08.jpg"></a>
+                    <p><a href="#">你仔细看，我不用眼睛鄙视你</a></p>
+                </figure>
+            </div>
+        </div>
+        <div id="fountainG">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </div>    
+        <div class="about_boy">
+            <span><a href="#"><img src="/images/photos.jpg"></a></span>
+            <p>茫茫人海，相遇真的不易，我已经遇到那个可以陪我走一生的人，我会把你的点滴牢牢记在心上....</p>
+        </div>
+    </ul>
+    </div>    
+</article>
+<aside>
+    @*右侧基本信息*@
+    @{Html.RenderAction("BlogBaseInfo", "PartialView");}
+    <div class="tj_news">
+        <h2>
+            <p class="tj_t1">最新文章</p>
+        </h2>
+        @{Html.RenderAction("NewArticle", "PartialView");}
+        <h2>
+            <p class="tj_t1">点击排行</p>
+        </h2>
+        @{Html.RenderAction("HotArticle", "PartialView");}
+        <h2>
+            <p class="tj_t2">网友推荐</p>
+        </h2>
+        @{Html.RenderAction("RecommendedArticle", "PartialView");}
+        <h2>
+            <p class="tj_t2">编辑推荐</p>
+        </h2>
+        @{Html.RenderAction("CompilerLikeArticle", "PartialView");}
+        <h2>
+            <p class="tj_t2">最近访客</p>
+            @{Html.RenderAction("DSPeople", "PartialView", new { count = 24 });}
+        </h2>
+    </div>
+    <br />
+    @*友情链接*@
+    @{Html.RenderAction("FriendLink", "PartialView", new { pageType = 1 });}
+    @*版权*@
+    @{Html.RenderAction("CopyRight", "PartialView");}
+</aside>
+@section JsScript{
+
+}

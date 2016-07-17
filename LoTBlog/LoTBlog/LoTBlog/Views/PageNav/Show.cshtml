@@ -1,0 +1,57 @@
+﻿@{
+    string webUrl = string.Empty;
+
+    if (ViewBag.Url.IndexOf("?") > 0)
+    {
+        webUrl = ViewBag.Url + "&pi=";
+    }
+    else
+    {
+        webUrl = ViewBag.Url + "?pi=";
+    }
+    int pi = ViewBag.PageIndex;
+    int ps = ViewBag.PageSize;
+    int count = ViewBag.Count;
+    int lastIndex = pi > 1 ? pi - 1 : 1;
+    int nextIndex = pi < count ? pi + 1 : count;
+}
+<footer class="page">
+    <a title="文章数">
+        <b>@ViewBag.Total</b>
+    </a>
+    <a href="@ViewBag.Url">&lt;&lt;</a>
+    <a href="@webUrl@lastIndex">&lt;</a>
+    @*九条以内全部显示*@
+    @if (count <= 9)
+    {
+        for (int i = 1; i <= count; i++)
+        {
+            if (i == pi)
+            {
+                <b>@pi</b>
+            }
+            else
+            {
+                <a href="@webUrl@i">@i</a>
+            }
+        }
+    }
+    else
+    {
+        @*显示前4页*@
+        int start = pi - 4 < 1 ? 1 : (pi - 4);
+        for (int i = start; i < pi; i++)
+        {
+            <a href="@webUrl@i">@i</a>
+        }
+        @*显示后4页*@
+        int end = pi + 4 > count ? count : (pi + 4);
+        <b>@pi</b>
+        for (int i = pi + 1; i <= end; i++)
+        {
+            <a href="@webUrl@i">@i</a>
+        }
+    }
+    <a href="@webUrl@nextIndex">&gt;</a>
+    <a href="@webUrl@count">&gt;&gt;</a>
+</footer>

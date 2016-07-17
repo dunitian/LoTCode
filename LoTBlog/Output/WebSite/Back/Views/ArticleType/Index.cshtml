@@ -1,0 +1,262 @@
+﻿@{
+    ViewBag.Title = "文章分类管理";
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+@model IQueryable<LoT.Model.ArticleType>
+@section HeadCss{
+    @*<link href="/Styles/public.css" rel="stylesheet">*@
+}
+<div class="pub_module">
+
+    <div class="top">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="middle">
+        <div class="search_info">
+            <ul class="fixed">
+                <li style="height: auto">
+                    <table>
+                        <tr>
+                            <td>
+                                分类名称:
+                            </td>
+                            <td>
+                                <input type="text" id="title" name="title" value="" />
+                            </td>
+                            <td>
+                                所属分类:
+                            </td>
+                            <td colspan="2">
+                                <select id="SelectTypeId" onchange="getChildType(this);">
+                                    @if (Model != null)
+                                    {
+                                        <option value="0">--请选择--</option>
+                                        foreach (var item in Model)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <select id="SelectChildTypeId" style="display: none;" onchange="getChildType(this);"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="3">
+                                <input type="submit" value="查 询" class="input_30 p_btn" onclick="return onSearch();" />&nbsp;
+                                <input type="button" onclick="toClear();" class="input_30 p_btn" value="重 置" />&nbsp;
+                                <input type="submit" onclick="Daochu();" class="input_30 p_btn" value="导 出" />&nbsp;
+                            </td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="pub_module pub_module_r">
+    <div class="top">
+        <a class="p_btn btn_add" href="#" onclick="add()">添加</a>
+        <a class="p_btn btn_del" href="#" onclick="listIds(99)">批量删除</a>
+        <a class="p_btn btn_update" href="#" onclick="listIds(1)">批量恢复</a>
+    </div>
+    <div class="middle">
+        <table id="dg"></table>
+    </div>
+</div>
+@section JsScript{
+    <script type="text/javascript">
+    $(function () {
+        $("#dg").datagrid({
+            tmp_id: "dg",
+            title: '@ViewBag.Title',
+            loadMsg: '数据加载中...',
+            fit: true,
+            url: '@Url.Action("Query")',
+            pageNumber: 1,
+            pageSize: 20,
+            queryParams: {},
+            pagination: true,
+            rownumbers: true,
+            fitColumns: true,
+            fit: true,
+            loadFilter: function (data) {
+                if (data.IsSuccess) {
+                    return data.Data;
+                } else {
+                    $.messager.alert('Error', data.ErrorMessage, "error", function () { if (data.ErrorCode == "38") { window.top.location.href = '@Url.Action("Login", "Admin")'; } });
+                }
+            },
+            columns: [[
+                { field: 'Id', checkbox: true, width: 50, hidden: false },
+                {
+                    field: 'Name', title: '类型名称', width: 200, formatter: function (value, row, index) {
+                        return '<a onclick="Edit(' + row.Id + ')" href="#">' + value + '</a>';
+                    }
+                },
+                {
+                    field: 'PName', title: '所属分类', width: 100, formatter: function (value, row, index) {
+                        if (row.Pid == 0 || row.Pid == null) {
+                            return '<span style="color:Red">顶级栏目</span>';
+                        }
+                        else if (row.ParentType != null) {
+                            return row.ParentType.Name;
+                        } else {
+                            return row.Pid;
+                        }
+                    }
+                },
+                {
+                    field: 'Status', title: '当前状态', width: 100, formatter: function (value, row, index) {
+                        if (value == 99) {
+                            return '<span style="color:Red">删除状态</span>';
+                        } else {
+                            return '正常状态';
+                        }
+                    }
+                },
+                {
+                    field: 'operation', title: '操作', width: 100, align: 'center',
+                    formatter: function (value, row, index) {
+                        return "<div class='dg_oper'><a class='dg_edit' href=\"javascript:void(0)\" onclick=\"Edit('" + row.Id + "')\">编辑</a>" +
+                            "<a class='dg_edit' href=\"javascript:void(0)\" onclick=\"delet('" + row.Id + "')\">删除</a></div>";
+                    }
+                }
+            ]]
+
+        });
+
+        $(window).resize(function () {
+            $('#dg').datagrid('resize', {
+                width: function () { return document.body.clientWidth; },
+                height: function () { return document.body.clientHeight; }
+            });
+        });
+    });
+
+    //查询
+    function onSearch() {
+        var Pid = $("#SelectTypeId").val();
+        var cPid = $("#SelectChildTypeId").val();
+        //记得加pid！=0
+        if (cPid != null && cPid > 0 && Pid != 0) {
+            Pid = cPid;
+        }
+        $('#dg').datagrid('load', {
+            Name: $("#title").val(),
+            Pid: Pid
+        })
+    }
+
+    //重置
+    function toClear() {
+        $("#title").val("");
+        $("#SelectTypeId").val(0);
+        $('#SelectChildTypeId').val(0).hide();
+    }
+
+    //编辑
+    function Edit(id) {
+        location.href = '/ArticleType/Update?Id=' + id;
+    }
+
+    //添加
+    function add() {
+        location.href = "@Url.Action("Add")";
+    }
+
+    //导出
+    function Daochu() {
+
+    }
+
+    //删除
+    function delet(ids) {
+        $.messager.confirm("提示", "确定删除吗？", function (r) {
+            if (r) {
+                $.post('@Url.Action("DeletList")', { ids: ids }, function (data) {
+                        if (data.IsSuccess) {
+                            $.messager.alert('提示', data.OtherData, "info");
+                        } else {
+                            $.messager.alert('提示', data.ErrorMessage, "info");
+                        }
+                        onSearch();
+                    })
+                }
+            });
+        }
+
+        //恢复
+        function recover(ids) {
+            $.messager.confirm("提示", "确定恢复吗？", function (r) {
+                if (r) {
+                    $.post('@Url.Action("RecoverList")', { ids: ids }, function (data) {
+                        if (data.IsSuccess) {
+                            $.messager.alert('提示', data.OtherData, "info");
+                        } else {
+                            $.messager.alert('提示', data.ErrorMessage, "info");
+                        }
+                        onSearch();
+                    })
+                }
+            });
+        }
+
+        //批量操作
+        function listIds(a) {
+            try {
+                var rows = $("#dg").datagrid("getSelections");
+                if (rows.length == 0) {
+                    throw "请先选中行!";
+                }
+                var ids = "";
+                $(rows).each(function (i) {
+                    if (ids == "") {
+                        ids += this.Id;
+                    }
+                    else {
+                        ids += "," + this.Id + "";
+                    }
+                });
+                if(a==99){
+                    delet(ids);//调用删除的方法
+                } else {
+                    recover(ids);//批量恢复
+                }
+            }
+            catch (e) {
+                $.messager.alert("提示", e, "error")
+            }
+        }
+
+        //获取当前分类的子分类
+        function getChildType(temp) {
+            var id = $(temp).attr("id");
+            //是顶级分类调用的
+            if (id == "SelectTypeId") {
+                //顶级分类的id
+                var pid = $('#SelectTypeId').val();
+                if (pid != null && pid != 0) {
+                    $.post('@Url.Action("GetChildType")', { Pid: pid }, function (data) {
+
+                    if (data.IsSuccess) {
+                        //这边是pid，不要设置0，会混乱的
+                        $("#SelectChildTypeId").html('<option value="' + pid + '">--全部--</option>');
+                        $.each(data.Data, function (key, value) {
+                            $("#SelectChildTypeId").append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                        });
+                        $("#SelectChildTypeId").show();
+                    }
+                    else {
+                        $("#SelectChildTypeId").val("0").hide();
+                        $.messager.alert("提示", data.ErrorMessage, "info");
+                    }
+                });
+            } else {
+                //没有选择分类~隐藏子分类
+                $('#SelectChildTypeId').val(0).hide();
+            }
+        }
+    }
+    </script>
+}

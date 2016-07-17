@@ -1,0 +1,120 @@
+﻿@{
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+    ViewBag.Title = "说说添加页面";
+}
+@section HeadCss{
+    @*文本编辑器引用的2个css开始*@
+    <link rel="stylesheet" href="/Script/kindeditor/themes/default/default.css" />
+    @*文本编辑器引用的2个css结束*@
+}
+<div class="pub_module">
+    <div class="top">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="middle">
+        <ul class="list_info" style="padding-left:30px;">
+            <li>
+                <span class="tit">说说标题：</span>
+                <input type="text" id="Title" value="生活" />
+            </li>
+            <li>
+                <span class="tit">浏览总量：</span>
+                <input type="text" id="HitCount" value="99" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">访问级别：</span>
+                <label><input type="radio" style="width: 20px" name="Status" value="0" checked="checked" /><font>所有人可见</font></label>
+                <label><input type="radio" style="width: 20px" name="Status" value="1" /><font>仅好友可见</font></label>
+                <label><input type="radio" style="width: 20px" name="Status" value="2" /><font>仅自己可见</font></label>
+            </li>
+            <li>
+                <span class="tit">默认展图：</span>
+                <input type="button" class="input_30 p_btn" value="点我就上传默认展图" id="disPhoto" />
+                <input type="hidden" id="DisplayPic" /><img id="DisplayPhoto" style="width:50px;height:30px;" />
+            </li>
+            <li style="padding-left:35px;">
+                <span class="tit">说说内容：</span><br />
+                <textarea rows="10" cols="110" id="Say" name="Say"></textarea>
+            </li>
+            <li class="pub_btn">
+                <input type="button" id="mybtn" value="保 存" class="input_30 p_btn" style="width: 100px;height:30px; float: left; margin-left: 153px;font-size:16px;" />
+                <input type="button" id="mybtnfh" value="返 回" class="input_30 p_btn" style="width: 100px;height:30px; margin-left: 53px;font-size:16px;" />
+            </li>
+        </ul>
+    </div>
+</div>
+@section JsScript{
+
+    @*文本编辑器引用的几个js文件开始*@
+    <script charset="utf-8" src="/Script/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="/Script/kindeditor/lang/zh_CN.js"></script>
+    @*文本编辑器引用的几个js文件结束*@
+
+    <script type="text/javascript">
+
+        //文本编辑器初始化
+        var editor = "";
+        KindEditor.ready(function (K) {
+            var editor = K.editor({
+                uploadJson: '/Script/kindeditor/upload_json.ashx',
+                fileManagerJson: '/Script/kindeditor/file_manager_json.ashx',
+                allowFileManager: true
+            });
+            //默认展图
+            K('#disPhoto').click(function () {
+                editor.loadPlugin('image', function () {
+                    editor.plugin.imageDialog({
+                        imageUrl: K('#DisplayPic').val(),
+                        clickFn: function (url, title, width, height, border, align) {
+                            K('#DisplayPic').val(url);
+                            K('#disPhoto').val('默认展图设置完毕');
+                            K('#DisplayPhoto').attr("src", url);
+                            editor.hideDialog();
+                        }
+                    });
+                });
+            });
+        });
+
+        $(function () {
+            //返回
+            $("#mybtnfh").click(function () {
+                location.href = "/Talking/Index";
+            })
+            //保存
+            $("#mybtn").click(function () {
+                //说说标题
+                var Title = $.trim($("#Title").val());
+
+                //浏览次数
+                var HitCount = $.trim($("#HitCount").val());
+                var $regex = /^\d+$/;
+                if (!$regex.test(HitCount)) {
+                    $.messager.alert('提示', "请输入正确的浏览次数", "warning");
+                    return false;
+                }
+                //访问级别
+                var Status = $("input[name='Status']:checked").val();
+                //文章内容
+                var Say = $.trim($("#Say").val());
+                if (Say.length < 1) {
+                    $.messager.alert('提示', "说说内容不能为空", "warning")
+                    return false;
+                }
+                //文章默认展图 DisplayPic
+                var DisplayPic = $("#DisplayPic").val();
+                //添加
+                $.post('@Url.Action("Add")', { Title: Title, Say: Say, HitCount: HitCount, Status: Status, DisplayPic: DisplayPic }, function (data) {
+                    if (data.IsSuccess) {
+                        $.messager.alert('提示', "添加成功", "warning");
+                        setTimeout(function () {
+                            window.location.href = '/Talking/Index';
+                        }, 2000);
+                    } else {
+                        $.messager.alert('提示', data.ErrorMessage, "warning")
+                    }
+                });
+            });
+        });
+    </script>
+}

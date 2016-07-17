@@ -1,0 +1,219 @@
+﻿@{
+    ViewBag.Title = "友情链接编辑页面";
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+@model LoT.Model.FriendLink
+<div class="pub_module">
+    <div class="top">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="middle">
+        <ul class="list_info">
+            <li>
+                <span class="tit">标题：</span>
+                <input type="text" id="linkName" value="@Model.LinkName" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">网址：</span>
+                <input type="text" id="WebUrl" value="@Model.WebUrl" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">
+                    所属页面:
+                </span>
+                @*最偷懒的方法*@
+                <select id="SelectStatus">
+                    <option value="-1">=请选择=</option>
+                    @switch (Model.LinkType)
+                    {
+                        case LoT.Enums.LinkTypeEnum.Index:
+                            <option value="1" selected="selected">网站首页</option>
+                            <option value="2">资讯页面</option>
+                            <option value="4">笔记页面</option>
+                            <option value="5">资源页面</option>
+                            <option value="3">文章详细</option>
+                            <option value="6">说说页面</option>
+                            <option value="7">音乐页面</option>
+                            <option value="8">相册页面</option>
+                            <option value="9">其他页面</option>
+                            break;
+                        case LoT.Enums.LinkTypeEnum.News:
+                        <option value="1">网站首页</option>
+                        <option value="2" selected="selected">资讯页面</option>
+                        <option value="3">文章详细</option>
+                        <option value="4">笔记页面</option>
+                        <option value="5">资源页面</option>
+                        <option value="6">说说页面</option>
+                        <option value="7">音乐页面</option>
+                        <option value="8">相册页面</option>
+                        <option value="9">其他页面</option>
+                            break;
+                        case LoT.Enums.LinkTypeEnum.Detail:
+                        <option value="1">网站首页</option>
+                        <option value="2">资讯页面</option>
+                        <option value="3" selected="selected">文章详细</option>
+                        <option value="4">笔记页面</option>
+                        <option value="5">资源页面</option>
+                        <option value="6">说说页面</option>
+                        <option value="7">音乐页面</option>
+                        <option value="8">相册页面</option>
+                        <option value="9">其他页面</option>
+                            break;
+                        case LoT.Enums.LinkTypeEnum.Note:
+                        <option value="1">网站首页</option>
+                        <option value="2">资讯页面</option>
+                        <option value="3">文章详细</option>
+                        <option value="4" selected="selected">笔记页面</option>
+                        <option value="5">资源页面</option>
+                        <option value="6">说说页面</option>
+                        <option value="7">音乐页面</option>
+                        <option value="8">相册页面</option>
+                        <option value="9">其他页面</option>
+                            break;
+                        case LoT.Enums.LinkTypeEnum.Resource:
+                        <option value="1">网站首页</option>
+                        <option value="2">资讯页面</option>
+                        <option value="3">文章详细</option>
+                        <option value="4">笔记页面</option>
+                        <option value="5" selected="selected">资源页面</option>
+                        <option value="6">说说页面</option>
+                        <option value="7">音乐页面</option>
+                        <option value="8">相册页面</option>
+                        <option value="9">其他页面</option>
+                            break;
+                        case LoT.Enums.LinkTypeEnum.Talk:
+                        <option value="1">网站首页</option>
+                        <option value="2">资讯页面</option>
+                        <option value="3">文章详细</option>
+                        <option value="4">笔记页面</option>
+                        <option value="5">资源页面</option>
+                        <option value="6" selected="selected">说说页面</option>
+                        <option value="7">音乐页面</option>
+                        <option value="8">相册页面</option>
+                        <option value="9">其他页面</option>
+                            break;
+                        case LoT.Enums.LinkTypeEnum.Music:
+                        <option value="1">网站首页</option>
+                        <option value="2">资讯页面</option>
+                        <option value="3">文章详细</option>
+                        <option value="4">笔记页面</option>
+                        <option value="5">资源页面</option>
+                        <option value="6">说说页面</option>
+                        <option value="7" selected="selected">音乐页面</option>
+                        <option value="8">相册页面</option>
+                        <option value="9">其他页面</option>
+                            break;
+                        case LoT.Enums.LinkTypeEnum.Photo:
+                        <option value="1">网站首页</option>
+                        <option value="2">资讯页面</option>
+                        <option value="3">文章详细</option>
+                        <option value="4">笔记页面</option>
+                        <option value="5">资源页面</option>
+                        <option value="6">说说页面</option>
+                        <option value="7">音乐页面</option>
+                        <option value="8" selected="selected">相册页面</option>
+                        <option value="9">其他页面</option>
+                            break;
+                        case LoT.Enums.LinkTypeEnum.Other:
+                        <option value="1">网站首页</option>
+                        <option value="2">资讯页面</option>
+                        <option value="3">文章详细</option>
+                        <option value="4">笔记页面</option>
+                        <option value="5">资源页面</option>
+                        <option value="6">说说页面</option>
+                        <option value="7">音乐页面</option>
+                        <option value="8">相册页面</option>
+                        <option value="9" selected="selected">其他页面</option>
+                            break;
+                        default:
+                        <option value="1">网站首页</option>
+                        <option value="2">资讯页面</option>
+                        <option value="3">文章详细</option>
+                        <option value="4">笔记页面</option>
+                        <option value="5">资源页面</option>
+                        <option value="6">说说页面</option>
+                        <option value="7">音乐页面</option>
+                        <option value="8">相册页面</option>
+                        <option value="9">其他页面</option>
+                            break;
+                    }
+                </select>
+            </li>
+            <li>
+                <span class="tit">Sort：</span>
+                <input type="text" id="Sort" value="@Model.Sort" /><font style="color: Red">*</font>(<font style="color:red">0~999</font>)
+            </li>
+            <li>
+                <span class="tit">当前状态：</span>
+                <select id="Status">
+                    <option value="1">正常状态</option>
+                    @if (Model.Status == LoT.Enums.StatusEnum.Delete)
+                    {
+                        <option value="99" selected="selected">删除状态</option>
+                    }
+                    else
+                    {
+                        <option value="99">删除状态</option>
+                    }
+                </select>
+                <font style="color: Red">*</font>
+            </li>
+            <li class="pub_btn">
+                <input type="hidden" id="Id" value="@Model.Id" />
+                <input type="button" id="mybtn" value="保存" class="input_30 p_btn" style="width: 100px; float: left; margin-left: 35px;" />
+                <input type="button" id="mybtnfh" value="返回" class="input_30 p_btn" style="width: 100px; margin-left: 35px;" />
+            </li>
+        </ul>
+    </div>
+</div>
+@section JsScript{
+    <script type="text/javascript">
+        $(function () {
+            //返回
+            $("#mybtnfh").click(function () {
+                location.href = "/FriendLink/Index";
+            })
+            //保存
+            $("#mybtn").click(function () {
+                var Id = $('#Id').val();
+                var LinkName = $.trim($("#linkName").val());
+                if (LinkName.length < 1) {
+                    $.messager.alert('提示', "标题名称不能为空", "warning")
+                    return false;
+                }
+
+                var WebUrl = $.trim($("#WebUrl").val());
+                if (WebUrl.length < 1) {
+                    $.messager.alert('提示', "标题名称不能为空", "warning")
+                    return false;
+                }
+
+                var LinkType = $("#SelectStatus").val();
+                if (LinkType < 1) {
+                    $.messager.alert('提示', "选择所属页面", "warning")
+                    return false;
+                }
+
+                var Status = $('#Status').val();
+
+                var Sort = $.trim($("#Sort").val());
+                var $regex = /^\d+$/;
+                if (!$regex.test(Sort)) {
+                    $.messager.alert('提示', "请输入正确的浏览次数", "warning");
+                    return false;
+                }
+
+                $.post('@Url.Action("Update")', { Id: Id, Name: LinkName, WebUrl: WebUrl, LinkType: LinkType, Status: Status, Sort: Sort }, function (data) {
+                    if (data.IsSuccess) {
+                        $.messager.alert('提示', "添加成功", "warning");
+                        setTimeout(function () {
+                            window.location.href = '@Url.Action("Index")';
+                        }, 2000);
+                    } else {
+                        $.messager.alert('提示', data.ErrorMessage, "warning")
+                    }
+                });
+            });
+        });
+    </script>
+}

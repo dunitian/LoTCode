@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="/Styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="/Script/easyui/themes/gray/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="/Script/easyui/themes/icon.css" />
+</head>
+<body class="easyui-layout">
+    <!--顶部-->
+    <div data-options="region:'north',border:false" style="width:40px;border-width: 1px;border-style: solid;">
+        <div class="top_content">
+            <div class="top_bar fixed" id="top_bar">
+                <ul class="fixed">
+                    <li class="admin"><span id="name">@ViewBag.ManagerName</span> ：您好</li>
+                    <li class="quit"><a href="#" onclick="logout();">退出</a> </li>
+                    <li class="dd" style="border-left: 1px solid #2e363f; border-right: 0 none; padding: 0;">
+                    </li>
+                </ul>
+            </div>
+            <div class="public_nav">
+                <ul class="nav_ul fixed" id="navUl">
+                    <li class="nav0 cur"><a class="dntBlock dntDivCenter" onclick="changeMenuTab(this);" href="javascript:void(0);" index="businessManage">业务管理</a></li>
+                    <li class="nav1"><a onclick="changeMenuTab(this);" href="javascript:void(0);" index="siteManage">网站管理</a></li>
+                    <li class="nav2"><a onclick="changeMenuTab(this);" href="javascript:void(0);" index="systemManage">系统设置</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--/顶部-->
+    <!--左侧-->
+    <div data-options="region:'west',border:false" style="width: 200px; background: #1d242c">
+        <div id="businessManage" class="easyui-accordion" data-options="border:false,fit:false,multiple:false">
+            <div title="业务数据管理" style="overflow: auto; padding: 3px;">
+                <ul class="menu_list">
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "Article")">行业资讯管理</a> </li>
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "Talking")">生活点滴专栏</a> </li>
+                </ul>
+            </div>
+            <div title="生活笔记专栏" style="overflow: auto; padding: 3px;">
+                <ul class="menu_list">
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("NotePad", "Article")">生活笔记专栏</a> </li>
+                </ul>
+            </div>
+            <div title="网络资源专栏" style="overflow: auto; padding: 3px;">
+                <ul class="menu_list">
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Resource", "Article")">网络资源专栏</a> </li>
+                </ul>
+            </div>
+        </div>
+        <div id="siteManage" class="easyui-accordion" data-options="border:false,fit:false,multiple:false" style="display:none">
+            <div title="基础数据管理" style="overflow: auto; padding: 3px;">
+                <ul class="menu_list">
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "BaseInfo")">固定信息管理</a> </li>
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "DisPhoto")">文章展图栏</a></li>
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Peoples", "DisPhoto")">游客头像栏</a></li>
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "ArticleType")">文章分类管理</a></li>
+                </ul>
+            </div>
+            <div title="网络营销专栏" style="overflow: auto; padding: 3px;">
+                <ul class="menu_list">
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "FriendLink")">友情链接管理</a></li>
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "Adment")">固定广告专栏</a></li>
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "SeoTKD")">SEO、防盗链等</a></li>
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Compute", "Census")">站点数据搜集</a></li>
+                </ul>
+            </div>
+            <div title="逆天@实验室" style="overflow: auto; padding: 3px;">
+                <ul class="menu_list">
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Compute", "Census")">后续扩展中</a> </li>
+                </ul>
+            </div>
+        </div>
+        <div id="systemManage" class="easyui-accordion" data-options="border:false,fit:false,multiple:false" style="display:none">
+            <div title="角色权限管理" style="overflow: auto; padding: 3px;">
+                <ul class="menu_list">
+                    @*<li><a href="javascript:void(0);" data-url="@Url.Action("Index", "DntRootInfo")">角色管理</a> </li>
+                        <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "ActionInfo")">授权管理</a> </li>
+                        <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "RoleGroup")">Group管理</a> </li>
+                        <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "AdminRecord")">敏感记录</a> </li>*@
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Compute", "Census")">后续扩展中</a> </li>
+                </ul>
+            </div>
+            <div title="网站管理专栏" style="overflow: auto; padding: 3px;">
+                <ul class="menu_list">
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "ImgFlash")">幻灯片专栏</a> </li>
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "ArticleTag")">Tag标签专栏</a></li>
+                    @*<li><a href="javascript:void(0);" data-url="@Url.Action("Index", "Census")">黑白名单管理</a></li>
+                        <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "HotWord")">热词热搜统计</a></li>*@
+                </ul>
+            </div>
+            <div title="网络数据统计" style="overflow: auto; padding: 3px;">
+                <ul class="menu_list">
+                    @*<li><a href="javascript:void(0);" data-url="@Url.Action("Index", "PublicRecord")">访客统计</a> </li>
+                        <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "XSS")">XSS 统计</a> </li>
+                        <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "DDos")">DDos统计</a> </li>
+                        <li><a href="javascript:void(0);" data-url="@Url.Action("Index", "Census")">文章统计</a> </li>*@
+                    <li><a href="javascript:void(0);" data-url="@Url.Action("Compute", "Census")">后续扩展中</a> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--/左侧-->
+    <!--主页面-->
+    <div data-options="region:'center',border:false">
+        <div id="mainContent" style="width:100%;height:98%">
+            <iframe id="ifrContent" scrolling="auto" frameborder="0" src="@Url.Action("Compute", "Census")" style="width:100%;height:100%;"></iframe>
+        </div>
+    </div>
+    <!--/主页面-->
+    <script type="text/javascript" src="/Script/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/Script/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/Script/common.js"></script>
+    <script type="text/javascript">
+        //管理后台桌面操作
+        var desktop = {
+
+            //添加右侧操作区
+            addMain: function (obj) {
+                var self = this;
+
+                //创建Tab页
+                $("#mainContent").html(self.createFrame(obj.url));
+            },
+
+            //创建iFrame方法
+            createFrame: function (url) {
+                $("#ifrContent").attr("src", url);
+            }
+        }
+
+        $(function () {
+
+            //菜单显示效果
+            $(".menu_list li").on({
+                mouseenter: function () {
+                    $(this).addClass("current").siblings().removeClass("current");
+                },
+                mouseleave: function () {
+                    $(this).removeClass("current");
+                },
+                click: function () {
+                    $(".menu_list li").removeClass('active');
+                    $(this).addClass("active");
+                }
+            });
+
+            //菜单点击导航
+            $(".menu_list a").click(function () {
+                var params = { text: this.text, url: this.attributes['data-url'].value };
+                desktop.addMain(params);
+            });
+        });
+
+        function changeMenuTab(obj) {
+            var index = $(obj).attr("index");
+            $("#businessManage").hide();
+            $("#siteManage").hide();
+            $("#systemManage").hide();
+            $("#" + index).show();
+            $("#" + index).accordion({
+                animate: true
+            });
+            $("#navUl li").removeClass("cur");
+            $(obj).parent().addClass("cur");
+        }
+    </script>
+</body>
+</html>

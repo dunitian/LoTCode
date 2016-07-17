@@ -1,0 +1,85 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="gb2312">
+    <title>逆天工作室音乐调频频道</title>
+    <meta name="keywords" content="毒逆天个人博客" />
+    <meta name="description" content="中庸之道存乎一心" />
+    <link href="/Styles/base.css" rel="stylesheet">
+    <link href="/Styles/about.css" rel="stylesheet">
+    <link href="/Styles/index.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <!--[if lt IE 9]>
+    <script src="js/modernizr.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <article style="margin-left:90px;">
+        <h3></h3>
+        <div class="about">
+            <h2>1.DouBan OnlyDes</h2>
+            <ul class="blog_a">
+                <li>&nbsp;&nbsp;豆瓣FM是你专属的个性化音乐收听工具。它简单方便，打开就能收听。在收听过程中，你可以用“红心”、“垃圾桶”或者“跳过” 告诉豆瓣FM你的喜好。豆瓣FM将根据你的操作和反馈，从海量曲库中自动发现并播出符合你音乐口味的歌曲。</li>
+            </ul>
+            <div id="douban" class="dntTxtCenter">
+                <h2></h2>
+                <img class="doubanBtn dntDivCenter" src="/Images/music/douban.png" />
+            </div>
+            <p></p>
+            <div class="dntTxtCenter">
+                <a class="blog_link">&nbsp;豆瓣电台不是很稳定，如果出现不能播放的时候请多点几次这&nbsp;=>&nbsp;<img src="/Images/music/icon_arrow.gif" class="doubanBtn" style="cursor:help;display:inline;" /></a>
+            </div>
+            <p></p>
+
+            <h2>2.KuGou OnlyTew</h2>
+            <ul class="blog_a">
+                <li>&nbsp;&nbsp;酷狗音乐旗下最新最全的在线正版音乐网站，可以为您免费提供最全的在线音乐试听下载，以及全球海量电台和MV播放服务、最新音乐播放器下载。酷狗音乐 和音乐在一起。</li>
+            </ul>
+            <p></p>
+            <div id="kugou" class="dntTxtCenter">
+                <img id="kugouBtn" class="dntDivCenter" src="/Images/music/kugou.png" />
+            </div>
+            <p></p>
+            <div class="dntTxtCenter">
+                <a class="blog_link dntTxtCenter">&nbsp;酷狗电台逆天是很喜欢的，里面可是有很多90后喜欢的歌曲哦~</a>
+            </div>
+            <p></p>
+
+            <h2>3.XiaMi OnlyLove</h2>
+            <ul class="blog_a">
+                <li>&nbsp;&nbsp;虾米网,在线音乐网站,在线听歌,音乐网站,在线音乐试听,音乐搜索,音乐下载.提供高品质音乐MP3的个性化推荐、发布、P2P下载服务，以及线下音乐活动等互动内容。</li>
+            </ul>
+            <p></p>
+            <div id="xiami" class="dntTxtCenter">
+                <img id="xiamiBtn" class="dntDivCenter" src="/Images/music/xiami.png" />
+            </div>
+            <p></p>
+            <div class="dntTxtCenter">
+                <a class="blog_link dntTxtCenter">&nbsp;虾米电台逆天最喜欢他的稳定，里面很多80和90后喜欢的歌曲~</a>
+            </div>
+        </div>
+    </article>
+    <div class="clear"></div>
+    <!-- 清除浮动 -->
+    <script type="text/javascript" src="/Script/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#kugouBtn').click(function () {
+                $('#kugou').html('<iframe id="kugou" src="http://web.kugou.com/2345_new.html" width="745" height="514" frameborder="0" scrolling="no" border="0" allowtransparency="true"></iframe>');
+            });
+
+            $('.doubanBtn').click(function () {
+                doubanRef();
+            });
+
+            $('#xiamiBtn').click(function () {
+                $('#xiami').html('<iframe src="http://kuang.xiami.com/kuang/play/xiamiradio" width="530" height="282" frameborder="0" scrolling="no" border="0" allowtransparency="true"></iframe>');
+            });
+        });
+
+        function doubanRef() {
+            $('#douban').html('<iframe id="douban" frameborder="0" width="530" scrolling="no" style="background-color: transparent; height: 249px;" allowtransparency="true" src="http://douban.fm/partner/baidu/doubanradio?"></iframe>');
+        }
+    </script>
+</body>
+</html>

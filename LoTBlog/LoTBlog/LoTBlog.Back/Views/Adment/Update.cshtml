@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "广告位添加";
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+@model LoT.Model.Advertisement
+@section HeadCss{
+    @*文本编辑器引用的2个css开始*@
+    <link rel="stylesheet" href="/Script/kindeditor/themes/default/default.css" />
+    <link rel="stylesheet" href="/Script/kindeditor/plugins/code/prettify.css" />
+    @*文本编辑器引用的2个css结束*@
+}
+<div class="pub_module">
+    <div class="top">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="middle">
+        <ul class="list_info">            
+            <li>
+                <span class="tit">当前状态：</span>
+                <select id="Status">
+                    <option value="1">正常状态</option>
+                    @if (Model.Status == LoT.Enums.StatusEnum.Delete)
+                    {
+                        <option value="99" selected="selected">删除状态</option>
+                    }
+                    else
+                    {
+                        <option value="99">删除状态</option>
+                    }
+                </select>
+                <font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">广告位置：</span>
+                <input type="text" id="Map" value="@Model.Map" /><font style="color: Red">*</font>
+            </li>
+        </ul>
+        <div style="padding-left:50px;">
+            <textarea rows="30" cols="97" id="editor_id" name="AContext">@Html.Raw(Model.AContext)</textarea>
+        </div>
+        <ul>
+            <li>&nbsp;</li>            
+            <li class="pub_btn">
+                <input type="hidden" value="@Model.Id" id="Id" />
+                <input type="button" id="mybtn" value="保 存" class="input_30 p_btn" style="width: 100px;height:30px; float: left; margin-left: 153px;font-size:16px;" />
+                <input type="button" id="mybtnfh" value="返 回" class="input_30 p_btn" style="width: 100px; height: 30px; margin-left: 53px; font-size: 16px; " />
+            </li>
+            <li>&nbsp;</li>
+        </ul>
+    </div>
+</div>
+@section JsScript{
+
+    @*文本编辑器引用的几个js文件开始*@
+    <script charset="utf-8" src="/Script/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="/Script/kindeditor/lang/zh_CN.js"></script>
+    <script charset="utf-8" src="/Script/kindeditor/plugins/code/prettify.js"></script>
+    @*文本编辑器引用的几个js文件结束*@
+
+    <script type="text/javascript">
+
+        //文本编辑器初始化
+        var editor = "";
+        KindEditor.ready(function (K) {
+            editor = K.create('#editor_id', {
+                uploadJson: '/Script/kindeditor/upload_json.ashx',
+                fileManagerJson: '/Script/kindeditor/file_manager_json.ashx',
+                allowFileManager: true
+            });
+        });
+
+        $(function () {
+            //返回
+            $("#mybtnfh").click(function () {
+                location.href = "/Adment//Index";
+            })
+            //保存
+            $("#mybtn").click(function () {
+                //文章标题
+                var Map = $.trim($("#Map").val());
+                if (Map.length < 1) {
+                    $.messager.alert('提示', "广告位置不能为空", "warning")
+                    return false;
+                }
+                //文章内容
+                var AContext = $.trim(escape(editor.html()));
+                if (AContext.length < 1) {
+                    $.messager.alert('提示', "内容部分不能为空", "warning")
+                    return false;
+                }
+                var Id = $('#Id').val();
+                var Status = $('#Status').val();
+                //添加
+                $.post('@Url.Action("Update")', { Map: Map, AContext: AContext, Status: Status, Id: Id }, function (data) {
+                    if (data.IsSuccess) {
+                        $.messager.alert('提示', "修改成功", "warning");
+                        setTimeout(function () {
+                            window.location.href = '/Adment//Index';
+                        }, 2000);
+                    } else {
+                        $.messager.alert('提示', data.ErrorMessage, "warning")
+                    }
+                })
+            })
+        });
+    </script>
+}

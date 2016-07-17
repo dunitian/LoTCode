@@ -1,0 +1,28 @@
+﻿<ul class="ph_n">
+    @if (ViewBag.ArticleList != null)
+    {
+        IList<LoTBlog.Models.Temp> articleList = ViewBag.ArticleList as IList<LoTBlog.Models.Temp>;
+        if (articleList != null)
+        {
+            for (int i = 1; i <= articleList.Count; i++)
+            {
+                if (i == 1)
+                {
+                    <li><span class="num1">@i</span><a href="@Url.Action("Detail", "Article", new { id = articleList[i - 1].Id })">@articleList[i - 1].Name</a></li>
+                }
+                else if (i == 2)
+                {
+                    <li><span class="num2">@i</span><a href="@Url.Action("Detail", "Article", new { id = articleList[i - 1].Id })">@articleList[i - 1].Name</a></li>
+                }
+                else if (i == 3)
+                {
+                    <li><span class="num3">@i</span><a href="@Url.Action("Detail", "Article", new { id = articleList[i - 1].Id })">@articleList[i - 1].Name</a></li>
+                }
+                else
+                {
+                    <li><span>@i</span><a href="@Url.Action("Detail", "Article", new { id = articleList[i - 1].Id })">@articleList[i - 1].Name</a></li>
+                }
+            }
+        }
+    }
+</ul>

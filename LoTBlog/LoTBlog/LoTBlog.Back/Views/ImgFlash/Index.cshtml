@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "幻灯片部分";
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+@section HeadCss{
+    @*文本编辑器引用的css开始*@
+    <link rel="stylesheet" href="/Script/kindeditor/themes/default/default.css" />
+    @*文本编辑器引用的css结束*@
+}
+@model LoT.Model.ImgFlash
+<div class="pub_module">
+    <div class="top">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="middle">
+        <ul class="list_info">
+            <li>
+                <span class="tit">上标题：</span>
+                <input type="text" id="TopTitle" value="@Model.TopTitle" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">下标题：</span>
+                <input type="text" id="BottomTitle" value="@Model.BottomTitle" /><font style="color: Red">*</font>
+            </li>
+            <li style="padding-left:20px;">
+                <img id="DisplayPhoto" src="@Model.BackImg" style="max-width:715px;" /><br />
+                <input type="button" class="input_30 p_btn" value="点我就上传图片" style="margin-left:250px;margin-top:10px;" onclick="uploadImg(this);" />
+            </li>
+            <li class="pub_btn">
+                <input type="hidden" value="@Model.Id" id="Id" />
+                <input type="button" id="mybtn" value="保   存" class="input_30 p_btn" style="width: 250px; height:50px; font-size:16px; margin-left: 155px;" />
+            </li>
+        </ul>
+    </div>
+</div>
+@section JsScript{
+
+    @*文本编辑器引用的几个js文件开始*@
+    <script charset="utf-8" src="/Script/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="/Script/kindeditor/lang/zh_CN.js"></script>
+    @*文本编辑器引用的几个js文件结束*@
+
+    <script type="text/javascript">
+        //上传图片
+        function uploadImg(btn) {
+            var editor = KindEditor.editor({
+                uploadJson: '/Script/kindeditor/upload_json.ashx',
+                fileManagerJson: '/Script/kindeditor/file_manager_json.ashx',
+                allowFileManager: true
+            });
+            editor.loadPlugin('image', function () {
+                editor.plugin.imageDialog({
+                    imageWidth: 50,
+                    imageHeight: 50,
+                    clickFn: function (url, title, width, height, border, align) {
+                        $(btn).val('图片上传完毕');
+                        $(btn).siblings('img').attr('src', url);//设置图片路径
+                        editor.hideDialog();
+                    }
+                });
+            });
+        }
+
+        //保存
+        $("#mybtn").click(function () {
+            var TopTitle = $.trim($("#TopTitle").val());
+            if (TopTitle.length < 1) {
+                $.messager.alert('提示', "上标题不能为空", "warning")
+                return false;
+            }
+            var BottomTitle = $.trim($("#BottomTitle").val());
+            if (BottomTitle.length < 1) {
+                $.messager.alert('提示', "下标题不能为空", "warning")
+                return false;
+            }
+            var Id = $('#Id').val();
+            var BackImg = $('#DisplayPhoto').attr('src');
+
+            $.post('@Url.Action("Update")', { TopTitle: TopTitle, BottomTitle: BottomTitle, BackImg: BackImg, Id: Id }, function (data) {
+                if (data.IsSuccess) {
+                    $.messager.alert('提示', "操作成功", "warning");
+                    setTimeout(function () {
+                        window.location.href = window.location.href;
+                    }, 2000);
+                } else {
+                    $.messager.alert('提示', data.ErrorMessage, "warning")
+                }
+            });
+        });
+    </script>
+}

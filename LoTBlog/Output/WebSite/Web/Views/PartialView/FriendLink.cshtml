@@ -1,0 +1,16 @@
+﻿@model IQueryable<LoT.Model.FriendLink>
+<div class="links">
+    <h2>
+        <p>友情链接</p>
+    </h2>
+    <ul>
+        <li><a href="http://www.cnblogs.com/dunitian/" target="_blank">毒逆天个人博客</a></li>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <li><a href="@item.WebUrl" target="_blank">@item.LinkName</a></li>
+            }
+        }
+    </ul>
+</div>

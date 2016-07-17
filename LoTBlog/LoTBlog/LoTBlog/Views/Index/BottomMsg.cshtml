@@ -1,0 +1,9 @@
+﻿<div id="msgwrap" style="width:350px;bottom:20px;display:none;">
+    <span id="msgtitle">今日推荐</span><a href="javascript:void(0);" id="msgclose" onclick="msgclose();" style="display: block;">&nbsp;</a>
+    <div id="msglatest">
+        <h3 class="includetitle">
+            @*<a id="dntmsg" href="@ViewBag.MsgUrl">@ViewBag.MsgTxt</a>*@
+            @Html.Raw(HttpUtility.HtmlDecode(ViewBag.AContext))
+        </h3>
+    </div>
+</div>

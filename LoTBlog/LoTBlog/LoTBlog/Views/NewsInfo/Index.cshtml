@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "行业资讯（专业+安全）~ 毒逆天的个人博客";
+    Layout = "~/Views/Shared/_LoTBlog.cshtml";
+    ViewBag.Keywords = "毒逆天,逆天,dunitian,dnt,个人博客,Net,分享,经验,资源,免费,dkill,dkill.net,行业资讯,资讯";
+    ViewBag.Description = "行业资讯，主要共享一些专业知识和安全的知识。逆天的个人博客，本博客主要以一些经验和技术分享为主，如有疏漏欢迎指出~";
+}
+@section HeadCss{
+    <link href="/Css/index.css" rel="stylesheet">
+}
+<article>
+    @{Html.RenderAction("BlogSWF", "PartialView");}
+    <div class="bloglist">
+        <h2>
+            <p>行业<span>资讯</span></p>
+        </h2>
+        @{Html.RenderAction("NewsArticle", "Article", new { pi = ViewBag.PageIndex, ps = ViewBag.PageSize });}
+    </div>
+</article>
+<aside>
+    @*右侧基本信息*@
+    @{Html.RenderAction("BlogBaseInfo", "PartialView");}
+    <div class="tj_news">
+        <h2>
+            <p class="tj_t1">最新文章</p>
+        </h2>
+        @{Html.RenderAction("NewArticle", "PartialView");}
+        <h2>
+            <p class="tj_t1">点击排行</p>
+        </h2>
+        @{Html.RenderAction("HotArticle", "PartialView");}
+        <h2>
+            <p class="tj_t2">网友推荐</p>
+        </h2>
+        @{Html.RenderAction("RecommendedArticle", "PartialView");}
+        <h2>
+            <p class="tj_t2">编辑推荐</p>
+        </h2>
+        @{Html.RenderAction("CompilerLikeArticle", "PartialView");}
+        <h2>
+            <p class="tj_t2">最近访客</p>
+            @{Html.RenderAction("DSPeople", "PartialView", new { count = 24 });}
+        </h2>
+    </div>
+    <br />
+    @*友情链接*@
+    @{Html.RenderAction("FriendLink", "PartialView", new { pageType = 2 });}
+    @*版权*@
+    @{Html.RenderAction("CopyRight", "PartialView");}
+</aside>
+@section JsScript{
+
+}

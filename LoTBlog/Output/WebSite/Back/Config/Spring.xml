@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+
+  <!--放容器里面的所有的节点  type属性的规范：程序集名称在内的类型全名,程序集名-->
+  <object type="LoTBlog.Back.Controllers.ArticleTypeController,LoTBlog.Back" singleton="false" >
+    <!--给ArticleTypeController注入ArticleTypeService对象-->
+    <property name="ArticleTypeService" ref="ArticleTypeService" />
+  </object>
+
+  <object type="LoTBlog.Back.Controllers.ArticleTagController,LoTBlog.Back" singleton="false" >
+    <!--给ArticleTagController注入ArticleTagService对象-->
+    <property name="ArticleTagService" ref="ArticleTagService" />
+  </object>
+
+  <object type="LoTBlog.Back.Controllers.ArticleController,LoTBlog.Back" singleton="false" >
+    <!--给ArticleController注入ArticleService,ArticleDisPhotoService,ArticleTypeService,ArticleTagService对象-->
+    <property name="ArticleService" ref="ArticleService" />
+    <property name="ArticleDisPhotoService" ref="ArticleDisPhotoService" />
+    <property name="ArticleTypeService" ref="ArticleTypeService" />
+    <property name="ArticleTagService" ref="ArticleTagService" />
+  </object>
+  
+  <object type="LoTBlog.Back.Controllers.FriendLinkController,LoTBlog.Back" singleton="false" >
+    <!--给FriendLinkController注入FriendLinkService对象-->
+    <property name="FriendLinkService" ref="FriendLinkService" />
+  </object>
+
+  <object type="LoTBlog.Back.Controllers.DisPhotoController,LoTBlog.Back" singleton="false" >
+    <!--给DisPhotoController注入ArticleDisPhotoService,PeopleDisPhotoService对象-->
+    <property name="ArticleDisPhotoService" ref="ArticleDisPhotoService" />
+    <property name="PeopleDisPhotoService" ref="PeopleDisPhotoService" />
+  </object>
+
+  <object type="LoTBlog.Back.Controllers.SeoTKDController,LoTBlog.Back" singleton="false" >
+    <!--给SeoTKDController注入SeoTKDService对象-->
+    <property name="SeoTKDService" ref="SeoTKDService" />
+  </object>
+
+  <object type="LoTBlog.Back.Controllers.AdmentController,LoTBlog.Back" singleton="false" >
+    <!--给AdmentController注入AdvertisementService对象-->
+    <property name="AdvertisementService" ref="AdvertisementService" />
+  </object>
+
+  <object type="LoTBlog.Back.Controllers.ImgFlashController,LoTBlog.Back" singleton="false" >
+    <!--给ImgFlashController注入ImgFlashService对象-->
+    <property name="ImgFlashService" ref="ImgFlashService" />
+  </object>
+  
+    <object type="LoTBlog.Back.Controllers.TalkingController,LoTBlog.Back" singleton="false" >
+    <!--给TalkingController注入ArticleDisPhotoService,TalkingService对象-->
+      <property name="ArticleDisPhotoService" ref="ArticleDisPhotoService" />
+      <property name="TalkingService" ref="TalkingService" />
+  </object>
+
+  <object type="LoTBlog.Back.Controllers.BaseInfoController,LoTBlog.Back" singleton="false" >
+    <!--给BaseInfoController注入BaseInfoService对象-->
+    <property name="BaseInfoService" ref="BaseInfoService" />
+  </object>
+  <!--=================================华丽的分割线=================================-->
+
+  <!--配置Service-->
+  <object name="AdvertisementService" type="LoT.Service.AdvertisementService,LoT.Service" singleton="false" ></object>
+  <object name="ArticleService" type="LoT.Service.ArticleService,LoT.Service" singleton="false" ></object>
+  <object name="ArticleDisPhotoService" type="LoT.Service.ArticleDisPhotoService,LoT.Service" singleton="false" ></object>
+  <object name="ArticleTypeService" type="LoT.Service.ArticleTypeService,LoT.Service" singleton="false" ></object>
+  <object name="ArticleTagService" type="LoT.Service.ArticleTagService,LoT.Service" singleton="false" ></object>
+  <object name="BaseInfoService" type="LoT.Service.BaseInfoService,LoT.Service" singleton="false" ></object>
+  <object name="FriendLinkService" type="LoT.Service.FriendLinkService,LoT.Service" singleton="false"></object>
+  <object name="PeopleDisPhotoService" type="LoT.Service.PeopleDisPhotoService,LoT.Service" singleton="false"></object>
+  <object name="SeoTKDService" type="LoT.Service.SeoTKDService,LoT.Service" singleton="false"></object>
+  <object name="ImgFlashService" type="LoT.Service.ImgFlashService,LoT.Service" singleton="false"></object>
+  <object name="TalkingService" type="LoT.Service.TalkingService,LoT.Service" singleton="false"></object>
+  
+</objects>

@@ -1,0 +1,45 @@
+﻿@model IQueryable<LoT.Model.UserRegInfo>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @*<a href="@Url.Action("Create", "UserRegInfo")">Create New</a>*@
+        @Html.ActionLink("Create New", "Create", "UserRegInfo")
+    </p>
+    <table>
+        <tr>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Pass
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                    @item.Status
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete", "UserRegInfo", new { id = item.Id })">删除</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

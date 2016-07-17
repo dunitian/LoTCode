@@ -1,0 +1,13 @@
+﻿<ul>
+    @if (ViewBag.ArticleList != null)
+    {
+        IQueryable<LoTBlog.Models.Temp> articleList = ViewBag.ArticleList as IQueryable<LoTBlog.Models.Temp>;
+        if (articleList != null)
+        {
+            foreach (var item in articleList)
+            {
+                <li class="dntHideTitle"><a href="@Url.Action("Detail", "Article", new { id = item.Id })" title="@item.Name">@item.Name</a></li>
+            }
+        }
+    }
+</ul>

@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "访客头像管理";
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+
+<div style="height:10px;"></div>
+<div class="pub_module pub_module_r">    
+    <div class="middle">
+        <table id="dg"></table>
+    </div>
+</div>
+@section JsScript{
+    <script type="text/javascript">
+        $(function () {
+            $("#dg").datagrid({
+                tmp_id: "dg",
+                title: '@ViewBag.Title',
+                loadMsg: '数据加载中...',
+                fit: true,
+                url: '@Url.Action("Query")',
+                pageNumber: 1,
+                pageSize: 20,
+                queryParams: { photoType: 2 },
+                pagination: true,
+                rownumbers: true,
+                fitColumns: true,
+                fit: true,
+                loadFilter: function (data) {
+                    if (data.IsSuccess) {
+                        return data.Data;
+                    } else {
+                        $.messager.alert('Error', data.ErrorMessage, "error", function () { if (data.ErrorCode == "38") { window.top.location.href = '@Url.Action("Login", "Admin")'; } });
+                    }
+                },
+                columns: [[
+                    { field: 'Id', checkbox: true, width: 50, hidden: false },
+                    {
+                        field: 'Title', title: '标题名称', width: 200, formatter: function (value, row, index) {
+                            return '<a onclick="Edit(' + row.Id + ')" href="#">' + value + '</a>';
+                        }
+                    },
+                    {
+                        field: 'PicUrl', title: '图片路径', width: 200, formatter: function (value, row, index) {
+                            return '<a onclick="Edit(' + row.Id + ')" href="#">' + value + '</a>';
+                        }
+                    },
+                    {
+                        field: 'Status', title: '当前状态', width: 100, formatter: function (value, row, index) {
+                            if (value == 99) {
+                                return '<span style="color:Red">删除状态</span>';
+                            } else {
+                                return '正常状态'
+                            }
+                        }
+                    }
+                ]]
+            });
+
+            $(window).resize(function () {
+                $('#dg').datagrid('resize', {
+                    width: function () { return document.body.clientWidth; },
+                    height: function () { return document.body.clientHeight; }
+                });
+            });
+        });
+
+        //查询
+        function onSearch() {
+            var Status = $("#SelectStatus").val();
+            $('#dg').datagrid('load', {
+                Name: $("#title").val(),
+                Status: Status
+            })
+        }
+
+        //重置
+        function toClear() {
+            $("#title").val("");
+            $("#SelectStatus").val(-1);
+        }
+
+        //导出
+        function Daochu() {
+
+        }
+
+        //删除
+        function delet(ids) {
+            $.messager.confirm("提示", "确定删除吗？", function (r) {
+                if (r) {
+                    $.post('@Url.Action("DeletList")', { ids: ids }, function (data) {
+                        if (data.IsSuccess) {
+                            $.messager.alert('提示', data.OtherData, "info");
+                        } else {
+                            $.messager.alert('提示', data.ErrorMessage, "info");
+                        }
+                        onSearch();
+                    })
+                }
+            });
+        }
+
+        //恢复
+        function recover(ids) {
+            $.messager.confirm("提示", "确定恢复吗？", function (r) {
+                if (r) {
+                    $.post('@Url.Action("RecoverList")', { ids: ids }, function (data) {
+                        if (data.IsSuccess) {
+                            $.messager.alert('提示', data.OtherData, "info");
+                        } else {
+                            $.messager.alert('提示', data.ErrorMessage, "info");
+                        }
+                        onSearch();
+                    })
+                }
+            });
+        }
+
+        //批量操作
+        function listIds(a) {
+            try {
+                var rows = $("#dg").datagrid("getSelections");
+                if (rows.length == 0) {
+                    throw "请先选中行!";
+                }
+                var ids = "";
+                $(rows).each(function (i) {
+                    if (ids == "") {
+                        ids += this.Id;
+                    }
+                    else {
+                        ids += "," + this.Id + "";
+                    }
+                });
+                if (a == 99) {
+                    delet(ids);//调用删除的方法
+                } else {
+                    recover(ids);//批量恢复
+                }
+            }
+            catch (e) {
+                $.messager.alert("提示", e, "error")
+            }
+        }
+    </script>
+}

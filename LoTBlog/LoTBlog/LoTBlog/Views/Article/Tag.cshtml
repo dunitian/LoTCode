@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "你所在的位置是标签详细页";
+    Layout = "~/Views/Shared/_LoTBlog.cshtml";
+    ViewBag.Keywords = "毒逆天,逆天,dunitian,dnt,个人博客,Net,分享,经验,资源,免费,dkill,dkill.net,标签";
+    ViewBag.Description = "标签详细页,你所在的位置是标签详细页。逆天的个人博客，本博客主要以一些经验和技术分享为主，如有疏漏欢迎指出~";
+}
+@section HeadCss{
+    <link href="/Css/style.css" rel="stylesheet">
+}
+<article>
+    <h2 class="about_h">您现在的位置是：<a href="@Url.Action("Index","Index")">首页</a>><a href="#">标签详细</a></h2>
+    <div class="bloglist">
+        @{IEnumerable<LoTBlog.Models.ArticleTemp> templist = ViewBag.ArticleList as IEnumerable<LoTBlog.Models.ArticleTemp>;}
+        @if (templist != null)
+        {
+            foreach (var item in templist)
+            {
+                <div class="newblog">
+                    <h3><a href="@Url.Action("Detail", "Article", new { id = item.Id })">@item.Title</a></h3>
+                    <ul>
+                        <div class="autor">
+                            <span>作者：@item.Author</span>
+                            <span>
+                                分类：
+                                @if (item.ArticleTypeList != null && item.ArticleTypeList.Count > 0)
+                                {
+                                    IList<LoT.Model.ArticleType> articleTypes = item.ArticleTypeList;
+                                    for (int i = articleTypes.Count - 1; i >= 0; i--)
+                                    {
+                                        <a href="@Url.Action("Type", "Article", new { id = articleTypes[i].Id })">@articleTypes[i].Name</a>
+                                    }
+                                }
+                            </span>
+                            @*<span>浏览（<a href="@Url.Action("Detail", "Article", new { id = item.Id })">@item.Count</a>）</span>*@
+                        </div>
+                        <p>
+                            @if (item.TContent.Length > 279)
+                            {
+                                @item.TContent.Substring(0, 279);
+                            }
+                            else
+                            {
+                                @item.TContent;
+                            }...
+                            <a href="@Url.Action("Detail", "Article", new { id = item.Id })" target="_blank" class="readmore">全文</a>
+                        </p>
+                    </ul>
+                    <figure><img src="@item.DisplayPic"></figure>
+                    <div class="dateview">@item.CreateTime</div>
+                </div>
+            }
+        }
+    </div>
+    @{Html.RenderAction("Show", "PageNav", new { pi = ViewBag.PageIndex, ps = ViewBag.PageSize, total = ViewBag.Total, url = ViewBag.PageUrl });}
+</article>
+<aside>
+    @*右侧基本信息*@
+    @{Html.RenderAction("BlogBaseInfo", "PartialView");}
+    <div class="ph_news">
+        <h2>
+            <p class="tj_t1">最新文章</p>
+        </h2>
+        @{Html.RenderAction("NewArticle", "PartialView");}
+        <h2>
+            <p class="tj_t1">点击排行</p>
+        </h2>
+        @{Html.RenderAction("HotArticle", "PartialView");}
+        <h2>
+            <p class="tj_t2">网友推荐</p>
+        </h2>
+        @{Html.RenderAction("RecommendedArticle", "PartialView");}
+        <h2>
+            <p class="tj_t2">编辑推荐</p>
+        </h2>
+        @{Html.RenderAction("CompilerLikeArticle", "PartialView");}
+    </div>
+    @*友情链接*@
+    @{Html.RenderAction("FriendLink", "PartialView", new { pageType = 1 });}
+    @*版权*@
+    @{Html.RenderAction("CopyRight", "PartialView");}
+</aside>

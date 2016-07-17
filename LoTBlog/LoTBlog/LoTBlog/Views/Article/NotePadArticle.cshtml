@@ -1,0 +1,41 @@
+﻿@{IEnumerable<LoTBlog.Models.ArticleTemp> templist = ViewBag.ArticleList as IEnumerable<LoTBlog.Models.ArticleTemp>;}
+@if (templist != null)
+{
+    foreach (var item in templist)
+    {
+        <div class="newblog">
+            <h3><a href="@Url.Action("Detail", "Article", new { id = item.Id })">@item.Title</a></h3>
+            <ul>
+                <div class="autor">
+                    <span>作者：@item.Author</span>
+                    <span>
+                        分类：
+                        @if (item.ArticleTypeList != null && item.ArticleTypeList.Count > 0)
+                        {
+                            IList<LoT.Model.ArticleType> articleTypes = item.ArticleTypeList;
+                            for (int i = articleTypes.Count - 1; i >= 0; i--)
+                            {
+                                <a href="@Url.Action("Type", "Article", new { id = articleTypes[i].Id })">@articleTypes[i].Name</a>
+                            }
+                        }
+                    </span>
+                    <span>浏览（<a href="@Url.Action("Detail", "Article", new { id = item.Id })">@item.Count</a>）</span>
+                </div>
+                <p>
+                    @if (item.TContent.Length > 279)
+                    {
+                        @item.TContent.Substring(0, 279);
+                    }
+                    else
+                    {
+                        @item.TContent;
+                    }...
+                    <a href="@Url.Action("Detail", "Article", new { id = item.Id })" target="_blank" class="readmore">全文</a>
+                </p>
+            </ul>
+            <figure><img src="@item.DisplayPic"></figure>
+            <div class="dateview">@item.CreateTime</div>
+        </div>
+    }
+}
+@{Html.RenderAction("Show", "PageNav", new { pi = ViewBag.PageIndex, ps = ViewBag.PageSize, total = ViewBag.Total, url = ViewBag.PageUrl });}

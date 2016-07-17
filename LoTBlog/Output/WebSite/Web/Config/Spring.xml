@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+
+  <!--放容器里面的所有的节点  type属性的规范：程序集名称在内的类型全名,程序集名-->
+  <!--<object type="LoTBlog.Controllers.UserRegInfoController,LoTBlog" singleton="false" >-->
+  <!--给UserRegInfoController注入UserRegInfoService对象-->
+  <!--<property name="UserRegInfoService" ref="UserRegInfoService" />-->
+  <!--</object>-->
+
+  <object type="LoTBlog.Controllers.PartialViewController,LoTBlog" singleton="false" >
+    <!--给PartialViewController注入ArticleService对象-->
+    <property name="ArticleService" ref="ArticleService" />
+
+    <!--给PartialViewController注入ArticleTypeService对象-->
+    <property name="ArticleTypeService" ref="ArticleTypeService" />
+
+    <!--给PartialViewController注入FriendLinkService对象-->
+    <property name="FriendLinkService" ref="FriendLinkService" />
+
+    <!--给PartialViewController注入ImgFlashService对象-->
+    <property name="ImgFlashService" ref="ImgFlashService" />
+  </object>
+
+  <object type="LoTBlog.Controllers.ArticleController,LoTBlog" singleton="false" >
+    <!--给ArticleController注入ArticleService对象-->
+    <property name="ArticleService" ref="ArticleService" />
+
+    <!--给ArticleController注入ArticleTypeService对象-->
+    <property name="ArticleTypeService" ref="ArticleTypeService" />
+
+    <!--给ArticleController注入ArticleTagService对象-->
+    <property name="ArticleTagService" ref="ArticleTagService" />
+  </object>
+
+  <object type="LoTBlog.Controllers.IndexController,LoTBlog" singleton="false" >
+    <!--给IndexController注入AdvertisementService对象-->
+    <property name="AdvertisementService" ref="AdvertisementService" />
+    <!--给IndexController注入QQModelService对象-->
+    <property name="QQModelService" ref="QQModelService" />
+  </object>
+
+  <object type="LoTBlog.Controllers.TalkController,LoTBlog" singleton="false" >
+    <!--给TalkingController注入TalkingService对象-->
+    <property name="TalkingService" ref="TalkingService" />
+  </object>
+
+  <!--配置Service-->
+  <!--<object name="UserRegInfoService" type="LoT.Service.UserRegInfoService,LoT.Service" singleton="false" ></object>-->
+  <object name="AdvertisementService" type="LoT.Service.AdvertisementService,LoT.Service" singleton="false"></object>
+  <object name="ArticleService" type="LoT.Service.ArticleService,LoT.Service" singleton="false"></object>
+  <object name="ArticleTypeService" type="LoT.Service.ArticleTypeService,LoT.Service" singleton="false"></object>
+  <object name="ArticleTagService" type="LoT.Service.ArticleTagService,LoT.Service" singleton="false"></object>
+  <object name="FriendLinkService" type="LoT.Service.FriendLinkService,LoT.Service" singleton="false"></object>
+  <object name="ImgFlashService" type="LoT.Service.ImgFlashService,LoT.Service" singleton="false"></object>
+  <object name="TalkingService" type="LoT.Service.TalkingService,LoT.Service" singleton="false"></object>
+  <object name="QQModelService" type="LoT.Service.QQModelService,LoT.Service" singleton="false"></object>
+</objects>

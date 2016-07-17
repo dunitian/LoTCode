@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "友情链接添加页面";
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+<div class="pub_module">
+    <div class="top">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="middle">
+        <ul class="list_info">
+            <li>
+                <span class="tit">标题：</span>
+                <input type="text" id="linkName" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">网址：</span>
+                <input type="text" id="WebUrl" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">
+                    所属页面:
+                </span>
+                <select id="SelectStatus">
+                    <option value="-1">=请选择=</option>
+                    <option value="1">网站首页</option>
+                    <option value="2">资讯页面</option>
+                    <option value="4">笔记页面</option>
+                    <option value="5">资源页面</option>
+                    <option value="3">文章详细</option>
+                    <option value="6">说说页面</option>
+                    <option value="7">音乐页面</option>
+                    <option value="8">相册页面</option>
+                    <option value="9">其他页面</option>
+                </select>
+            </li>
+            <li>
+                <span class="tit">Sort：</span>
+                <input type="text" id="Sort" /><font style="color: Red">*</font>(<font style="color:red">0~999</font>)
+            </li>            
+            <li class="pub_btn">
+                <input type="button" id="mybtn" value="保存" class="input_30 p_btn" style="width: 100px; float: left; margin-left: 35px;" />
+                <input type="button" id="mybtnfh" value="返回" class="input_30 p_btn" style="width: 100px; margin-left: 35px;" />
+            </li>
+        </ul>
+    </div>
+</div>
+@section JsScript{
+    <script type="text/javascript">
+        $(function () {
+            //返回
+            $("#mybtnfh").click(function () {
+                location.href = "/FriendLink/Index";
+            })
+            //保存
+            $("#mybtn").click(function () {
+                var LinkName = $.trim($("#linkName").val());
+                if (LinkName.length < 1) {
+                    $.messager.alert('提示', "标题名称不能为空", "warning")
+                    return false;
+                }
+
+                var WebUrl = $.trim($("#WebUrl").val());
+                if (WebUrl.length < 1) {
+                    $.messager.alert('提示', "标题名称不能为空", "warning")
+                    return false;
+                }
+
+                var LinkType = $("#SelectStatus").val();
+                if (LinkType < 1) {
+                    $.messager.alert('提示', "选择所属页面", "warning")
+                    return false;
+                }
+
+                var Sort = $.trim($("#Sort").val());
+                var $regex = /^\d+$/;
+                if (!$regex.test(Sort)) {
+                    $.messager.alert('提示', "请输入正确的浏览次数", "warning");
+                    return false;
+                }
+
+                $.post('@Url.Action("Add")', { Name: LinkName, WebUrl: WebUrl, LinkType: LinkType, Sort: Sort }, function (data) {
+                    if (data.IsSuccess) {
+                        $.messager.alert('提示', "添加成功", "warning");
+                        setTimeout(function () {
+                            window.location.href = '@Url.Action("Index")';
+                        }, 2000);
+                    } else {
+                        $.messager.alert('提示', data.ErrorMessage, "warning")
+                    }
+                });
+            })
+        });
+    </script>
+}

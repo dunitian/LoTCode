@@ -1,0 +1,217 @@
+﻿@{
+    ViewBag.Title = "固定信息栏";
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+@section HeadCss{
+    @*文本编辑器引用的css开始*@
+    <link rel="stylesheet" href="/Script/kindeditor/themes/default/default.css" />
+    @*文本编辑器引用的css结束*@
+}
+@model LoT.Model.BaseInfo
+<div class="pub_module">
+    <div class="top">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="middle">
+        <ul class="list_info">
+            <li>
+                <span class="tit">顶部标题：</span>
+                <input type="text" id="TopTitle" value="@Model.TopTitle" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">头部简介：</span>
+                <input type="text" id="TopText" value="@Model.TopText" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">Logo正面：</span>
+                <img id="TopLogoOne" src="@Model.TopLogoOne" style="width:40px;height:40px;" onmouseover="ReInitImg(this);" onmouseout="getInitImg(this);" />
+                <input type="button" class="input_30 p_btn" value="点我就上传图片" style="margin-top:5px;" onclick="uploadImg(this);" />
+            </li>
+            <li>
+                <span class="tit">Logo背面：</span>
+                <img id="TopLogoTwo" src="@Model.TopLogoTwo" style="width:40px;height:40px;" onmouseover="ReInitImg(this);" onmouseout="getInitImg(this);" />
+                <input type="button" class="input_30 p_btn" value="点我就上传图片" style="margin-top:5px;" onclick="uploadImg(this);" />
+            </li>
+            <li>
+                <span class="tit">右侧头像：</span>
+                <img id="RightImg" src="@Model.RightImg" style="width:40px;height:40px;" onmouseover="ReInitImg(this);" onmouseout="getInitImg(this);" />
+                <input type="button" class="input_30 p_btn" value="点我就上传图片" style="margin-top:5px;" onclick="uploadImg(this);" />
+            </li>
+            <li>
+                <span class="tit">右侧标题：</span>
+                <input type="text" id="RightTitle" value="@Model.RightTitle" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">右侧宣言：</span>
+                <input type="text" id="Manifesto" value="@Model.Manifesto" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">网名昵称：</span>
+                <input type="text" id="Nickname" value="@Model.Nickname" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">奋斗目标：</span>
+                <input type="text" id="Goal" value="@Model.Goal" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">你的梦想：</span>
+                <input type="text" id="Dream" value="@Model.Dream" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">ＱＱ号：</span>
+                <input type="text" id="QQ" value="@Model.QQ" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">邮箱号码：</span>
+                <input type="text" id="Email" value="@Model.Email" /><font style="color: Red">*</font>
+            </li>
+            <li class="pub_btn">
+                <input type="hidden" value="@Model.Id" id="Id" />
+                <input type="button" id="mybtn" value="保   存" class="input_30 p_btn" style="width: 250px; height:50px; font-size:16px; margin-left: 155px;" />
+            </li>
+        </ul>
+    </div>
+</div>
+@section JsScript{
+
+    @*文本编辑器引用的几个js文件开始*@
+    <script charset="utf-8" src="/Script/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="/Script/kindeditor/lang/zh_CN.js"></script>
+    @*文本编辑器引用的几个js文件结束*@
+
+    <script type="text/javascript">
+        //上传图片
+        function uploadImg(btn) {
+            var editor = KindEditor.editor({
+                uploadJson: '/Script/kindeditor/upload_json.ashx',
+                fileManagerJson: '/Script/kindeditor/file_manager_json.ashx',
+                allowFileManager: true
+            });
+            editor.loadPlugin('image', function () {
+                editor.plugin.imageDialog({
+                    imageWidth: 50,
+                    imageHeight: 50,
+                    clickFn: function (url, title, width, height, border, align) {
+                        $(btn).val('图片上传完毕');
+                        $(btn).siblings('img').attr('src', url);//设置图片路径
+                        editor.hideDialog();
+                    }
+                });
+            });
+        }
+
+        //恢复图片大小
+        function ReInitImg(imgobj) {
+            $(imgobj).css('width', '').css('height', '');
+        }
+
+        //缩小图
+        function getInitImg(imgobj) {
+            $(imgobj).css('width', '40px').css('height', '40px');
+        }
+
+        //保存
+        $("#mybtn").click(function () {
+            //顶部标题
+            var TopTitle = $.trim($("#TopTitle").val());
+            if (TopTitle.length < 1) {
+                $.messager.alert('提示', "顶部标题不能为空", "warning");
+                return false;
+            } else if (TopTitle.length > 29) {
+                $.messager.alert('提示', "顶部标题不能超过29个字", "warning");
+                return false;
+            }
+            //头部简介
+            var TopText = $.trim($("#TopText").val());
+            if (TopText.length < 1) {
+                $.messager.alert('提示', "头部简介不能为空", "warning");
+                return false;
+            } else if (TopText.length > 100) {
+                $.messager.alert('提示', "头部简介不能超过100个字", "warning");
+                return false;
+            }
+            //Logo正面
+            var TopLogoOne = $.trim($("#TopLogoOne").attr('src'));
+            if (TopLogoOne.length < 1) {
+                $.messager.alert('提示', "Logo正面不能为空", "warning");
+                return false;
+            }
+            //Logo背面
+            var TopLogoTwo = $.trim($("#TopLogoTwo").attr('src'));
+            if (TopLogoTwo.length < 1) {
+                $.messager.alert('提示', "Logo背面不能为空", "warning");
+                return false;
+            }
+            //右侧头像
+            var RightImg = $.trim($("#RightImg").attr('src'));
+            if (RightImg.length < 1) {
+                $.messager.alert('提示', "右侧头像不能为空", "warning");
+                return false;
+            }
+            //右侧标题
+            var RightTitle = $.trim($("#RightTitle").val());
+            if (RightTitle.length < 1) {
+                $.messager.alert('提示', "右侧标题不能为空", "warning");
+                return false;
+            } else if (RightTitle.length > 29) {
+                $.messager.alert('提示', "右侧标题不能超过29个字", "warning");
+            }
+            //右侧宣言
+            var Manifesto = $.trim($("#Manifesto").val());
+            if (Manifesto.length < 1) {
+                $.messager.alert('提示', "右侧宣言不能为空", "warning");
+                return false;
+            } else if (Manifesto.length > 29) {
+                $.messager.alert('提示', "右侧宣言不能超过29个字", "warning");
+            }
+            //网名昵称
+            var Nickname = $.trim($("#Nickname").val());
+            if (Nickname.length < 1) {
+                $.messager.alert('提示', "网名昵称不能为空", "warning");
+                return false;
+            } else if (Nickname.length > 29) {
+                $.messager.alert('提示', "网名昵称不能超过29个字", "warning");
+            }
+            //奋斗目标
+            var Goal = $.trim($("#Goal").val());
+            if (Goal.length < 1) {
+                $.messager.alert('提示', "奋斗目标不能为空", "warning");
+                return false;
+            } else if (Goal.length > 29) {
+                $.messager.alert('提示', "奋斗目标不能超过29个字", "warning");
+            }
+            //你的梦想
+            var Dream = $.trim($("#Dream").val());
+            if (Dream.length < 1) {
+                $.messager.alert('提示', "你的梦想不能为空", "warning");
+                return false;
+            } else if (Dream.length > 29) {
+                $.messager.alert('提示', "你的梦想不能超过29个字", "warning");
+            }
+            //ＱＱ号
+            var QQ = $.trim($("#QQ").val());
+            if (QQ.length < 1) {
+                $.messager.alert('提示', "ＱＱ号不能为空", "warning");
+                return false;
+            }
+            //邮箱号码
+            var Email = $.trim($("#Email").val());
+            if (Email.length < 1) {
+                $.messager.alert('提示', "邮箱号码不能为空", "warning");
+                return false;
+            }
+            var Id = $('#Id').val();
+
+            $.post('@Url.Action("Update")', { TopTitle: TopTitle, TopText: TopText, TopLogoOne: TopLogoOne, TopLogoTwo: TopLogoTwo, RightImg: RightImg, RightTitle: RightTitle, Manifesto: Manifesto, Nickname: Nickname, Goal: Goal, Dream: Dream, QQ: QQ, Email: Email, Id: Id }, function (data) {
+                if (data.IsSuccess) {
+                    $.messager.alert('提示', "操作成功", "warning");
+                    setTimeout(function () {
+                        window.location.href = window.location.href;
+                    }, 2000);
+                } else {
+                    $.messager.alert('提示', data.ErrorMessage, "warning")
+                }
+            });
+        });
+    </script>
+}

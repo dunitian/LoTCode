@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "站点数据搜集";
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+<div data-options="region:'center',border:false">
+    <div id="mainContent" style="width:100%;height:98%;">
+        <ul id="staties" class="quick-actions" style="padding:30px 0 0 50px;height:100px;">
+            <li class="bg_lg" id="today_orders" style="margin-right:27px;">
+                <a href="#">
+                    <i class="Iconbg_006"></i>
+                    <span class="label label-important">@ViewBag.Newstoday</span>
+                    今日新增资讯
+                </a>
+            </li>
+            <li class="bg_ly" id="today_orders" style="margin-right:27px;">
+                <a href="#">
+                    <i class="Iconbg_001"></i>
+                    <span class="label label-important">@ViewBag.ArticleToday</span>
+                    今日新增资源
+                </a>
+            </li>
+            <li class="bg_lb" id="today_goods" style="margin-right:18px;">
+                <a href="#">
+                    <i class="Iconbg_003"></i>
+                    <span class="label label-important">@ViewBag.SCToday</span>
+                    今日新增笔记
+                </a>
+            </li>
+            <li class="bg_lr" id="today_member" style="margin-right:0;">
+                <a href="#">
+                    <i class="Iconbg_002"></i>
+                    <span class="label label-important">@ViewBag.UserCount</span>
+                    今日新增会员
+                </a>
+            </li>
+        </ul>
+        <div id="welcomeContent" class="welecome" style="padding-left:50px">
+            <div class="dash serv_num" style="padding-left:50px;padding-top:15px;">
+                <div style="float:left;width:20%">
+                    <span style="font-size: 14px;line-height:18px;font-weight: lighter;float:left;">今日新增资讯</span>
+                    <span id="totalUser" style="float: left;font-size: 22px;height: 60px;line-height: 60px;margin-left: 8px;float:left;">@ViewBag.Newstoday</span>
+                </div>
+                <div style="float:left;width:20%">
+                    <span style="font-size: 14px;line-height:18px;font-weight: lighter;float:left;">本月新增资讯</span>
+                    <span id="totalUser" style="float: left;font-size: 22px;height: 60px;line-height: 60px;margin-left: 8px;float:left;">@ViewBag.NewsMonth</span>
+                </div>
+                <div style="float:left;width:20%">
+                    <span style="font-size: 14px;line-height:18px;font-weight: lighter;float:left;">所有新增资讯</span>
+                    <span id="totalUser" style="float: left;font-size: 22px;height: 60px;line-height: 60px;margin-left: 8px;float:left;">@ViewBag.NewsAll</span>
+                </div>
+            </div>
+            <div class="dash cli_num fixed" style="padding-left:50px;padding-top:15px;">
+                <div style="float:left;width:20%">
+                    <span style="font-size: 14px;line-height:18px;font-weight: lighter;float:left;">今日新增文章</span>
+                    <span id="totalUser" style="float: left;font-size: 22px;height: 60px;line-height: 60px;margin-left: 8px;float:left;">@ViewBag.ArticleToday</span>
+                </div>
+                <div style="float:left;width:20%">
+                    <span style="font-size: 14px;line-height:18px;font-weight: lighter;float:left;">本月新增文章</span>
+                    <span id="totalUser" style="float: left;font-size: 22px;height: 60px;line-height: 60px;margin-left: 8px;float:left;">@ViewBag.ArticleMonth</span>
+                </div>
+                <div style="float:left;width:20%">
+                    <span style="font-size: 14px;line-height:18px;font-weight: lighter;float:left;">所有新增文章</span>
+                    <span id="totalUser" style="float: left;font-size: 22px;height: 60px;line-height: 60px;margin-left: 8px;float:left;">@ViewBag.ArticleAll</span>
+                </div>
+            </div>
+            <div class="dash mem_num fixed" style="padding-left:50px;padding-top:15px;">
+                <div style="float:left;width:20%">
+                    <span style="font-size: 14px;line-height:18px;font-weight: lighter;float:left;">今日新增笔记</span>
+                    <span id="totalUser" style="float: left;font-size: 22px;height: 60px;line-height: 60px;margin-left: 8px;float:left;">@ViewBag.SCToday</span>
+                </div>
+                <div style="float:left;width:20%">
+                    <span style="font-size: 14px;line-height:18px;font-weight: lighter;float:left;">本月新增笔记</span>
+                    <span id="totalUser" style="float: left;font-size: 22px;height: 60px;line-height: 60px;margin-left: 8px;float:left;">@ViewBag.SCMonth</span>
+                </div>
+                <div style="float:left;width:20%">
+                    <span style="font-size: 14px;line-height:18px;font-weight: lighter;float:left;">所有新增笔记</span>
+                    <span id="totalUser" style="float: left;font-size: 22px;height: 60px;line-height: 60px;margin-left: 8px;float:left;">@ViewBag.SCAll</span>
+                </div>
+            </div>
+        </div>
+        <iframe id="ifrContent" scrolling="auto" frameborder="0" src="" style="width:100%;height:100%;display:none;"></iframe>
+    </div>
+</div>

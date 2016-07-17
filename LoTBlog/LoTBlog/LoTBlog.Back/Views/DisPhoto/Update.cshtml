@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "默认展图编辑";
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+@model LoT.Model.ArticleDisPhoto
+@section HeadCss{
+    @*文本编辑器引用的2个css开始*@
+    <link rel="stylesheet" href="/Script/kindeditor/themes/default/default.css" />
+    @*文本编辑器引用的2个css结束*@
+}
+<div class="pub_module">
+    <div class="top">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="middle">
+        <ul class="list_info">
+            <li>
+                <span class="tit">标题名称：</span>
+                <input type="text" id="title" value="@Model.Title" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">默认展图：</span>
+                <input type="button" class="input_30 p_btn" value="点我就上传默认展图" id="disPhoto" />
+                <input type="hidden" id="DisplayPic" value="@Model.PicUrl" /><img id="DisplayPhoto" style="width:50px;height:30px;" src="@Model.PicUrl" />
+            </li>
+            <li>
+                <span class="tit">当前状态：</span>
+                <select id="Status">
+                    <option value="1">正常状态</option>
+                    @if (Model.Status == LoT.Enums.StatusEnum.Delete)
+                    {
+                        <option value="99" selected="selected">删除状态</option>
+                    }
+                    else
+                    {
+                        <option value="99">删除状态</option>
+                    }
+                </select>
+                <font style="color: Red">*</font>
+            </li>
+            <li class="pub_btn">
+                <input type="hidden" value="@Model.Id" id="Id" />
+                <input type="button" id="mybtn" value="保存" class="input_30 p_btn" style="width: 100px; float: left; margin-left: 35px;" />
+                <input type="button" id="mybtnfh" value="返回" class="input_30 p_btn" style="width: 100px; margin-left: 35px;" />
+            </li>
+        </ul>
+    </div>
+</div>
+@section JsScript{
+
+    @*文本编辑器引用的几个js文件开始*@
+    <script charset="utf-8" src="/Script/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="/Script/kindeditor/lang/zh_CN.js"></script>
+    @*文本编辑器引用的几个js文件结束*@
+
+    <script type="text/javascript">
+
+        //文本编辑器初始化
+        var editor = "";
+        KindEditor.ready(function (K) {
+            var editor = K.editor({
+                uploadJson: '/Script/kindeditor/upload_json.ashx',
+                fileManagerJson: '/Script/kindeditor/file_manager_json.ashx',
+                allowFileManager: true
+            });
+            //默认展图
+            K('#disPhoto').click(function () {
+                editor.loadPlugin('image', function () {
+                    editor.plugin.imageDialog({
+                        imageUrl: K('#DisplayPic').val(),
+                        clickFn: function (url, title, width, height, border, align) {
+                            K('#DisplayPic').val(url);
+                            K('#disPhoto').val('默认展图设置完毕');
+                            K('#DisplayPhoto').attr("src", url);
+                            editor.hideDialog();
+                        }
+                    });
+                });
+            });
+        });
+
+        $(function () {
+            //返回
+            $("#mybtnfh").click(function () {
+                location.href = "/DisPhoto/Index";
+            })
+            //保存
+            $("#mybtn").click(function () {
+                var Title = $.trim($("#title").val());
+                if (Title.length < 1) {
+                    $.messager.alert('提示', "Tag名称不能为空", "warning")
+                    return false;
+                }
+                var Id = $('#Id').val();
+                var DisplayPic = $('#DisplayPic').val();
+                var Status = $('#Status').val();
+                $.post('@Url.Action("Update")', { Title: Title, PicUrl: DisplayPic, Status: Status, Id: Id }, function (data) {
+                    if (data.IsSuccess) {
+                        $.messager.alert('提示', "修改成功", "warning");
+                        setTimeout(function () {
+                            window.location.href = '@Url.Action("Index")';
+                        }, 2000);
+                    } else {
+                        $.messager.alert('提示', data.ErrorMessage, "warning")
+                    }
+                });
+            })
+        });
+    </script>
+}

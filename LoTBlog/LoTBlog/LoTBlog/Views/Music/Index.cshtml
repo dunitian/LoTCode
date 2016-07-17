@@ -1,0 +1,97 @@
+﻿@*逆天实验室*@
+@{
+    ViewBag.Title = "逆天工作室音乐调频频道~毒逆天的个人博客";
+    Layout = "~/Views/Shared/_LoTBlog.cshtml";
+    ViewBag.Keywords = "毒逆天,逆天,dunitian,dnt,个人博客,Net,分享,经验,资源,免费,dkill,dkill.net,听音乐,音乐,音乐调频";
+    ViewBag.Description = "逆天工作室音乐调频频道，主要用来听听音乐放松心情的。逆天的个人博客，本博客主要以一些经验和技术分享为主，如有疏漏欢迎指出~";
+}
+@section HeadCss{
+    <link href="/Css/index.css" rel="stylesheet">
+    <link href="/Css/about.css" rel="stylesheet">
+}
+<article>
+    <h3 class="about_h">您现在的位置是：<a href="@Url.Action("Index","Index")">首页</a>><a href="@Url.Action("Index", "Music")">音乐调频</a></h3>
+    <div class="about">
+        <h2>1.DouBan OnlyDes</h2>
+        <ul class="blog_a">
+            <li>&nbsp;&nbsp;豆瓣FM是你专属的个性化音乐收听工具。它简单方便，打开就能收听。在收听过程中，你可以用“红心”、“垃圾桶”或者“跳过” 告诉豆瓣FM你的喜好。豆瓣FM将根据你的操作和反馈，从海量曲库中自动发现并播出符合你音乐口味的歌曲。</li>
+        </ul>
+        <div id="douban" class="dntTxtCenter">
+            <h2></h2>
+            <img class="doubanBtn dntDivCenter" src="/Images/music/douban.png" />
+        </div>
+        <p></p>
+        <div class="dntTxtCenter">
+            <a class="blog_link">&nbsp;豆瓣电台不是很稳定，如果出现不能播放的时候请多点几次这&nbsp;=>&nbsp;<img src="/Images/music/icon_arrow.gif" class="doubanBtn" style="cursor:help;display:inline;" /></a>
+        </div>
+        <p></p>
+        <br />
+        <h2>2.KuGou OnlyTew</h2>
+        <ul class="blog_a">
+            <li>&nbsp;&nbsp;酷狗音乐旗下最新最全的在线正版音乐网站，可以为您免费提供最全的在线音乐试听下载，以及全球海量电台和MV播放服务、最新音乐播放器下载。酷狗音乐 和音乐在一起。</li>
+        </ul>
+        <p></p>
+        <div id="kugou" class="dntTxtCenter">
+            <img id="kugouBtn" class="dntDivCenter" src="/Images/music/kugou.png" />
+        </div>
+        <p></p>
+        <br />
+        <div class="dntTxtCenter">
+            <a class="blog_link dntTxtCenter">&nbsp;酷狗电台逆天是很喜欢的，里面有很多90后喜欢的歌曲哦~(9s等待)</a>
+        </div>
+        <p></p>
+        <br />
+        <h2>3.XiaMi OnlyLove</h2>
+        <ul class="blog_a">
+            <li>&nbsp;&nbsp;虾米网,在线音乐网站,在线听歌,音乐网站,在线音乐试听,音乐搜索,音乐下载.提供高品质音乐MP3的个性化推荐、发布、P2P下载服务，以及线下音乐活动等互动内容。</li>
+        </ul>
+        <p></p>
+        <div id="xiami" class="dntTxtCenter">
+            <img id="xiamiBtn" class="dntDivCenter" src="/Images/music/xiami.png" />
+        </div>
+        <p></p>
+        <div class="dntTxtCenter">
+            <a class="blog_link dntTxtCenter">&nbsp;虾米电台逆天最喜欢他的稳定，里面很多80和90后喜欢的歌曲~</a>
+        </div>
+    </div>
+</article>
+<aside>
+    @*右侧基本信息*@
+    @{Html.RenderAction("BlogBaseInfo", "PartialView");}
+    <div class="tj_news">
+        <h2>
+            <p class="tj_t1">最新文章</p>
+        </h2>
+        @{Html.RenderAction("NewArticle", "PartialView");}
+        <h2>
+            <p class="tj_t1">点击排行</p>
+        </h2>
+        @{Html.RenderAction("HotArticle", "PartialView");}
+    </div>
+    <br />
+    @*友情链接*@
+    @{Html.RenderAction("FriendLink", "PartialView", new { pageType = 1 });}
+    @*版权*@
+    @{Html.RenderAction("CopyRight", "PartialView");}
+</aside>
+@section JsScript{
+    <script type="text/javascript">
+        $(function () {
+            $('#kugouBtn').click(function () {
+                $('#kugou').html('<iframe id="kugou" src="http://web.kugou.com/2345_new.html" width="322" height="514" frameborder="0" scrolling="no" border="0" allowtransparency="true"></iframe>');
+            });
+
+            $('.doubanBtn').click(function () {
+                doubanRef();
+            });
+
+            $('#xiamiBtn').click(function () {
+                $('#xiami').html('<iframe src="http://kuang.xiami.com/kuang/play/xiamiradio" width="530" height="282" frameborder="0" scrolling="no" border="0" allowtransparency="true"></iframe>');
+            });
+        });
+
+        function doubanRef() {
+            $('#douban').html('<h2></h2><iframe id="douban" frameborder="0" width="422" scrolling="no" style="background-color: transparent; height: 187px;" allowtransparency="true" src="http://douban.fm/partner/baidu/"></iframe>');
+        }
+    </script>
+}

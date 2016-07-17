@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "添加文章Tag";
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+<div class="pub_module">
+    <div class="top">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="middle">
+        <ul class="list_info">
+            <li>
+                <span class="tit">Tag名称：</span>
+                <input type="text" id="typeName" /><font style="color: Red">*</font>
+            </li>
+            <li class="pub_btn">
+                <input type="button" id="mybtn" value="保存" class="input_30 p_btn" style="width: 100px; float: left; margin-left: 35px;" />
+                <input type="button" id="mybtnfh" value="返回" class="input_30 p_btn" style="width: 100px; margin-left: 35px;" />
+            </li>
+        </ul>
+    </div>
+</div>
+@section JsScript{
+    <script type="text/javascript">
+        $(function () {
+            //返回
+            $("#mybtnfh").click(function () {
+                location.href = "/ArticleTag/Index";
+            })
+            //保存
+            $("#mybtn").click(function () {
+                var TypeName = $.trim($("#typeName").val());
+                if (TypeName.length < 1) {
+                    $.messager.alert('提示', "Tag名称不能为空", "warning")
+                    return false;
+                }
+
+                $.post('@Url.Action("Add")', { Name: TypeName }, function (data) {
+                    if (data.IsSuccess) {
+                        $.messager.alert('提示', "添加成功", "warning");
+                        setTimeout(function () {
+                            window.location.href = '@Url.Action("Index")';
+                        }, 2000);
+                    } else {
+                        $.messager.alert('提示', data.ErrorMessage, "warning")
+                    }
+                });
+            })
+        });
+    </script>
+}

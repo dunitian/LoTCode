@@ -1,0 +1,31 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="gb2312">
+    <title>@ViewBag.Title</title>
+    @Html.Partial("SeoHead")
+    <link href="/Css/base.css" rel="stylesheet">
+    <link href="/Css/media.css" rel="stylesheet">
+    <link rel="SHORTCUT ICON" href="/Images/favicon.ico">
+    <link rel="BOOKMARK" href="/Images/favicon.ico">
+    @RenderSection("HeadCss", false)
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <!--[if lt IE 9]>
+       <script src="/Javascript/modernizr.js"></script>
+       <![endif]-->
+</head>
+<body>
+    <div class="ibody">
+        @*头部*@
+        @Html.Partial("Header")
+        @RenderBody()
+        <div class="clear"></div>
+        @*清除浮动*@
+        @Html.Partial("Footer")
+    </div>
+    <script src="/Javascript/jquery-1.8.3.min.js"></script>
+    <script src="/Javascript/silder.js"></script>
+    <script type="text/javascript" src="/Javascript/ds.js"></script>
+    @RenderSection("JsScript", false)
+</body>
+</html>

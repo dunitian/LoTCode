@@ -1,0 +1,504 @@
+﻿@{
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+@model LoT.Model.Article
+@{ int tempId = ViewBag.GroupType;
+ switch (tempId)
+ {
+     case 1:
+         ViewBag.Title = "资讯编辑页面";
+         ViewBag.NewUrl = "Index";
+         break;
+     case 2:
+         ViewBag.Title = "笔记编辑页面";
+         ViewBag.NewUrl = "NotePad";
+         break;
+     case 3:
+         ViewBag.Title = "网络资源编辑";
+         ViewBag.NewUrl = "Resource";
+         break;
+     default:
+         ViewBag.Title = "文章编辑页面";
+         ViewBag.NewUrl = "Index";
+         break;
+ }
+}
+@section HeadCss{
+    @*文本编辑器引用的2个css开始*@
+    <link rel="stylesheet" href="/Script/kindeditor/themes/default/default.css" />
+    <link rel="stylesheet" href="/Script/kindeditor/plugins/code/prettify.css" />
+    @*文本编辑器引用的2个css结束*@
+}
+<div class="pub_module">
+    <div class="top">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="middle">
+        <ul class="list_info" style="padding-left:30px;">
+            <li>
+                <span class="tit">文章标题：</span>
+                <input type="text" id="Title" value="@Model.Title" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">文章作者：</span>
+                <input type="text" id="Author" value="@Model.Author" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">浏览总量：</span>
+                <input type="text" id="HitCount" value="@Model.HitCount" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">排序：</span>
+                <input type="text" id="Sort" value="@Model.Sort" /><font style="color: Red">*(999~0)</font>
+            </li>
+            <li>
+                <span class="tit">文章分类：</span>
+                @*一级菜单*@
+                <select id="SelectTypeId" onchange="getChildType(this);">
+                    @if (ViewBag.ArticleTopType != null)
+                    {
+                        IQueryable<LoT.Model.ArticleType> ArticleTopTypes = ViewBag.ArticleTopType as IQueryable<LoT.Model.ArticleType>;
+                        <option value="0">=请选择=</option>
+                        foreach (var item in ArticleTopTypes)
+                        {
+                            if (ViewBag.TypeOneId != null && item.Id == Convert.ToInt32(ViewBag.TypeOneId))
+                            {
+                                <option value="@item.Id" selected="selected">@item.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        }
+                    }
+                </select>
+                @*二级菜单*@
+                @if (ViewBag.TypeTwo != null)
+                {
+                    <select id="SelectChildTypeId" onchange="getChildType(this);">
+                        @{
+                    IQueryable<LoT.Model.ArticleType> ArticleTypeTwos = ViewBag.TypeTwo as IQueryable<LoT.Model.ArticleType>;
+                    <option value="0">=请选择=</option>
+                    foreach (var item in ArticleTypeTwos)
+                    {
+                        if (ViewBag.TypeTwoId != null && item.Id == Convert.ToInt32(ViewBag.TypeTwoId))
+                        {
+                            <option value="@item.Id" selected="selected">@item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                        }
+                    </select>
+                }
+                else
+                {
+                    <select id="SelectChildTypeId" style="display: none;" onchange="getChildType(this);"></select>
+                }
+
+                @*三级菜单*@
+                @if (ViewBag.TypeThree != null)
+                {
+                    <select id="SelectChildTwoId">
+                        @{
+                    IQueryable<LoT.Model.ArticleType> ArticleTypeThree = ViewBag.TypeThree as IQueryable<LoT.Model.ArticleType>;
+                    <option value="0">=请选择=</option>
+                    foreach (var item in ArticleTypeThree)
+                    {
+                        if (ViewBag.TypeTwoId != null && item.Id == Convert.ToInt32(ViewBag.TypeThreeId))
+                        {
+                            <option value="@item.Id" selected="selected">@item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                        }
+                    </select>
+                }
+                else
+                {
+                    <select id="SelectChildTwoId" style="display: none;"></select>
+                }
+                <font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">推荐类型：</span>
+                @{
+                    if (Model.Recommend == LoT.Enums.RecommendEnum.No)
+                    {
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="0" checked="checked" /><font>不用推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="1" /><font>编辑推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="2" /><font>逆天推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="3" /><font>网友推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="4" /><font>首页置顶</font></label>
+                    }
+                    else if (Model.Recommend == LoT.Enums.RecommendEnum.Compiler)
+                    {
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="0" /><font>不用推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="1" checked="checked" /><font>编辑推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="2" /><font>逆天推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="3" /><font>网友推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="4" /><font>首页置顶</font></label>
+                    }
+                    else if (Model.Recommend == LoT.Enums.RecommendEnum.Dnt)
+                    {
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="0" /><font>不用推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="1" /><font>编辑推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="2" checked="checked" /><font>逆天推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="3" /><font>网友推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="4" /><font>首页置顶</font></label>
+                    }
+                    else if (Model.Recommend == LoT.Enums.RecommendEnum.Net)
+                    {
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="0" /><font>不用推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="1" /><font>编辑推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="2" /><font>逆天推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="3" checked="checked" /><font>网友推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="4" /><font>首页置顶</font></label>
+                    }
+                    else if (Model.Recommend == LoT.Enums.RecommendEnum.Top)
+                    {
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="0" /><font>不用推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="1" /><font>编辑推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="2" /><font>逆天推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="3" /><font>网友推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="4" checked="checked" /><font>首页置顶</font></label>
+                    }
+                    else
+                    {
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="0" /><font>不用推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="1" /><font>编辑推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="2" /><font>逆天推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="3" /><font>网友推荐</font></label>
+                        <label><input type="radio" style="width: 20px" name="Recommend" value="4" /><font>首页置顶</font></label>
+                    }
+                }
+            </li>
+            <li>
+                <span class="tit">访问级别：</span>
+                @{
+                    if (Model.Status == LoT.Enums.ArticleStatusEnum.All)
+                    {
+                        <label><input type="radio" style="width: 20px" name="Status" value="0" checked="checked" /><font>所有人可见</font></label>
+                        <label><input type="radio" style="width: 20px" name="Status" value="1" /><font>仅好友可见</font></label>
+                        <label><input type="radio" style="width: 20px" name="Status" value="2" /><font>仅自己可见</font></label>
+                    }
+                    else if (Model.Status == LoT.Enums.ArticleStatusEnum.Friend)
+                    {
+                        <label><input type="radio" style="width: 20px" name="Status" value="0" /><font>所有人可见</font></label>
+                        <label><input type="radio" style="width: 20px" name="Status" value="1" checked="checked" /><font>仅好友可见</font></label>
+                        <label><input type="radio" style="width: 20px" name="Status" value="2" /><font>仅自己可见</font></label>
+                    }
+                    else if (Model.Status == LoT.Enums.ArticleStatusEnum.Self)
+                    {
+                        <label><input type="radio" style="width: 20px" name="Status" value="0" /><font>所有人可见</font></label>
+                        <label><input type="radio" style="width: 20px" name="Status" value="1" /><font>仅好友可见</font></label>
+                        <label><input type="radio" style="width: 20px" name="Status" value="2" checked="checked" /><font>仅自己可见</font></label>
+                    }
+                    else
+                    {
+                        <label><input type="radio" style="width: 20px" name="Status" value="0" /><font>所有人可见</font></label>
+                        <label><input type="radio" style="width: 20px" name="Status" value="1" /><font>仅好友可见</font></label>
+                        <label><input type="radio" style="width: 20px" name="Status" value="2" /><font>仅自己可见</font></label>
+                    }
+                }
+            </li>
+            @if (Model.SeoInfo != null)
+            {
+                <li>
+                    <span class="tit">SEO关键字：</span>
+
+                    <input type="text" id="SeoKeywords" value="@Model.SeoInfo.SeoKeywords" /><font style="color: Red">*</font><strong>逗号分隔</strong>
+                </li>
+                <li>
+                    <span class="tit">SEO的描述：</span>
+                    <input type="text" id="Seodescription" value="@Model.SeoInfo.Sedescription" /><font style="color: Red">*</font><strong>249字内</strong>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <span class="tit">SEO关键字：</span>
+                    <input type="text" id="SeoKeywords" /><font style="color: Red">*</font><strong>逗号分隔</strong>
+                </li>
+                <li>
+                    <span class="tit">SEO的描述：</span>
+                    <input type="text" id="Seodescription" /><font style="color: Red">*</font><strong>249字内</strong>
+                </li>
+            }
+            <li>
+                <span class="tit">文章展图：</span>
+                <input type="button" class="input_30 p_btn" value="点我就上传默认展图" id="disPhoto" />
+                <input type="hidden" id="DisplayPic" value="@Model.DisplayPic" /><img id="DisplayPhoto" src="@Model.DisplayPic" style="width:50px;height:30px;" />
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;<input style="width:30px;height:20px;" type="radio" onclick="updateDisplayPic();" /><font>随机生成默认展图</font></label>
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;<input style="width:30px;height:20px;" type="radio" onclick="updateCreateTime();" /><font>更新文章创建时间</font></label>
+            </li>
+        </ul>
+        <div style="padding-left:50px;">
+            <textarea rows="30" cols="97" id="editor_id" name="TContent">@Html.Raw(Model.TContent)</textarea>
+        </div>
+        <ul class="middle" style="padding-left:30px;">
+            <li>&nbsp;</li>
+            <li>
+                <span class="tit"><strong>Tag 标签</strong>：</span>
+                @if (ViewBag.ArticleTags != null)
+                {
+                    IEnumerable<int> tagIds = Model.TagIds.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(t => int.Parse(t));
+                    IQueryable<LoT.Model.ArticleTag> articleTags = ViewBag.ArticleTags as IQueryable<LoT.Model.ArticleTag>;
+                    int tagi = 1;
+                    foreach (var item in articleTags)
+                    {
+                        if (tagi % 11 == 0)
+                        {
+                            <br /> <br />
+                        }
+                        if (tagIds.Contains(item.Id))
+                        {
+                            <label><input type="checkbox" checked="checked" style="width:20px;height:15px;" name='TagIds' id="@item.Id" value="@item.Id" /><font>@item.Name</font></label>
+                        }
+                        else
+                        {
+                            <label><input type="checkbox" style="width:20px;height:15px;" name='TagIds' id="@item.Id" value="@item.Id" /><font>@item.Name</font></label>
+                        }
+                        tagi++;
+                    }
+                }
+            </li>
+            <li>
+                <input type="hidden" id="GroupType" value="@ViewBag.GroupType" />
+                <input type="hidden" id="ArticleId" value="@Model.Id" />
+                <input type="hidden" id="SeoId" value="@Model.SeoId" />
+                <input type="hidden" id="CreateTime" value="@Model.CreateTime" />
+                <input type="hidden" id="NewUrl" value="@ViewBag.NewUrl" />
+            </li>
+            <li>&nbsp;</li>
+            <li class="pub_btn">
+                <input type="button" id="mybtn" value="保 存" class="input_30 p_btn" style="width: 130px;height:50px; float: left; margin-left: 153px;font-size:16px;" />
+                <input type="button" id="mybtnfh" value="返 回" class="input_30 p_btn" style="width: 130px;height:50px; margin-left: 53px;font-size:16px;" />
+            </li>
+            <li>&nbsp;</li>
+        </ul>
+    </div>
+</div>
+@section JsScript{
+
+    @*文本编辑器引用的几个js文件开始*@
+    <script charset="utf-8" src="/Script/kindeditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="/Script/kindeditor/lang/zh_CN.js"></script>
+    <script charset="utf-8" src="/Script/kindeditor/plugins/code/prettify.js"></script>
+    @*文本编辑器引用的几个js文件结束*@
+
+    <script type="text/javascript">
+        var newUrl = $.trim($('#NewUrl').val());
+        if (newUrl == null || newUrl == "") {
+            newUrl = "Index";
+        }
+
+        //文本编辑器初始化
+        var editor = "";
+        KindEditor.ready(function (K) {
+            editor = K.create('#editor_id', {
+                uploadJson: '/Script/kindeditor/upload_json.ashx',
+                fileManagerJson: '/Script/kindeditor/file_manager_json.ashx',
+                allowFileManager: true
+            });
+            //默认展图
+            K('#disPhoto').click(function () {
+                editor.loadPlugin('image', function () {
+                    editor.plugin.imageDialog({
+                        imageUrl: K('#DisplayPic').val(),
+                        clickFn: function (url, title, width, height, border, align) {
+                            K('#DisplayPic').val(url);
+                            K('#disPhoto').val('默认展图设置完毕');
+                            K('#DisplayPhoto').attr("src", url);
+                            editor.hideDialog();
+                        }
+                    });
+                });
+            });
+        });
+
+        $(function () {
+            //返回
+            $("#mybtnfh").click(function () {
+                location.href = "/Article/" + newUrl;
+            })
+            //保存
+            $("#mybtn").click(function () {
+                //文章标题
+                var Title = $.trim($("#Title").val());
+                if (Title.length < 1) {
+                    $.messager.alert('提示', "文章标题不能为空", "warning")
+                    return false;
+                }
+                //文章作者
+                var Author = $.trim($("#Author").val());
+                if (Author.length < 1) {
+                    $.messager.alert('提示', "文章作者不能为空", "warning")
+                    return false;
+                }
+                //浏览次数
+                var HitCount = $.trim($("#HitCount").val());
+                var $regex = /^\d+$/;
+                if (!$regex.test(HitCount)) {
+                    $.messager.alert('提示', "请输入正确的浏览次数", "warning");
+                    return false;
+                }
+                //排序，默认升序排列，0在最前面
+                var Sort = $.trim($("#Sort").val());
+                var $regex = /^\d+$/;
+                if (!$regex.test(Sort)) {
+                    $.messager.alert('提示', "请输入正确的排列数字", "warning");
+                    return false;
+                }
+                //文章分类 TypeIds(typeId,分隔)
+                var Pid = $("#SelectTypeId").val();
+                var cPid = $("#SelectChildTypeId").val();
+                var cPPid = $("#SelectChildTwoId").val();
+                //记得加pid！=0
+                if (cPid != null && cPid > 0 && cPid != Pid && Pid != 0) {
+                    Pid = Pid + "," + cPid;
+                    if (cPPid != null && cPPid != cPid && cPPid != 0) {
+                        Pid = Pid + "," + cPPid;
+                    }
+                }
+                if (Pid == 0) {
+                    $.messager.alert('提示', "请选择文章分类", "warning");
+                    return false;
+                }
+                //推荐类型
+                var Recommend = $("input[name='Recommend']:checked").val();
+                //访问级别
+                var Status = $("input[name='Status']:checked").val();
+                //SEO关键字
+                var SeoKeywords = $.trim($("#SeoKeywords").val());
+                if (SeoKeywords.length < 1) {
+                    $.messager.alert('提示', "SEO关键字不能为空", "warning")
+                    return false;
+                }
+                //SEO的描述
+                var Seodescription = $.trim($("#Seodescription").val());
+                if (Seodescription.length < 1) {
+                    $.messager.alert('提示', "SEO的描述不能为空", "warning")
+                    return false;
+                }
+                //文章内容
+                var TContent = $.trim(escape(editor.html()));
+                if (TContent.length < 1) {
+                    $.messager.alert('提示', "文章内容不能为空", "warning")
+                    return false;
+                }
+                //文章Tag TagIds (tagid用,分隔)
+                var TagIds = '';
+                $('input[name="TagIds"]:checked').each(function () {
+                    TagIds += $(this).val() + ',';
+                });
+                //类型
+                var GroupType = $('#GroupType').val();
+                //文章ID
+                var ArticleId = $('#ArticleId').val();
+                //Seo Id
+                var SeoId = $('#SeoId').val();
+                //创建时间
+                var CreateTime = $('#CreateTime').val();
+                //文章默认展图 DisplayPic
+                var DisplayPic = $("#DisplayPic").val();
+                //编辑
+                $.post('@Url.Action("Update")', { ArticleId: ArticleId, SeoId: SeoId, CreateTime: CreateTime, Title: Title, Author: Author, TContent: TContent, TypeIds: Pid, TagIds: TagIds, GroupType: GroupType, Recommend: Recommend, HitCount: HitCount, Sort: Sort, Status: Status, DisplayPic: DisplayPic, SeoKeywords: SeoKeywords, Seodescription: Seodescription }, function (data) {
+                    if (data.IsSuccess) {
+                        $.messager.alert('提示', "更新成功", "warning");
+                        setTimeout(function () {
+                            window.location.href = '/Article/' + newUrl;
+                        }, 2000);
+                    } else {
+                        $.messager.alert('提示', data.ErrorMessage, "warning")
+                    }
+                })
+            })
+        });
+
+        //获取当前分类的子分类
+        function getChildType(temp) {
+            var id = $(temp).attr("id");
+            //是顶级分类调用的
+            if (id == "SelectTypeId") {
+                //顶级分类的id
+                var pid = $('#SelectTypeId').val();
+                if (pid != null && pid != 0) {
+                    $.post('@Url.Action("GetChildType","ArticleType")', { Pid: pid }, function (data) {
+
+                        if (data.IsSuccess) {
+                            //这边是pid，不要设置0，会混乱的
+                            $("#SelectChildTypeId").html('<option value="' + pid + '">--全部--</option>');
+                            $.each(data.Data, function (key, value) {
+                                $("#SelectChildTypeId").append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                            });
+                            $("#SelectChildTypeId").show();
+                            $("#SelectChildTwoId").val("0").hide();
+                        }
+                        else {
+                            $("#SelectChildTypeId").val("0").hide();
+                            $("#SelectChildTwoId").val("0").hide();
+                            $.messager.alert("提示", data.ErrorMessage, "info");
+                        }
+                    });
+                } else {
+                    //没有选择分类~隐藏子分类
+                    $('#SelectChildTypeId').val(0).hide();
+                    $('#SelectChildTwoId').val(0).hide();
+                }
+            } else if (id = "SelectChildTypeId") {
+                //二级分类调用的
+                var pid = $('#SelectChildTypeId').val();
+                if (pid != null && pid != 0) {
+                    $.post('@Url.Action("GetChildType","ArticleType")', { Pid: pid }, function (data) {
+
+                        if (data.IsSuccess) {
+                            //这边是pid，不要设置0，会混乱的
+                            $("#SelectChildTwoId").html('<option value="' + pid + '">--全部--</option>');
+                            $.each(data.Data, function (key, value) {
+                                $("#SelectChildTwoId").append('<option value="' + value.Id + '">' + value.Name + '</option>');
+                            });
+                            $("#SelectChildTwoId").show();
+                        }
+                        else {
+                            $("#SelectChildTwoId").val("0").hide();
+                            $.messager.alert("提示", data.ErrorMessage, "info");
+                        }
+                    });
+                } else {
+                    //没有选择分类~隐藏子分类
+                    $('#SelectChildTwoId').val(0).hide();
+                }
+            }
+        }
+
+        //创建时间更新
+        function updateCreateTime() {
+            var date = new Date();
+            var seperator1 = "-";
+            var seperator2 = ":";
+            var month = date.getMonth() + 1;
+            var strDate = date.getDate();
+            if (month >= 1 && month <= 9) {
+                month = "0" + month;
+            }
+            if (strDate >= 0 && strDate <= 9) {
+                strDate = "0" + strDate;
+            }
+            var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                    + " " + date.getHours() + seperator2 + date.getMinutes()
+                    + seperator2 + date.getSeconds();
+            $('#CreateTime').val(currentdate);
+        }
+
+        //随机默认展图
+        function updateDisplayPic() {
+            $('#DisplayPic').val('');
+        }
+    </script>
+}

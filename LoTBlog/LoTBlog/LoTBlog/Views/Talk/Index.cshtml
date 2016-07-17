@@ -1,0 +1,107 @@
+﻿@*点滴：居家、闲言碎语，生活感触*@
+@{
+    ViewBag.Title = "居家、闲言碎语，生活感触~毒逆天的个人博客";
+    Layout = "~/Views/Shared/_LoTBlog.cshtml";
+    ViewBag.Keywords = "毒逆天,逆天,dunitian,dnt,个人博客,Net,分享,经验,资源,免费,dkill,dkill.net,居家,闲言碎语,生活感触";
+    ViewBag.Description = "居家、闲言碎语，生活感触，主要记录一些生活中的事情。逆天的个人博客，本博客主要以一些经验和技术分享为主，如有疏漏欢迎指出~";
+}
+@section HeadCss{
+    <link href="/Css/index.css" rel="stylesheet">
+    <link href="/Css/easydialog.css" rel="stylesheet" />
+}
+<article>
+    @{Html.RenderAction("BlogSWF", "PartialView");}
+    <div class="bloglist">
+        <h2>
+            <p>生活<span>点滴</span></p>
+        </h2>
+        @*主体内容开始*@
+        @{IEnumerable<LoTBlog.Models.TalkingTemp> templist = ViewBag.TalkingList as IEnumerable<LoTBlog.Models.TalkingTemp>;}
+        @if (templist != null)
+        {
+            foreach (var item in templist)
+            {
+                <div class="blogs">
+                    <h3><a href="javascript:void(0);" onclick="GetContext(@item.Id);">@item.Title</a></h3>
+                    <figure><img src="@item.DisplayPic"></figure>
+                    <ul>
+                        <p>
+                            @if (item.Say.Length > 279)
+                            {
+                                @item.Say.Substring(0, 279);
+                            }
+                            else
+                            {
+                                @item.Say;
+                            }...
+                        </p>
+                        <a href="javascript:void(0);" class="readmore" onclick="GetContext(@item.Id);">内容详细&gt;&gt;</a>
+                    </ul>
+                    <p class="autor">
+                        <span>作者：<a href="javascript:void(0);">毒逆天</a></span>
+                        <span>浏览（<a href="javascript:void(0);">@item.HitCount</a>）</span>
+                        <span>创建时间：<a href="javascript:void(0);">@item.CreateTime</a></span>
+                    </p>
+                    <div class="dateview">@item.CreateTime</div>
+                </div>
+            }
+        }
+        @*主体内容结束*@
+        @{Html.RenderAction("Show", "PageNav", new { pi = ViewBag.PageIndex, ps = ViewBag.PageSize, total = ViewBag.Total, url = ViewBag.PageUrl });}
+    </div>
+</article>
+<aside>
+    @*右侧基本信息*@
+    @{Html.RenderAction("BlogBaseInfo", "PartialView");}
+    <div class="tj_news">
+        <h2>
+            <p class="tj_t1">最新文章</p>
+        </h2>
+        @{Html.RenderAction("NewArticle", "PartialView");}
+        <h2>
+            <p class="tj_t1">点击排行</p>
+        </h2>
+        @{Html.RenderAction("HotArticle", "PartialView");}
+        <h2>
+            <p class="tj_t2">网友推荐</p>
+        </h2>
+        @{Html.RenderAction("RecommendedArticle", "PartialView");}
+        <h2>
+            <p class="tj_t2">编辑推荐</p>
+        </h2>
+        @{Html.RenderAction("CompilerLikeArticle", "PartialView");}
+        <h2>
+            <p class="tj_t2">最近访客</p>
+            @{Html.RenderAction("DSPeople", "PartialView", new { count = 24 });}
+        </h2>
+    </div>
+    <br />
+    @*友情链接*@
+    @{Html.RenderAction("FriendLink", "PartialView", new { pageType = 1 });}
+    @*版权*@
+    @{Html.RenderAction("CopyRight", "PartialView");}
+</aside>
+@section JsScript{
+    <script type="text/javascript" src="/Javascript/easydialog.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // 点击弹窗图片关闭
+            $(document).on("click", "#easyDialogBox", function () {
+                easyDialog.close();
+            });
+        });
+
+        function GetContext(id) {
+            $.post('@Url.Action("GetSayById", "Talk")', { id: id }, function (data) {
+                if (data != "false") {
+                    easyDialog.open({
+                        container: {
+                            content: data
+                        },
+                        autoClose: 9000
+                    });
+                }
+            });
+        }
+    </script>
+}

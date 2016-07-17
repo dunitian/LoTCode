@@ -1,0 +1,461 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0C1C296F-3CDA-4073-BD22-CDCFD2154F3D}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LoTBlog</RootNamespace>
+    <AssemblyName>LoTBlog</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging">
+      <HintPath>..\packages\Spring.Net\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Log4Net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Spring.Core">
+      <HintPath>..\packages\Spring.Net\Spring.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Web">
+      <HintPath>..\packages\Spring.Net\Spring.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Web.Extensions">
+      <HintPath>..\packages\Spring.Net\Spring.Web.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Web.Mvc4">
+      <HintPath>..\packages\Spring.Net\Spring.Web.Mvc4.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.30506.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.30506.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.30506.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\DntLoTController.cs" />
+    <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\MusicController.cs" />
+    <Compile Include="Controllers\NewsInfoController.cs" />
+    <Compile Include="Controllers\PageNavController.cs" />
+    <Compile Include="Controllers\PartialViewController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
+    <Compile Include="Controllers\ShareController.cs" />
+    <Compile Include="Controllers\TalkController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArticleTemp.cs" />
+    <Compile Include="Models\MyExceptionFilterAttribute.cs" />
+    <Compile Include="Models\TalkingTemp.cs" />
+    <Compile Include="Models\Temp.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Config\Spring.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Css\about.css" />
+    <Content Include="Css\base.css" />
+    <Content Include="Css\easydialog.css" />
+    <Content Include="Css\index.css" />
+    <Content Include="Css\media.css" />
+    <Content Include="Css\Photo.css" />
+    <Content Include="Css\style.css" />
+    <Content Include="Error.html" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\002.jpg" />
+    <Content Include="Images\003.jpg" />
+    <Content Include="Images\404.gif" />
+    <Content Include="Images\5794.png" />
+    <Content Include="Images\5849.png" />
+    <Content Include="Images\6264.png" />
+    <Content Include="Images\about_c.png" />
+    <Content Include="Images\article\1.jpg" />
+    <Content Include="Images\article\10.jpg" />
+    <Content Include="Images\article\11.jpg" />
+    <Content Include="Images\article\12.jpg" />
+    <Content Include="Images\article\13.jpg" />
+    <Content Include="Images\article\14.jpg" />
+    <Content Include="Images\article\15.jpg" />
+    <Content Include="Images\article\16.jpg" />
+    <Content Include="Images\article\17.jpg" />
+    <Content Include="Images\article\18.jpg" />
+    <Content Include="Images\article\19.jpg" />
+    <Content Include="Images\article\2.jpg" />
+    <Content Include="Images\article\3.jpg" />
+    <Content Include="Images\article\4.jpg" />
+    <Content Include="Images\article\5.jpg" />
+    <Content Include="Images\article\6.jpg" />
+    <Content Include="Images\article\7.jpg" />
+    <Content Include="Images\article\8.jpg" />
+    <Content Include="Images\article\9.jpg" />
+    <Content Include="Images\banner.jpg" />
+    <Content Include="Images\bg.png" />
+    <Content Include="Images\favicon.ico" />
+    <Content Include="Images\home.png" />
+    <Content Include="Images\ibodybg.png" />
+    <Content Include="Images\icons.png" />
+    <Content Include="Images\icon_plus.png" />
+    <Content Include="Images\li.jpg" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\ms.png" />
+    <Content Include="Images\ms8.png" />
+    <Content Include="Images\music\douban.png" />
+    <Content Include="Images\music\icon_arrow.gif" />
+    <Content Include="Images\music\kugou.png" />
+    <Content Include="Images\music\xiami.png" />
+    <Content Include="Images\photos.jpg" />
+    <Content Include="Images\Photo\boy.jpg" />
+    <Content Include="Images\Photo\girl.jpg" />
+    <Content Include="Images\Photo\p01.jpg" />
+    <Content Include="Images\Photo\p02.jpg" />
+    <Content Include="Images\Photo\p03.jpg" />
+    <Content Include="Images\Photo\p04.jpg" />
+    <Content Include="Images\Photo\p05.jpg" />
+    <Content Include="Images\Photo\t01.jpg" />
+    <Content Include="Images\Photo\t02.jpg" />
+    <Content Include="Images\Photo\t03.jpg" />
+    <Content Include="Images\Photo\t04.png" />
+    <Content Include="Images\Photo\t05.jpg" />
+    <Content Include="Images\Photo\t06.jpg" />
+    <Content Include="Images\Photo\t07.jpg" />
+    <Content Include="Images\Photo\t08.jpg" />
+    <Content Include="Images\s6.jpg" />
+    <Content Include="Images\s7.jpg" />
+    <Content Include="Images\s8.jpg" />
+    <Content Include="Images\ti.png" />
+    <Content Include="Images\vis.jpg" />
+    <Content Include="Images\Vis\1.jpg" />
+    <Content Include="Images\Vis\10.jpg" />
+    <Content Include="Images\Vis\11.jpg" />
+    <Content Include="Images\Vis\12.jpg" />
+    <Content Include="Images\Vis\13.jpg" />
+    <Content Include="Images\Vis\14.jpg" />
+    <Content Include="Images\Vis\15.jpg" />
+    <Content Include="Images\Vis\16.jpg" />
+    <Content Include="Images\Vis\17.jpg" />
+    <Content Include="Images\Vis\18.jpg" />
+    <Content Include="Images\Vis\19.jpg" />
+    <Content Include="Images\Vis\2.jpg" />
+    <Content Include="Images\Vis\3.jpg" />
+    <Content Include="Images\Vis\4.jpg" />
+    <Content Include="Images\Vis\5.jpg" />
+    <Content Include="Images\Vis\6.jpg" />
+    <Content Include="Images\Vis\7.jpg" />
+    <Content Include="Images\Vis\8.jpg" />
+    <Content Include="Images\Vis\9.jpg" />
+    <Content Include="Javascript\Code\scripts\shAutoloader.js" />
+    <Content Include="Javascript\Code\scripts\shBrushAppleScript.js" />
+    <Content Include="Javascript\Code\scripts\shBrushAS3.js" />
+    <Content Include="Javascript\Code\scripts\shBrushBash.js" />
+    <Content Include="Javascript\Code\scripts\shBrushColdFusion.js" />
+    <Content Include="Javascript\Code\scripts\shBrushCpp.js" />
+    <Content Include="Javascript\Code\scripts\shBrushCSharp.js" />
+    <Content Include="Javascript\Code\scripts\shBrushCss.js" />
+    <Content Include="Javascript\Code\scripts\shBrushDelphi.js" />
+    <Content Include="Javascript\Code\scripts\shBrushDiff.js" />
+    <Content Include="Javascript\Code\scripts\shBrushErlang.js" />
+    <Content Include="Javascript\Code\scripts\shBrushGroovy.js" />
+    <Content Include="Javascript\Code\scripts\shBrushJava.js" />
+    <Content Include="Javascript\Code\scripts\shBrushJavaFX.js" />
+    <Content Include="Javascript\Code\scripts\shBrushJScript.js" />
+    <Content Include="Javascript\Code\scripts\shBrushPerl.js" />
+    <Content Include="Javascript\Code\scripts\shBrushPhp.js" />
+    <Content Include="Javascript\Code\scripts\shBrushPlain.js" />
+    <Content Include="Javascript\Code\scripts\shBrushPowerShell.js" />
+    <Content Include="Javascript\Code\scripts\shBrushPython.js" />
+    <Content Include="Javascript\Code\scripts\shBrushRuby.js" />
+    <Content Include="Javascript\Code\scripts\shBrushSass.js" />
+    <Content Include="Javascript\Code\scripts\shBrushScala.js" />
+    <Content Include="Javascript\Code\scripts\shBrushSql.js" />
+    <Content Include="Javascript\Code\scripts\shBrushVb.js" />
+    <Content Include="Javascript\Code\scripts\shBrushXml.js" />
+    <Content Include="Javascript\Code\scripts\shCore.js" />
+    <Content Include="Javascript\Code\scripts\shLegacy.js" />
+    <Content Include="Javascript\Code\src\shAutoloader.js" />
+    <Content Include="Javascript\Code\src\shCore.js" />
+    <Content Include="Javascript\Code\src\shLegacy.js" />
+    <Content Include="Javascript\Code\styles\shCore.css" />
+    <Content Include="Javascript\Code\styles\shCoreDefault.css" />
+    <Content Include="Javascript\Code\styles\shCoreEclipse.css" />
+    <Content Include="Javascript\Code\styles\shCoreFadeToGrey.css" />
+    <Content Include="Javascript\Code\styles\shThemeDefault.css" />
+    <Content Include="Javascript\Code\styles\shThemeFadeToGrey.css" />
+    <Content Include="Javascript\Code\styles\shThemeRDark.css" />
+    <Content Include="Javascript\detail.js" />
+    <Content Include="Javascript\ds.js" />
+    <Content Include="Javascript\easydialog.min.js" />
+    <Content Include="Javascript\jquery-1.8.3.min.js" />
+    <Content Include="Javascript\lotqq.js" />
+    <Content Include="Javascript\modernizr.js" />
+    <Content Include="Javascript\silder.js" />
+    <Content Include="Script\editorImgs\image\20150329\20150329170702_8622.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329170731_4088.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329170816_9582.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329180242_9494.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329180255_5843.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329180338_8617.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329180401_6453.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329180443_3061.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329180516_4972.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329180534_1531.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329180557_6815.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329180617_7505.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329180657_0484.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329180718_1437.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182249_6996.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182302_8627.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182316_2893.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182331_5245.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182344_4175.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182358_2756.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182410_9797.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182524_2713.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182552_6110.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182607_3759.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182622_8827.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182637_4615.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182650_5166.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182702_8857.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329182747_4331.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183523_3692.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183537_7950.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183557_1873.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183611_2050.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183623_1722.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183635_7153.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183647_4787.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183703_5929.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183718_9165.png" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183732_1396.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183746_2004.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183803_1066.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183819_0961.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183833_4553.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183847_7023.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183900_7848.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183913_5094.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183926_0750.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329183939_7551.jpg" />
+    <Content Include="Script\editorImgs\image\20150329\20150329184104_5151.jpg" />
+    <Content Include="Script\editorImgs\image\20150401\20150401002029_5766.png" />
+    <Content Include="Views\UserRegInfo\Create.cshtml" />
+    <Content Include="Views\UserRegInfo\Index.cshtml" />
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Index\Index.cshtml" />
+    <Content Include="Views\NewsInfo\Index.cshtml" />
+    <Content Include="Views\Share\Index.cshtml" />
+    <Content Include="Views\Talk\Index.cshtml" />
+    <Content Include="Views\DntLoT\Index.cshtml" />
+    <Content Include="Views\Music\Index.cshtml" />
+    <Content Include="Views\Photo\Index.cshtml" />
+    <Content Include="Views\Shared\_LoTBlog.cshtml" />
+    <Content Include="Views\Shared\SeoHead.cshtml" />
+    <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\PartialView\DuoShuo.cshtml" />
+    <Content Include="Views\PartialView\DSComment.cshtml" />
+    <Content Include="Views\PartialView\DSHot.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
+    <None Include="Properties\PublishProfiles\LoTBlog.pubxml" />
+    <Content Include="Views\PartialView\DSCommentCount.cshtml" />
+    <Content Include="Views\PartialView\DSPeople.cshtml" />
+    <Content Include="Views\PartialView\RelatedArticle.cshtml" />
+    <Content Include="Views\Article\Detail.cshtml" />
+    <Content Include="Views\Article\Type.cshtml" />
+    <Content Include="Views\Article\Tag.cshtml" />
+    <Content Include="Views\PartialView\TalkingLT.cshtml" />
+    <Content Include="Views\PartialView\HotArticle.cshtml" />
+    <Content Include="Views\PartialView\NavForType.cshtml" />
+    <Content Include="Views\PartialView\CopyRight.cshtml" />
+    <Content Include="Views\Article\LTLikeArticle.cshtml" />
+    <Content Include="Views\PartialView\BlogBaseInfo.cshtml" />
+    <Content Include="Views\PartialView\FriendLink.cshtml" />
+    <Content Include="Views\PageNav\Show.cshtml" />
+    <Content Include="Views\Resource\Index.cshtml" />
+    <Content Include="Views\PartialView\BlogSWF.cshtml" />
+    <Content Include="Views\Index\BottomMsg.cshtml" />
+    <Content Include="Views\Article\NotePadArticle.cshtml" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LoT.Common\LoT.Common.csproj">
+      <Project>{53d39d2b-6e6a-4a80-b452-3a2d315727d6}</Project>
+      <Name>LoT.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LoT.Enums\LoT.Enums.csproj">
+      <Project>{36d2b344-57fb-4c64-bcc9-8ad1e45a9292}</Project>
+      <Name>LoT.Enums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LoT.IService\LoT.IService.csproj">
+      <Project>{252b7642-16d9-4634-b282-9f98d22cd061}</Project>
+      <Name>LoT.IService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LoT.LogSystem\LoT.LogSystem.csproj">
+      <Project>{8e9ee6ae-f740-42ba-b032-a758fd0c37d6}</Project>
+      <Name>LoT.LogSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LoT.Model\LoT.Model.csproj">
+      <Project>{b23a3120-4692-4daf-93bf-0801dda09903}</Project>
+      <Name>LoT.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LoT.Safe\LoT.Safe.csproj">
+      <Project>{1dcb5592-abc1-48bb-ba37-fe9e731df747}</Project>
+      <Name>LoT.Safe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LoT.Service\LoT.Service.csproj">
+      <Project>{6636690b-7287-4cfa-9cae-b0518e0dc2e8}</Project>
+      <Name>LoT.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>8992</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:3845/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

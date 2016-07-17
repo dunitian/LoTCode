@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "SEOTKD修改";
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+@model LoT.Model.SeoTKD
+<div class="pub_module">
+    <div class="top">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="middle">
+        <ul class="list_info">
+            <li>
+                <span class="tit">关键字部分：</span>
+                <input type="text" id="SeoKeywords" value="@Model.SeoKeywords" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">关键词描述：</span>
+                <input type="text" id="Sedescription" value="@Model.Sedescription" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">当前状态：</span>
+                <select id="Status">
+                    <option value="1">正常状态</option>
+                    @if (Model.Status == LoT.Enums.StatusEnum.Delete)
+                    {
+                        <option value="99" selected="selected">删除状态</option>
+                    }
+                    else
+                    {
+                        <option value="99">删除状态</option>
+                    }
+                </select>
+                <font style="color: Red">*</font>
+            </li>
+            <li class="pub_btn">
+                <input type="hidden" value="@Model.Id" id="Id" />
+                <input type="button" id="mybtn" value="保存" class="input_30 p_btn" style="width: 100px; float: left; margin-left: 35px;" />
+                <input type="button" id="mybtnfh" value="返回" class="input_30 p_btn" style="width: 100px; margin-left: 35px;" />
+            </li>
+        </ul>
+    </div>
+</div>
+@section JsScript{
+    <script type="text/javascript">
+    $(function () {
+        //返回
+        $("#mybtnfh").click(function () {
+            location.href = "/SeoTKD/Index";
+        })
+        //保存
+        $("#mybtn").click(function () {
+
+            var SeoKeywords = $.trim($("#SeoKeywords").val());
+            if (SeoKeywords.length < 1) {
+                $.messager.alert('提示', "关键字不能为空", "warning")
+                return false;
+            }
+
+            var Sedescription = $.trim($("#Sedescription").val());
+            if (Sedescription.length < 1) {
+                $.messager.alert('提示', "关键词描述不能为空", "warning")
+                return false;
+            }
+
+            var Id = $('#Id').val();
+            var Status = $('#Status').val();
+
+            $.post('@Url.Action("Update")', { SeoKeywords: SeoKeywords, Sedescription: Sedescription, Status: Status,Id:Id }, function (data) {
+                if (data.IsSuccess) {
+                    $.messager.alert('提示', "修改成功", "warning");
+                    setTimeout(function () {
+                        window.location.href = '@Url.Action("Index")';
+                    }, 2000);
+                } else {
+                    $.messager.alert('提示', data.ErrorMessage, "warning")
+                }
+            });
+        })
+    });
+    </script>
+}

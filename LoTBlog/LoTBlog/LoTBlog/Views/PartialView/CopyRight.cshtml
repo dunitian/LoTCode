@@ -1,0 +1,20 @@
+﻿<footer class="copyright">
+    <ul style="color: #808080;">
+        <p>LoTBlog Beta 1.0 by <a href="http://wpa.qq.com/msgrd?v=3&uin=1054186320&site=qq&menu=yes" target="_blank" style="color: #929090;">毒逆天</a></p>
+        <p>Copyright ©&nbsp;2015 All rights</p>
+    </ul>
+    <center style="text-align: -webkit-center;">
+        <span id="lotqq">
+        </span>
+    </center>
+    <script type='text/javascript' src='http://ajax.useso.com/ajax/libs/jquery/1.7.2/jquery.min.js?ver=3.4.2'></script>
+    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101271485" data-redirecturi="http://www.dkill.net/Index" charset="utf-8"></script>
+    <script src="JavaScript/lotqq.js"></script>
+    <script type="text/javascript">
+        $.lotqq('101271485', 'http://www.dkill.net/Index', 'lotqq', function (data) {
+            $.post('@Url.Action("QQCheck", "Index")', { Name: data.Name, OpenId: data.OpenId, AccessToken: data.AccessToken, Figureurl: data.Figureurl }, function (data) {
+                console.log(data);
+            });
+        });
+    </script>
+</footer>

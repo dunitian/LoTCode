@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "修改文章Tag";
+    Layout = "~/Views/Shared/SonIndex.cshtml";
+}
+@model LoT.Model.ArticleTag
+<div class="pub_module">
+    <div class="top">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    <div class="middle">
+        <ul class="list_info">
+            <li>
+                <span class="tit">分类名称：</span>
+                <input type="text" id="typeName" value="@Model.Name" /><font style="color: Red">*</font>
+            </li>
+            <li>
+                <span class="tit">当前状态：</span>
+                <select id="Status">
+                    <option value="1">正常状态</option>
+                    @if (Model.Status == LoT.Enums.StatusEnum.Delete)
+                    {
+                        <option value="99" selected="selected">删除状态</option>
+                    }
+                    else
+                    {
+                        <option value="99">删除状态</option>
+                    }
+                </select>
+                <font style="color: Red">*</font>
+            </li>
+            <li class="pub_btn">
+                <input type="hidden" value="@Model.Id" id="Id" />
+                <input type="button" id="mybtn" value="保存" class="input_30 p_btn" style="width: 100px; float: left; margin-left: 35px;" />
+                <input type="button" id="mybtnfh" value="返回" class="input_30 p_btn" style="width: 100px; margin-left: 35px;" />
+            </li>
+        </ul>
+    </div>
+</div>
+@section JsScript{
+    <script type="text/javascript">
+        $(function () {
+            //返回
+            $("#mybtnfh").click(function () {
+                location.href = "/ArticleTag/Index";
+            })
+            //保存
+            $("#mybtn").click(function () {
+                var TypeName = $.trim($("#typeName").val());
+                if (TypeName.length < 1) {
+                    $.messager.alert('提示', "分类名称不能为空", "warning")
+                    return false;
+                }
+                var Id = $('#Id').val();
+                var Status = $('#Status').val();
+
+                $.post('@Url.Action("Update")', { Name: TypeName, Status: Status, Id: Id }, function (data) {
+                    if (data.IsSuccess) {
+                        $.messager.alert('提示', "更新成功", "warning");
+                        setTimeout(function () {
+                            window.location.href = '@Url.Action("Index")';
+                        }, 2000);
+                    } else {
+                        $.messager.alert('提示', data.ErrorMessage, "warning")
+                    }
+                })
+            })
+        });
+    </script>
+}
