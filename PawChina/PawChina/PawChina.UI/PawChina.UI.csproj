@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -93,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AutoMapper\AutoMapperConfig.cs" />
+    <Compile Include="AutoMapper\AutoMapperExt.cs" />
+    <Compile Include="AutoMapper\AutoMapperProfile.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -117,14 +124,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LoTLib.Core\LoTLib.Core.csproj">
-      <Project>{6961984b-b45c-4e80-90a8-d9bfff2dee82}</Project>
-      <Name>LoTLib.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LoTLib.WebExt\LoTLib.WebExt.csproj">
-      <Project>{5ba0783c-340e-44a0-b247-87576bc7c8b1}</Project>
-      <Name>LoTLib.WebExt</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PawChina.IBLL\PawChina.IBLL.csproj">
       <Project>{7de6c77a-543e-4a6e-81ef-455360177221}</Project>
       <Name>PawChina.IBLL</Name>

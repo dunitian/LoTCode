@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8E9CAC8C-016E-4E64-97B7-23A6090F06F2}</ProjectGuid>
+    <ProjectGuid>{E689757D-FDB7-42E9-BE70-8EE6738E12E0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PawChina.Dal</RootNamespace>
-    <AssemblyName>PawChina.Dal</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <RootNamespace>PawChina.Model</RootNamespace>
+    <AssemblyName>PawChina.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,16 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityInfo.cs" />
+    <Compile Include="AjaxOption.cs" />
+    <Compile Include="ChineseInfo.cs" />
+    <Compile Include="CRecordInfo.cs" />
+    <Compile Include="Enum\ProductEnum.cs" />
+    <Compile Include="Enum\StatusEnum.cs" />
+    <Compile Include="NoteInfo.cs" />
+    <Compile Include="PawBaseInfo.cs" />
+    <Compile Include="ProductInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LoTCode\LoTData.Core\LoTData.Core.csproj">
-      <Project>{caa3678e-63ad-4d28-aa19-b2de120a54a4}</Project>
-      <Name>LoTData.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
+    <Compile Include="ProTypeInfo.cs" />
+    <Compile Include="SeoTKD.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
