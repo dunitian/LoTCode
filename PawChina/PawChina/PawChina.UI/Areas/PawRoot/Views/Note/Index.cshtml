@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "~/Areas/PawRoot/Views/Shared/PawRootList.cshtml";
+}
+@section JsScript{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var columns = [{
+                field: 'State',
+                checkbox: true
+            },
+            {
+                field: 'NId',
+                title: '编号',
+                align: 'center',
+                sortable: true
+            },
+            {
+                field: 'NTitle',
+                title: '标题',
+                align: 'center',
+                sortable: true,
+            },
+            {
+                field: 'NAuthor',
+                title: '作者',
+                align: 'center',
+                sortable: true
+            },
+            {
+                field: 'NHitCount',
+                title: '浏览量',
+                align: 'center',
+                sortable: true
+            },
+            {
+                field: 'NCreateTime',                      //字段名字
+                title: '创建时间',                         //标题名字
+                align: 'center',                           //对齐方式
+                sortable: true,                            //支持排序
+                formatter: function (value, row, index) {  //格式方法
+                    return getDate(value);
+                }
+            },
+            {
+                field: 'NUpdateTime',
+                title: '更新时间',
+                align: 'center',
+                sortable: true,
+                formatter: function (value, row, index) {
+                    return getDate(value);
+                }
+            },
+            {
+                field: 'NPush',
+                title: '推送主页',
+                align: 'center',
+                sortable: true,
+                formatter: function (value, row, index) {
+                    if (value == true) {
+                        return '<font style="color:red;">推送</font>';
+                    } else {
+                        return '不推';
+                    }
+                }
+            },
+            {
+                field: 'NDataStatus',
+                title: '状态',
+                align: 'center',
+                sortable: true,
+                formatter: function (value, row, index) {
+                    if (value == 99) {
+                        return '<font style="color:red">已删</font>'
+                    } else {
+                        return '正常';
+                    }
+                }
+            },
+            {
+                title: '单操作',
+                align: 'center',
+                formatter: function (value, row, index) {
+                    return '<a href="#' + row.NId + '" class="edit glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;<a href="#" class="remove glyphicon glyphicon-trash"></a>';
+                },
+                events: {
+                    'click .edit': function (e, value, row, index) {
+                        location.href = '/PawRoot/Note/Edit?id=' + row.NId;
+                    },
+                    'click .remove': function (e, value, row, index) {
+                        updateData(row.NId, 99);
+                    }
+                }
+            }
+            ];
+            initTable(columns);
+        });
+    </script>
+}

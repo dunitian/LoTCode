@@ -41,12 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PawChina.IDal\PawChina.IDal.csproj">
-      <Project>{5a1eb3c9-2239-4fb2-ae92-9cec8d3dec99}</Project>
-      <Name>PawChina.IDal</Name>
+    <ProjectReference Include="..\PawChina.Factory\PawChina.Factory.csproj">
+      <Project>{b6aaa151-2516-430e-9288-fdb1677e47a8}</Project>
+      <Name>PawChina.Factory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PawChina.IBLL\PawChina.IBLL.csproj">
+      <Project>{7de6c77a-543e-4a6e-81ef-455360177221}</Project>
+      <Name>PawChina.IBLL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

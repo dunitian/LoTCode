@@ -1,0 +1,200 @@
+﻿@{
+    Layout = "~/Areas/PawRoot/Views/Shared/PawRootEdit.cshtml";
+}
+
+@model PawChina.Models.BackModels.NoteBackModel
+
+@section HeadCss{
+}
+
+<div class="form-horizontal">
+    <!--笔记标题-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">笔记标题：</label>
+        <div class="col-sm-6">
+            <input type="hidden" id="nId" value="@Model.NId" />
+            <input type="text" class="form-control" id="title" placeholder="请输入标题名..." value="@Model.NTitle">
+        </div>
+    </div>
+    <!--笔记作者-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">笔记作者：</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="author" placeholder="请输入作者名..." value="@Model.NAuthor">
+        </div>
+    </div>
+    <!--页面浏览-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">页面浏览：</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="hitCount" placeholder="请输入浏览量..." value="@Model.NHitCount">
+        </div>
+    </div>
+    <!--数据状态-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">数据状态：</label>
+        <div class="col-sm-6">
+            <select id="dataStatus" class="form-control">
+                @{
+                    if (Model.NDataStatus == StatusEnum.Deteled)
+                    {
+                        <option value="99">已删除</option>
+                        <option value="1">未删除</option>
+                    }
+                    else
+                    {
+                        <option value="1">未删除</option>
+                        <option value="99">已删除</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <!--推送到主页-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">推荐类型：</label>
+        <div class="col-sm-9">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="push" checked="@Model.NPush">推送到主页
+                </label>
+            </div>
+        </div>
+    </div>
+    <!--展览小图-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label" style="padding-top:13px;">展览小图：</label>
+        <div class="col-sm-6">
+            <span style="float:left;width:160px;"><span id="lot-uploader"></span></span><img id="displayPic" src="@Model.NDisplayPic" style="width:60px;height:33px;" />
+        </div>
+    </div>
+    <!--笔记内容-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">笔记内容：</label>
+        <div class="col-sm-6">
+            <script id="container" name="content" type="text/plain">
+                @Model.NContent
+            </script>
+        </div>
+    </div>
+    <!--Tag标签-->
+    @*<div class="form-group">
+            <label class="col-sm-2 control-label">Tag 标签：</label>
+            <div class="col-sm-6">
+                <select id="tag" class="lot-tagSelect form-control" multiple>
+                    <optgroup label="SQL">
+                        <option>MySql</option>
+                        <option>Sqlite</option>
+                        <option>SQLServer</option>
+                    </optgroup>
+                    <optgroup label="Other">
+                        <option>C#</option>
+                        <option>EF</option>
+                        <option>MVC</option>
+                        <option>Dapper</option>
+                        <option>Ado.Net</option>
+                    </optgroup>
+                </select>
+            </div>
+        </div>*@
+    <!--SEO关键字-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">SEO Key：</label>
+        <div class="col-sm-6">
+            <input type="hidden" id="seoId" value="@Model.NSeoId" />
+            <input type="text" class="form-control" id="seoKeywords" placeholder="关键词1,关键词2,关键词3" value="@Model.SeoInfo.SeoKeywords">
+        </div>
+        <label class="lot-blue">本篇文章的关键词（一般都是搜索关键词）</label>
+    </div>
+    <!--SEO详细描述-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">SEO Des：</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="seodescription" placeholder="请输入Seo详细描述..." value="@Model.SeoInfo.Sedescription">
+        </div>
+        <label class="lot-blue">本篇文章大概内容（尽量控制在150字内）</label>
+    </div>
+    <!--表单提交-->
+    <div class="form-group">
+        <label class="col-sm-2"></label>
+        <div class="col-sm-6">
+            <button id="form-success" class="btn btn-success lot-form-btn">提 交</button>
+            <button id="form-gohome" class="btn btn-success lot-form-btn">返 回</button>
+        </div>
+    </div>
+</div>
+
+@section JsScript{
+    <script type="text/javascript">
+        //实例化上传控件
+        $.lotuploader({
+            lotDocId: 'lot-uploader',
+            lotUrl: '服务器地址',
+            oneFile: true,
+            fileSize: 1024 * 1024 * 5,
+            btnStr: '点我就上传默认展图',
+            lotSuccessFunc: function (data) {
+                $('#displayPic').attr('src', data);
+            },
+            lotErrorFunc: function (msg) {
+                $('#lot-uploader').append('<div class="lot-temp" style="color:red">' + msg + '</div> ');
+                setTimeout(function () {
+                    $('.lot-temp').remove();
+                }, 2000);
+            }
+        });
+
+        //实例化编辑器
+        var ue = UE.getEditor('container');
+
+        //实例化Tag标签
+        $('#tag').select2({
+            tags: true,
+            tokenSeparators: [',', ' ']
+        });
+
+        //提交表单
+        $('#form-success').click(function () {
+            var nId = $('#nId').val();
+            var seoId = $('#seoId').val();
+            //标题
+            var title = $('#title').val();
+            //作者
+            var author = $('#author').val();
+            //浏览量
+            var hitCount = $('#hitCount').val();
+            //数据状态
+            var dataStatus = $('#dataStatus').val();
+            //是否推送到主页
+            var push = $('#push').is(':checked');
+            //文章展览小图
+            var displayPic = $('#displayPic').attr('src');
+            //编辑器内容
+            var ueHtml = '';
+            var ueText = '';
+            if (ue.hasContents()) {
+                ueHtml = ue.getContent();
+                ueText = ue.getContentTxt();
+                ue.execCommand("clearlocaldata");//清空草稿箱
+            } else {
+                //alert('文章主体内容不能为空！');
+            }
+            //标签
+            //var tags = $.map($('#tag').select2("data"), function (row) {
+            //    return row.text;
+            //});
+            //var tag = tags.join(',');
+            //SEO关键词
+            var seoKeywords = $('#seoKeywords').val();
+            //SEO详细描述
+            var seodescription = $('#seodescription').val();
+            console.log(title, author, hitCount, push, displayPic, ueHtml, ueText, seoKeywords, seodescription)
+            $.post('@Url.Action("Edit")', { NId: nId, NTitle: title, NContent: ueHtml, NAuthor: author, NHitCount: hitCount, NDisplayPic: displayPic, NPush: push, NDataStatus: dataStatus, NSeoId: seoId, SeoKeywords: seoKeywords, Sedescription: seodescription }, function (data) {
+                if (data.status) {
+                    alert(data);
+                }
+            });
+            //console.log(title, author, hitCount, push, displayPic, ueHtml, ueText, tag, seoKeywords, seodescription)
+        });
+    </script>
+}
