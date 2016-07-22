@@ -13,6 +13,11 @@ namespace PawChina.Factory
         /// IOC 容器
         /// </summary>
         public static IContainer container = null;
+        /// <summary>
+        /// 获取 IDal 的实例化对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static T Resolve<T>()
         {
             try

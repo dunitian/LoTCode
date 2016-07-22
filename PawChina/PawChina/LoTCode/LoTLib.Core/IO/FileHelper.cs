@@ -46,7 +46,12 @@ public static partial class FileHelper
             reader.Read(buff, 0, 2);//读取每个文件的头两个字节
             fileclass = buff[0].ToString() + buff[1].ToString();
         }
-        catch (System.Exception ex) { stream.Dispose(); reader.Dispose(); return false; }
+        catch//(System.Exception ex)
+        {
+            stream.Dispose();
+            reader.Dispose();
+            return false;
+        }
         #endregion
 
         #region 校验

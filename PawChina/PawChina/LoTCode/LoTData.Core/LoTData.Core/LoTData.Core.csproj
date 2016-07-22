@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4835E093-C687-40E4-BD53-A26EBBF71AED}</ProjectGuid>
+    <ProjectGuid>{3AC58219-E07E-46A7-BD80-0FB5F1C6C066}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PawChina.BLL</RootNamespace>
-    <AssemblyName>PawChina.BLL</AssemblyName>
+    <RootNamespace>LoTData.Core</RootNamespace>
+    <AssemblyName>LoTData.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,8 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dapper.1.50.1\lib\net451\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Dapper.Contrib, Version=1.50.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Dapper.Contrib.1.50.0\lib\net45\Dapper.Contrib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,22 +49,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseBLL.cs" />
+    <Compile Include="ConnFactory.cs" />
+    <Compile Include="DapperDataAsync.cs" />
+    <Compile Include="DapperDataExtAsync.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PawChina.Factory\PawChina.Factory.csproj">
-      <Project>{b6aaa151-2516-430e-9288-fdb1677e47a8}</Project>
-      <Name>PawChina.Factory</Name>
+    <ProjectReference Include="..\..\LoTLib.Core\LoTLib.Core.csproj">
+      <Project>{6961984b-b45c-4e80-90a8-d9bfff2dee82}</Project>
+      <Name>LoTLib.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PawChina.IBLL\PawChina.IBLL.csproj">
-      <Project>{7de6c77a-543e-4a6e-81ef-455360177221}</Project>
-      <Name>PawChina.IBLL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PawChina.IDal\PawChina.IDal.csproj">
-      <Project>{5A1EB3C9-2239-4FB2-AE92-9CEC8D3DEC99}</Project>
-      <Name>PawChina.IDal</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

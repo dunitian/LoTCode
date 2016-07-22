@@ -97,7 +97,7 @@ public partial class EmailHelper
                     await smtpClient.SendMailAsync(mailMsg); //发送邮件
                     return true;
                 }
-                catch (System.Exception ex)
+                catch //(System.Exception ex)
                 {
                     mailMsg.Dispose();
                     smtpClient.Dispose();

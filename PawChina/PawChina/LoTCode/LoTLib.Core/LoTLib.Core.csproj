@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\ConfigHelper.cs" />
     <Compile Include="IO\FileHelper.cs" />
     <Compile Include="Json\JsonHelper.cs" />
     <Compile Include="Net\EmailHelper.cs" />

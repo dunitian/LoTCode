@@ -64,7 +64,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
@@ -132,7 +131,9 @@
     <Folder Include="Views\Index\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\PawRoot\Views\web.config" />
     <Content Include="Areas\PawRoot\Views\Manager\Index.cshtml" />
     <Content Include="Areas\PawRoot\Views\Manager\Login.cshtml" />

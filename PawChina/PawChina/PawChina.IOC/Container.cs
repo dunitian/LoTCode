@@ -13,6 +13,11 @@ namespace PawChina.IOC
         /// IOC 容器
         /// </summary>
         public static IContainer container = null;
+        /// <summary>
+        /// 获取 IBLL 的实例化对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static T Resolve<T>()
         {
             try
@@ -37,7 +42,7 @@ namespace PawChina.IOC
         {
             var builder = new ContainerBuilder();
             //InstancePerLifetimeScope：在一个生命周期域中，每一个依赖或调用创建一个单一的共享的实例，且每一个不同的生命周期域，实例是唯一的，不共享的。
-            builder.RegisterType<BaseBLL>().As<IBaseBLL>().InstancePerLifetimeScope();
+            //builder.RegisterType<NoteBLL>().As<INoteBLL>().InstancePerLifetimeScope();
 
             container = builder.Build();
         }
