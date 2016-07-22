@@ -133,7 +133,7 @@ namespace PawChina.Dal
         /// <returns></returns>
         public async Task<int> InsertAsync<T>(T model, IDbTransaction transaction = null, int? commandTimeout = null) where T : class, new()
         {
-            return await DapperDataAsync.InsertAsync<T>(model, transaction, commandTimeout, null);
+            return await DapperDataAsync.InsertAsync<T>(model, transaction, commandTimeout);
         }
 
         /// <summary>

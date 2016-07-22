@@ -81,11 +81,11 @@ namespace LoTData.Core
         /// <param name="commandTimeout"></param>
         /// <param name="sqlAdapter"></param>
         /// <returns></returns>
-        public static async Task<int> InsertAsync<T>(T model, IDbTransaction transaction = null, int? commandTimeout = null, ISqlAdapter sqlAdapter = null) where T : class, new()
+        public static async Task<int> InsertAsync<T>(T model, IDbTransaction transaction = null, int? commandTimeout = null) where T : class, new()
         {
             using (var conn = await ConnFactory.GetConnection())
             {
-                return await conn.InsertAsync<T>(model, transaction, commandTimeout, sqlAdapter);
+                return await conn.InsertAsync<T>(model, transaction, commandTimeout);
             }
         }
 

@@ -106,9 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\PawRoot\Controllers\BaseController.cs" />
-    <Compile Include="Areas\PawRoot\Controllers\ManagerController.cs" />
-    <Compile Include="Areas\PawRoot\Controllers\NoteController.cs" />
     <Compile Include="Areas\PawRoot\Models\PageData.cs" />
     <Compile Include="Areas\PawRoot\Models\QueryModel.cs" />
     <Compile Include="Areas\PawRoot\PawRootAreaRegistration.cs" />
@@ -126,6 +123,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\PawRoot\Controllers\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Index\" />
