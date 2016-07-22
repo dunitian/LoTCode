@@ -44,8 +44,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=5.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -94,20 +94,22 @@
   <ItemGroup>
     <Content Include="Areas\PawRoot\assets\css\common.css" />
     <Content Include="Areas\PawRoot\assets\css\login.min.css" />
-    <Content Include="Areas\PawRoot\assets\css\manager.min.css" />
     <Content Include="Areas\PawRoot\assets\img\backgrounds\1.jpg" />
     <Content Include="Areas\PawRoot\assets\img\backgrounds\2.jpg" />
     <Content Include="Areas\PawRoot\assets\img\backgrounds\3.jpg" />
-    <Content Include="Areas\PawRoot\assets\img\logo.jpg" />
     <Content Include="Areas\PawRoot\assets\js\common.min.js" />
-    <Content Include="Areas\PawRoot\assets\js\datapattern.js" />
     <Content Include="Areas\PawRoot\assets\js\login.js" />
+    <Content Include="Areas\PawRoot\open\supersized\progress.gif" />
+    <Content Include="Areas\PawRoot\open\supersized\supersized-init.js" />
+    <Content Include="Areas\PawRoot\open\supersized\supersized.3.2.7.min.js" />
+    <Content Include="Areas\PawRoot\open\supersized\supersized.min.css" />
     <Content Include="Global.asax" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\PawRoot\Models\PageData.cs" />
-    <Compile Include="Areas\PawRoot\Models\QueryModel.cs" />
+    <Compile Include="Areas\PawRoot\Controllers\BaseController.cs" />
+    <Compile Include="Areas\PawRoot\Controllers\ManagerController.cs" />
+    <Compile Include="Areas\PawRoot\Models\ChineseViewModel.cs" />
     <Compile Include="Areas\PawRoot\PawRootAreaRegistration.cs" />
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\AutoMapperExt.cs" />
@@ -123,7 +125,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\PawRoot\Controllers\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Index\" />
@@ -133,14 +134,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\PawRoot\Views\web.config" />
-    <Content Include="Areas\PawRoot\Views\Manager\Index.cshtml" />
     <Content Include="Areas\PawRoot\Views\Manager\Login.cshtml" />
-    <Content Include="Areas\PawRoot\Views\Manager\Total.cshtml" />
-    <Content Include="Areas\PawRoot\Views\Note\Add.cshtml" />
-    <Content Include="Areas\PawRoot\Views\Note\Edit.cshtml" />
-    <Content Include="Areas\PawRoot\Views\Note\Index.cshtml" />
-    <Content Include="Areas\PawRoot\Views\Shared\PawRootEdit.cshtml" />
-    <Content Include="Areas\PawRoot\Views\Shared\PawRootList.cshtml" />
+    <Content Include="Areas\PawRoot\Views\Manager\Index.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

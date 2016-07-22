@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseBLL.cs" />
+    <Compile Include="ChineseInfoBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +57,10 @@
     <ProjectReference Include="..\PawChina.IDal\PawChina.IDal.csproj">
       <Project>{5A1EB3C9-2239-4FB2-AE92-9CEC8D3DEC99}</Project>
       <Name>PawChina.IDal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PawChina.Model\PawChina.Model.csproj">
+      <Project>{E689757D-FDB7-42E9-BE70-8EE6738E12E0}</Project>
+      <Name>PawChina.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

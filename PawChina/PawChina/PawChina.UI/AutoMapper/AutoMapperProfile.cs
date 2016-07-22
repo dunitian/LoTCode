@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using PawChina.Model;
+using PawChina.UI.Areas.PawRoot.Models;
 
 namespace PawChina.UI.AutoMapper
 {
@@ -6,11 +8,12 @@ namespace PawChina.UI.AutoMapper
     {
         protected override void Configure()
         {
-            //NoteInfo==>NoteBackModel
-            //CreateMap<NoteInfo, NoteBackModel>().ForMember(back => back.SeoInfo, n => n.Ignore());
+            //NoteInfoView==>NoteInfo
+            //CreateMap<NoteViewModel, NoteInfo>().ForMember(back => back.SeoInfo, n => n.Ignore());
+            //CreateMap<ChineseViewModel, ChineseInfo>();//ChineseViewModel==>ChineseInfo
 
             //Mapper Config验证
-            Mapper.AssertConfigurationIsValid();
+            //Mapper.AssertConfigurationIsValid();
         }
     }
 }

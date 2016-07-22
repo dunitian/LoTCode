@@ -22,7 +22,7 @@ namespace LoTData.Core
         /// <returns></returns>
         public static async Task<T> GetAsync<T>(int id, IDbTransaction transaction = null, int? commandTimeout = null) where T : class, new()
         {
-            using (var conn = await ConnFactory.GetConnection())
+            using (var conn = ConnFactory.GetConnection())
             {
                 return await conn.GetAsync<T>(id, transaction, commandTimeout);
             }
@@ -37,7 +37,7 @@ namespace LoTData.Core
         /// <returns></returns>
         public static async Task<T> GetAsync<T>(long id, IDbTransaction transaction = null, int? commandTimeout = null) where T : class, new()
         {
-            using (var conn = await ConnFactory.GetConnection())
+            using (var conn = ConnFactory.GetConnection())
             {
                 return await conn.GetAsync<T>(id, transaction, commandTimeout);
             }
@@ -52,7 +52,7 @@ namespace LoTData.Core
         /// <returns></returns>
         public static async Task<T> GetAsync<T>(System.Guid id, IDbTransaction transaction = null, int? commandTimeout = null) where T : class, new()
         {
-            using (var conn = await ConnFactory.GetConnection())
+            using (var conn = ConnFactory.GetConnection())
             {
                 return await conn.GetAsync<T>(id, transaction, commandTimeout);
             }
@@ -64,7 +64,7 @@ namespace LoTData.Core
         /// <returns></returns>
         public static async Task<IEnumerable<T>> GetAllAsync<T>() where T : class, new()
         {
-            using (var conn = await ConnFactory.GetConnection())
+            using (var conn = ConnFactory.GetConnection())
             {
                 return await conn.GetAllAsync<T>();
             }
@@ -83,7 +83,7 @@ namespace LoTData.Core
         /// <returns></returns>
         public static async Task<int> InsertAsync<T>(T model, IDbTransaction transaction = null, int? commandTimeout = null) where T : class, new()
         {
-            using (var conn = await ConnFactory.GetConnection())
+            using (var conn = ConnFactory.GetConnection())
             {
                 return await conn.InsertAsync<T>(model, transaction, commandTimeout);
             }
@@ -100,7 +100,7 @@ namespace LoTData.Core
         /// <returns></returns>
         public static async Task<T> UpdateAsync<T>(T model, IDbTransaction transaction = null, int? commandTimeout = null) where T : class, new()
         {
-            using (var conn = await ConnFactory.GetConnection())
+            using (var conn = ConnFactory.GetConnection())
             {
                 bool b = await conn.UpdateAsync<T>(model, transaction, commandTimeout);
                 if (b) { return model; }

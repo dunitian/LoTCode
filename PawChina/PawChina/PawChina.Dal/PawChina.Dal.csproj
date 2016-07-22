@@ -41,16 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseDal.cs" />
+    <Compile Include="ChineseInfoDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LoTCode\LoTData.Core\LoTData.Core\LoTData.Core.csproj">
       <Project>{3ac58219-e07e-46a7-bd80-0fb5f1c6c066}</Project>
       <Name>LoTData.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LoTCode\LoTLib.Core\LoTLib.Core.csproj">
-      <Project>{6961984b-b45c-4e80-90a8-d9bfff2dee82}</Project>
-      <Name>LoTLib.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\PawChina.IDal\PawChina.IDal.csproj">
       <Project>{5a1eb3c9-2239-4fb2-ae92-9cec8d3dec99}</Project>

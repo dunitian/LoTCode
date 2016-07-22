@@ -1,5 +1,4 @@
 ﻿using System.Data.SqlClient;
-using System.Threading.Tasks;
 
 namespace LoTData.Core
 {
@@ -9,26 +8,13 @@ namespace LoTData.Core
     public partial class ConnFactory
     {
         private static readonly string connString = ConfigHelper.GetConnectionString("SqlConnStr");
-        private static SqlConnection conn;
         /// <summary>
         /// 获取Connection
         /// </summary>
         /// <returns></returns>
-        public async static Task<SqlConnection> GetConnection()
+        public static SqlConnection GetConnection()
         {
-            if (conn == null)
-            {
-                conn = new SqlConnection(connString);
-            }
-            try
-            {
-                await conn.OpenAsync();
-            }
-            catch //(System.Exception ex)
-            {
-                throw new System.Exception("打开数据库出错~~~ConnFactory：conn.OpenAsync()");
-            }
-            return conn;
+            return new SqlConnection(connString);
         }
     }
 }

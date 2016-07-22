@@ -53,6 +53,7 @@
     <Compile Include="Net\IPAndPositionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pub\FunHelper.cs" />
+    <Compile Include="Safe\SafeHelper.cs" />
     <Compile Include="Validation\ValidationHelper.cs" />
   </ItemGroup>
   <ItemGroup>

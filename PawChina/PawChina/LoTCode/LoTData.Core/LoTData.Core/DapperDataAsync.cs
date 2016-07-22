@@ -33,7 +33,7 @@ namespace LoTData.Core
         /// <returns></returns>
         public static async Task<T> ExecuteScalarAsync<T>(string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = default(int?), CommandType? commandType = default(CommandType?))
         {
-            using (var conn = await ConnFactory.GetConnection())
+            using (var conn = ConnFactory.GetConnection())
             {
                 await conn.OpenAsync();
                 return await conn.ExecuteScalarAsync<T>(sql, param, transaction, commandTimeout, commandType);
@@ -50,7 +50,7 @@ namespace LoTData.Core
         /// <returns></returns>
         public static async Task<IEnumerable<T>> QueryAsync<T>(string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = default(int?), CommandType? commandType = default(CommandType?))
         {
-            using (var conn = await ConnFactory.GetConnection())
+            using (var conn = ConnFactory.GetConnection())
             {
                 await conn.OpenAsync();
                 return await conn.QueryAsync<T>(sql, param, transaction, commandTimeout, commandType);
@@ -67,7 +67,7 @@ namespace LoTData.Core
         /// <returns></returns>
         public static async Task<IEnumerable<dynamic>> QueryAsync(string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = default(int?), CommandType? commandType = default(CommandType?))
         {
-            using (var conn = await ConnFactory.GetConnection())
+            using (var conn = ConnFactory.GetConnection())
             {
                 await conn.OpenAsync();
                 return await conn.QueryAsync(sql, param, transaction, commandTimeout, commandType);
@@ -87,7 +87,7 @@ namespace LoTData.Core
         /// <returns></returns>
         public static async Task<int> ExecuteAsync(string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = default(int?), CommandType? commandType = default(CommandType?))
         {
-            using (var conn = await ConnFactory.GetConnection())
+            using (var conn = ConnFactory.GetConnection())
             {
                 await conn.OpenAsync();
                 return await conn.ExecuteAsync(sql, param, transaction, commandTimeout, commandType);

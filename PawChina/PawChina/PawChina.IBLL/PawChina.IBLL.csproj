@@ -42,7 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseBLL.cs" />
+    <Compile Include="IChineseInfoBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PawChina.Model\PawChina.Model.csproj">
+      <Project>{E689757D-FDB7-42E9-BE70-8EE6738E12E0}</Project>
+      <Name>PawChina.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

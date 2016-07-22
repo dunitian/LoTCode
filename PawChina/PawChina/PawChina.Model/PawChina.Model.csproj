@@ -49,7 +49,6 @@
     <Compile Include="Enum\ProductEnum.cs" />
     <Compile Include="Enum\StatusEnum.cs" />
     <Compile Include="NoteInfo.cs" />
-    <Compile Include="PageData.cs" />
     <Compile Include="PawBaseInfo.cs" />
     <Compile Include="ProductInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
