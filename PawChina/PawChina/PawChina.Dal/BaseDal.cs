@@ -8,7 +8,7 @@ namespace PawChina.Dal
     /// <summary>
     /// BaseDal
     /// </summary>
-    public abstract partial class BaseDal : IDal.IBaseDal
+    public abstract partial class BaseDal<T> : IDal.IBaseDal<T> where T : class, new()
     {
         #region 基础方法
 
@@ -16,27 +16,25 @@ namespace PawChina.Dal
         /// <summary>
         /// 单个值返回值
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="sql"></param>
         /// <param name="param"></param>
         /// <param name="transaction"></param>
         /// <param name="commandTimeout"></param>
         /// <param name="commandType"></param>
         /// <returns></returns>
-        public async Task<T> ExecuteScalarAsync<T>(string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = default(int?), CommandType? commandType = default(CommandType?))
+        public async Task<T> ExecuteScalarAsync(string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = default(int?), CommandType? commandType = default(CommandType?))
         {
             return await DapperDataAsync.ExecuteScalarAsync<T>(sql, param, transaction, commandTimeout, commandType);
         }
         /// <summary>
         /// 强类型查询
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="sql"></param>
         /// <param name="param"></param>
         /// <param name="transaction"></param>
         /// <param name="buffered"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<T>> QueryAsync<T>(string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = default(int?), CommandType? commandType = default(CommandType?))
+        public async Task<IEnumerable<T>> QueryAsync(string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = default(int?), CommandType? commandType = default(CommandType?))
         {
             return await DapperDataAsync.QueryAsync<T>(sql, param, transaction, commandTimeout, commandType);
         }
@@ -48,7 +46,7 @@ namespace PawChina.Dal
         /// <param name="transaction"></param>
         /// <param name="buffered"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<dynamic>> QueryAsync(string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = default(int?), CommandType? commandType = default(CommandType?))
+        public async Task<IEnumerable<dynamic>> QueryAsyncDynamic(string sql, object param = null, IDbTransaction transaction = null, int? commandTimeout = default(int?), CommandType? commandType = default(CommandType?))
         {
             return await DapperDataAsync.QueryAsync(sql, param, transaction, commandTimeout, commandType);
         }
@@ -78,45 +76,41 @@ namespace PawChina.Dal
         /// <summary>
         /// 获取Model-Key为int类型
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <param name="transaction"></param>
         /// <param name="commandTimeout"></param>
         /// <returns></returns>
-        public async Task<T> GetAsync<T>(int id, IDbTransaction transaction = null, int? commandTimeout = null) where T : class, new()
+        public async Task<T> GetAsync(int id, IDbTransaction transaction = null, int? commandTimeout = null)
         {
             return await DapperDataAsync.GetAsync<T>(id, transaction, commandTimeout);
         }
         /// <summary>
         /// 获取Model-Key为long类型
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <param name="transaction"></param>
         /// <param name="commandTimeout"></param>
         /// <returns></returns>
-        public async Task<T> GetAsync<T>(long id, IDbTransaction transaction = null, int? commandTimeout = null) where T : class, new()
+        public async Task<T> GetAsync(long id, IDbTransaction transaction = null, int? commandTimeout = null)
         {
             return await DapperDataAsync.GetAsync<T>(id, transaction, commandTimeout);
         }
         /// <summary>
         /// 获取Model-Key为Guid类型
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="id"></param>
         /// <param name="transaction"></param>
         /// <param name="commandTimeout"></param>
         /// <returns></returns>
-        public async Task<T> GetAsync<T>(System.Guid id, IDbTransaction transaction = null, int? commandTimeout = null) where T : class, new()
+        public async Task<T> GetAsync(System.Guid id, IDbTransaction transaction = null, int? commandTimeout = null)
         {
             return await DapperDataAsync.GetAsync<T>(id, transaction, commandTimeout);
         }
         /// <summary>
         /// 获取Model集合（没有Where条件）
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public async Task<IEnumerable<T>> GetAllAsync<T>() where T : class, new()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await DapperDataAsync.GetAllAsync<T>();
         }
@@ -126,12 +120,11 @@ namespace PawChina.Dal
         /// <summary>
         /// 插入一个Model
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="model"></param>
         /// <param name="transaction"></param>
         /// <param name="commandTimeout"></param>
         /// <returns></returns>
-        public async Task<int> InsertAsync<T>(T model, IDbTransaction transaction = null, int? commandTimeout = null) where T : class, new()
+        public async Task<int> InsertAsync(T model, IDbTransaction transaction = null, int? commandTimeout = null)
         {
             return await DapperDataAsync.InsertAsync<T>(model, transaction, commandTimeout);
         }
@@ -139,13 +132,12 @@ namespace PawChina.Dal
         /// <summary>
         /// 更新一个Model
         /// </summary>
-        /// <typeparam name="T"></typeparam>
         /// <param name="connection"></param>
         /// <param name="entityToUpdate"></param>
         /// <param name="transaction"></param>
         /// <param name="commandTimeout"></param>
         /// <returns></returns>
-        public async Task<T> UpdateAsync<T>(T model, IDbTransaction transaction = null, int? commandTimeout = null) where T : class, new()
+        public async Task<T> UpdateAsync(T model, IDbTransaction transaction = null, int? commandTimeout = null)
         {
             return await DapperDataAsync.UpdateAsync<T>(model, transaction, commandTimeout);
         }
@@ -160,7 +152,7 @@ namespace PawChina.Dal
         /// <param name="sqlTotal">total语句</param>
         /// <param name="p2">Total动态参数</param>
         /// <returns></returns>
-        public async Task<string> PageLoadAsync<T>(string sql, object p = null, string sqlTotal = "", object p2 = null)
+        public async Task<string> PageLoadAsync(string sql, object p = null, string sqlTotal = "", object p2 = null)
         {
             return await DapperDataAsync.PageLoadAsync<T>(sql, p, sqlTotal, p2);
         }
