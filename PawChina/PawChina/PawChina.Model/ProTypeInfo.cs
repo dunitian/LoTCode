@@ -1,10 +1,18 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PawChina.Model
 {
+    /// <summary>
+    /// 产品类别
+    /// </summary>
+    [Table("ProTypeInfo")]
     public class ProTypeInfo
     {
         /// <summary>
         /// 编号
         /// </summary>
+        [Key]
 		public int TId { get; set; }
         /// <summary>
         /// 分类名

@@ -1,10 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PawChina.Model
 {
+    [Table("ActivityInfo")]
     public class ActivityInfo
     {
         /// <summary>
         /// ±‡∫≈
         /// </summary>
+        [Key]
 		public int AId { get; set; }
         /// <summary>
         /// ±ÍÃ‚

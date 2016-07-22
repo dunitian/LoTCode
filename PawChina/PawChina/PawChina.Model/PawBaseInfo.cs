@@ -1,10 +1,18 @@
-﻿namespace PawChina.Model
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PawChina.Model
 {
+    /// <summary>
+    /// 首页信息
+    /// </summary>
+    [Table("NoteInfo")]
     public class PawBaseInfo
     {
         /// <summary>
         /// 主键
         /// </summary>
+        [Key]
         public int BId { get; set; }
         /// <summary>
         /// key

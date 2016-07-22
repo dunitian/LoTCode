@@ -1,13 +1,18 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PawChina.Model
 {
     /// <summary>
     /// 管理员
     /// </summary>
+    [Table("ChineseInfo")]
     public class ChineseInfo
     {
         /// <summary>
         /// GUID
         /// </summary>
+        [Key]
 		public string PawGid { get; set; }
         /// <summary>
         /// 用户名

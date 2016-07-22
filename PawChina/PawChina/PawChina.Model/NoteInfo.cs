@@ -1,13 +1,18 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PawChina.Model
 {
     /// <summary>
     /// 12¸ö×Ö¶Î
     /// </summary>
+    [Table("NoteInfo")]
     public class NoteInfo
     {
         /// <summary>
         /// ±àºÅ
         /// </summary>
+        [Key]
         public int NId { get; set; }
         /// <summary>
         /// ±êÌâ

@@ -105,7 +105,6 @@ namespace PawChina.IDal
         /// <param name="model"></param>
         /// <param name="transaction"></param>
         /// <param name="commandTimeout"></param>
-        /// <param name="sqlAdapter"></param>
         /// <returns></returns>
         Task<int> InsertAsync<T>(T model, IDbTransaction transaction = null, int? commandTimeout = null) where T : class, new();
 

@@ -85,7 +85,7 @@ public partial class EmailHelper
                     foreach (var item in model.AttachmentList)
                     {
                         try { mailMsg.Attachments.Add(new Attachment(item)); }
-                        catch (System.Exception ex) { }
+                        catch { }
                     }
                 }
                 mailMsg.Subject = model.MailSubject;                //主题

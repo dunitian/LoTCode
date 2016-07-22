@@ -1,10 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PawChina.Model
 {
     /// <summary>
     /// SeoTKD±í
     /// </summary>
+    [Table("SeoTKD")]
     public partial class SeoTKD
     {
+        [Key]
         public int Id { get; set; }
 
         /// <summary>
