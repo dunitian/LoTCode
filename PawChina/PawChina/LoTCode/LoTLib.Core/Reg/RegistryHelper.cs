@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System.Collections.Generic;
+
 namespace LoTLib.Core.Reg
 {
     public static partial class RegistryHelper
