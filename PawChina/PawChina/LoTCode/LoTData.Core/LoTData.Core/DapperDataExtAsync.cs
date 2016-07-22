@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Linq;
+using System.Data;
 using System.Threading.Tasks;
 using Dapper.Contrib.Extensions;
 using System.Collections.Generic;
@@ -105,6 +106,24 @@ namespace LoTData.Core
                 if (b) { return model; }
                 else { return null; }
             }
+        }
+        #endregion
+
+        #region 分页查询
+        /// <summary>
+        /// 分页查询(为什么不用out，请参考：http://www.cnblogs.com/dunitian/p/5556909.html)
+        /// </summary>
+        /// <param name="sql">查询语句</param>
+        /// <param name="p">动态参数</param>
+        /// <param name="sqlTotal">total语句</param>
+        /// <param name="p2">Total动态参数</param>
+        /// <returns></returns>
+        public static async Task<string> PageLoadAsync<T>(string sql, object p = null, string sqlTotal = "", object p2 = null)
+        {
+            var rows = await QueryAsync<T>(sql.ToString(), p);
+            var total = rows.Count();
+            if (!sqlTotal.IsNullOrWhiteSpace()) { total = await ExecuteScalarAsync<int>(sqlTotal, p2); }
+            return new { rows = rows, total = total }.ObjectToJson();
         }
         #endregion
     }

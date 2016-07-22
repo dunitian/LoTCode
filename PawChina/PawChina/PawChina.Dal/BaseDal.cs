@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
+using LoTData.Core;
+using PawChina.Model;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PawChina.Dal
@@ -10,6 +11,6 @@ namespace PawChina.Dal
     /// </summary>
     public abstract partial class BaseDal : IDal.IBaseDal
     {
-       
+        
     }
 }
