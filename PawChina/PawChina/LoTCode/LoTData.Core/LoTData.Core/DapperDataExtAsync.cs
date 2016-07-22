@@ -8,7 +8,7 @@ namespace LoTData.Core
     /// <summary>
     /// 扩展方法
     /// </summary>
-    public static partial class DapperDataAsync
+    public abstract partial class DapperDataAsync
     {
         #region 查询系
         /// <summary>
