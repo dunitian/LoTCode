@@ -23,6 +23,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         {
             base.OnActionExecuting(filterContext);
 
+            //LoginOn LoginOut Login 不用登录就可以访问
             if (CurrentUser == null && !filterContext.ActionDescriptor.ActionName.Contains("Login"))
             {
                 if (filterContext.HttpContext.Request.IsAjaxRequest())

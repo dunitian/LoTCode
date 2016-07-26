@@ -9,6 +9,7 @@ namespace PawChina.UI
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 
             //AutoMapper注册
             AutoMapper.AutoMapperConfig.Initialize();
