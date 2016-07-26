@@ -114,6 +114,17 @@ namespace PawChina.BLL
             return await modelDal.GetAsync(id, transaction, commandTimeout);
         }
         /// <summary>
+        /// 获取Model-Key为string类型
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="transaction"></param>
+        /// <param name="commandTimeout"></param>
+        /// <returns></returns>
+        public async Task<T> GetAsync(string id, IDbTransaction transaction = null, int? commandTimeout = null)
+        {
+            return await modelDal.GetAsync(id, transaction, commandTimeout);
+        }
+        /// <summary>
         /// 获取Model集合（没有Where条件）
         /// </summary>
         /// <returns></returns>

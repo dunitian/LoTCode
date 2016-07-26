@@ -42,8 +42,13 @@ namespace PawChina.Factory
         {
             var builder = new ContainerBuilder();
             //InstancePerLifetimeScope：在一个生命周期域中，每一个依赖或调用创建一个单一的共享的实例，且每一个不同的生命周期域，实例是唯一的，不共享的。
+            //管理员系
             builder.RegisterType<ChineseInfoDal>().As<IChineseInfoDal>().InstancePerLifetimeScope();
-
+            //笔记信息
+            builder.RegisterType<NoteInfoDal>().As<INoteInfoDal>().InstancePerLifetimeScope();
+            // SEO信息
+            builder.RegisterType<SeoTKDDal>().As<ISeoTKDDal>().InstancePerLifetimeScope();
+            
             container = builder.Build();
         }
     }

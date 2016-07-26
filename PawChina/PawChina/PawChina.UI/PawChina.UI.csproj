@@ -112,6 +112,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\PawRoot\Controllers\BaseController.cs" />
     <Compile Include="Areas\PawRoot\Controllers\ManagerController.cs" />
+    <Compile Include="Areas\PawRoot\Controllers\NoteController.cs" />
     <Compile Include="Areas\PawRoot\Models\ChineseViewModel.cs" />
     <Compile Include="Areas\PawRoot\PawRootAreaRegistration.cs" />
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />

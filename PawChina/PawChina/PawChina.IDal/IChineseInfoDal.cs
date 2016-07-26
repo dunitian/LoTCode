@@ -1,6 +1,6 @@
 ﻿namespace PawChina.IDal
 {
-    public interface IChineseInfoDal : IBaseDal<Model.ChineseInfo>
+    public interface INoteInfoDal : IBaseDal<Model.NoteInfo>
     {
     }
 }

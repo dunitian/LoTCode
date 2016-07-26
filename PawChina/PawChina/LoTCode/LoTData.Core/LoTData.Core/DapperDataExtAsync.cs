@@ -58,6 +58,21 @@ namespace LoTData.Core
             }
         }
         /// <summary>
+        /// 获取Model-Key为string类型
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="id"></param>
+        /// <param name="transaction"></param>
+        /// <param name="commandTimeout"></param>
+        /// <returns></returns>
+        public static async Task<T> GetAsync<T>(string id, IDbTransaction transaction = null, int? commandTimeout = null) where T : class, new()
+        {
+            using (var conn = ConnFactory.GetConnection())
+            {
+                return await conn.GetAsync<T>(id, transaction, commandTimeout);
+            }
+        }
+        /// <summary>
         /// 获取Model集合（没有Where条件）
         /// </summary>
         /// <typeparam name="T"></typeparam>

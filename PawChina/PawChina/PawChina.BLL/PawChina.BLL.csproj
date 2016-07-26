@@ -43,9 +43,15 @@
   <ItemGroup>
     <Compile Include="BaseBLL.cs" />
     <Compile Include="ChineseInfoBLL.cs" />
+    <Compile Include="NoteInfoBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeoTKDBLL.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LoTCode\LoTLib.Core\LoTLib.Core.csproj">
+      <Project>{6961984b-b45c-4e80-90a8-d9bfff2dee82}</Project>
+      <Name>LoTLib.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PawChina.Factory\PawChina.Factory.csproj">
       <Project>{b6aaa151-2516-430e-9288-fdb1677e47a8}</Project>
       <Name>PawChina.Factory</Name>

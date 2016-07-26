@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseBLL.cs" />
+    <Compile Include="ISeoTKDBLL.cs" />
+    <Compile Include="INoteInfoBLL.cs" />
     <Compile Include="IChineseInfoBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

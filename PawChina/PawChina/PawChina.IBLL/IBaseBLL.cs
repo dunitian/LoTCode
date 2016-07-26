@@ -82,6 +82,14 @@ namespace PawChina.IBLL
         /// <returns></returns>
         Task<T> GetAsync(System.Guid id, IDbTransaction transaction = null, int? commandTimeout = null);
         /// <summary>
+        /// 获取Model-Key为String类型
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="transaction"></param>
+        /// <param name="commandTimeout"></param>
+        /// <returns></returns>
+        Task<T> GetAsync(string id, IDbTransaction transaction = null, int? commandTimeout = null);
+        /// <summary>
         /// 获取Model集合（没有Where条件）
         /// </summary>
         /// <returns></returns>
