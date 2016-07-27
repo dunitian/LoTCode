@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>详细页面</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/Areas/PawRoot/assets/css/common.css" rel="stylesheet" />
+    <link href="/Areas/PawRoot/open/lotUploader/lotuploader1.0.1.min.css" rel="stylesheet" />
+    <link href="//cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    @RenderSection("HeadCss", false)
+</head>
+<body>
+    <header class="panel panel-default">
+        <div class="panel-heading">表单页面</div>
+        <article class="panel-body">
+            <div class="row">
+                @RenderBody()
+            </div>
+        </article>
+    </header>
+    <script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/Areas/PawRoot/open/lotUploader/lotuploader1.0.1.min.js"></script>
+    <script src="/Areas/PawRoot/open/ueditor/ueditor.config.js"></script>
+    <script src="/Areas/PawRoot/open/ueditor/ueditor.all.min.js"></script>
+    <script src="//cdn.bootcss.com/select2/4.0.3/js/select2.js"></script>
+    @RenderSection("JsScript", false)
+</body>
+</html>

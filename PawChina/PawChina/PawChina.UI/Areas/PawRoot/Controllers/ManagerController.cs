@@ -73,5 +73,14 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 统计页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Total()
+        {
+            return View();
+        }
     }
 }

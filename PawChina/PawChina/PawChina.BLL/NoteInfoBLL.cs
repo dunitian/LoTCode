@@ -25,6 +25,8 @@ namespace PawChina.BLL
         /// <returns></returns>
         public Task<IEnumerable<NoteInfo>> QueryAsync(QueryModel model)
         {
+            var list= modelDal.GetAllAsync();
+            return list;
             //StringBuilder sqlWhere = new StringBuilder();
             //var p = DapperDataAsync.GetDynamicParameters();
             //var p2 = DapperDataAsync.GetDynamicParameters();
