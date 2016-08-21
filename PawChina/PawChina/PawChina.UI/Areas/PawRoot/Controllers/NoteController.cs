@@ -102,7 +102,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<JsonResult> Query(QueryModel model)
+        public async Task<ActionResult> Query(QueryModel model)
         {
             var obj = new AjaxOption<object>();
             if (model == null)
@@ -116,7 +116,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
                 obj.Msg = "请检查开始或结束时间！";
                 return Json(obj);
             }
-            return Json(await NoteInfoBLL.QueryAsync(model));
+            return Content(await NoteInfoBLL.QueryAsync(model));
         }
     }
 }

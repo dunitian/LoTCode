@@ -10,6 +10,6 @@ namespace PawChina.IBLL
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task<IEnumerable<Model.NoteInfo>> QueryAsync(Model.QueryModel model);
+        Task<string> QueryAsync(Model.QueryModel model);
     }
 }
