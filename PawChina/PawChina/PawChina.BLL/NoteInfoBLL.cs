@@ -35,31 +35,28 @@ namespace PawChina.BLL
             if (model.DataStatus == StatusEnum.Init) { model.DataStatus = StatusEnum.Normal; }
             sqlWhere.Append(" where NDataStatus=@NDataStatus");
             pms1.NDataStatus = (int)model.DataStatus;
-            pms2.NDataStatus = (int)model.DataStatus;
 
             //文章标题
             if (!model.Title.IsNullOrWhiteSpace())
             {
                 sqlWhere.Append(" and NTitle like @NTitle");
                 pms1.NTitle = string.Format("%{0}%", model.Title);
-                pms2.NTitle = string.Format("%{0}%", model.Title);
             }
             //创建时间
             if (DateTime.Compare(model.StartTime, DateTime.MinValue) > 0)
             {
                 sqlWhere.Append(string.Format(" and NCreateTime>=@StartTime", model.StartTime));
                 pms1.StartTime = model.StartTime;
-                pms2.StartTime = model.StartTime;
             }
             //更新时间
             if (DateTime.Compare(model.EndTime, DateTime.MinValue) > 0 && DateTime.Compare(model.EndTime, DateTime.Now) <= 0)
             {
                 sqlWhere.Append(string.Format(" and NCreateTime<=@EndTime", model.EndTime));
                 pms1.EndTime = model.EndTime;
-                pms2.EndTime = model.EndTime;
             }
             #endregion
 
+            pms2 = pms1;
             sqlStr.Append(sqlWhere.ToString());
             sqlCount.Append(sqlWhere.ToString());
 
