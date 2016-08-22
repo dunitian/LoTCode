@@ -171,7 +171,8 @@
                 if (!data.Status) {
                     showMsg(data.Msg, 1000);
                 }
-                lotTab.bootstrapTable('load', data);
+                lotTab.bootstrapTable('removeAll');
+                lotTab.bootstrapTable('load', JSON.parse(data));
             });
         });
     </script>
