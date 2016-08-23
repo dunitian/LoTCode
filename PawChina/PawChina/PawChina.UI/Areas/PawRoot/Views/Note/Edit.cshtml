@@ -195,7 +195,10 @@
             var updateTime = new Date().getTime();
             $.post('@Url.Action("Edit")', { NId: nId, NTitle: title, NContent: ueHtml, NAuthor: author, NHitCount: hitCount, NDisplayPic: displayPic, NPush: push, NCreateTime: createTime, NUpdateTime: updateTime, NDataStatus: dataStatus, NSeoId: seoId, SeoInfo: { Id: seoId, SeoKeywords: seoKeywords, Sedescription: seodescription } }, function (data) {
                 if (data.Status) {
-                    alert(data.Msg);
+                    showMsg(data.Msg, 500);
+                    setTimeout(function () {
+                        window.location.href = '@Url.Action("Index")';
+                    },1000)
                 }
             });
         });

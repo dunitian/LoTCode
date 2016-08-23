@@ -27,10 +27,24 @@
     </header>
     <script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/Areas/PawRoot/assets/js/common.min.js"></script>
     <script src="/Areas/PawRoot/open/lotUploader/lotuploader1.0.1.min.js"></script>
     <script src="/Areas/PawRoot/open/ueditor/ueditor.config.js"></script>
     <script src="/Areas/PawRoot/open/ueditor/ueditor.all.min.js"></script>
     <script src="//cdn.bootcss.com/select2/4.0.3/js/select2.js"></script>
     @RenderSection("JsScript", false)
+    <script type="text/javascript">
+        //消息提醒
+        function showMsg(obj, time) {
+            if (obj) {
+                if (!time) { time = 1000; }
+                easyDialog.open({ container: { content: obj }, autoClose: time });
+            }
+        }
+        $(document).on("click", "#overlay", function () {
+            $(this).fadeOut(200);
+            easyDialog.close();
+        });
+    </script>
 </body>
 </html>
