@@ -1,5 +1,4 @@
-﻿using System;
-using PawChina.IBLL;
+﻿using PawChina.IBLL;
 using PawChina.IOC;
 using PawChina.Model;
 using System.Web.Mvc;
@@ -72,7 +71,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             }
             if (model.NAuthor.IsNullOrWhiteSpace() || model.NAuthor.Length > 50)
             {
-                obj.Msg = "标题不能为空且不能大于50个字符";
+                obj.Msg = "作者名不能为空且不能大于50个字符";
                 return Json(obj);
             }
             if (model.NContent.IsNullOrWhiteSpace())
@@ -82,8 +81,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             }
             #endregion
 
-            //必须保证存在数据库里面的文字是安全的
-            model.NContent = model.NContent.ToUrlDecode().ToHtmlEncode();
+            model.NContent = model.NContent.ToUrlDecode();
             if (model.SeoInfo != null)
                 await SeoTKDBLL.UpdateAsync(model.SeoInfo);
 

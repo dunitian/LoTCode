@@ -73,7 +73,7 @@
         <label class="col-sm-2 control-label">笔记内容：</label>
         <div class="col-sm-6">
             <script id="container" name="content" type="text/plain">
-                @Html.Encode(Model.NContent)
+                @Html.Raw(Model.NContent)
             </script>
         </div>
     </div>
@@ -178,7 +178,7 @@
                 ueText = ue.getContentTxt();
                 ue.execCommand("clearlocaldata");//清空草稿箱
             } else {
-                //alert('文章主体内容不能为空！');
+                showMsg('文章主体内容不能为空！', 500);
             }
             //标签
             //var tags = $.map($('#tag').select2("data"), function (row) {
@@ -198,7 +198,9 @@
                     showMsg(data.Msg, 500);
                     setTimeout(function () {
                         window.location.href = '@Url.Action("Index")';
-                    },1000)
+                    }, 1000)
+                } else {
+                    showMsg(data.Msg);
                 }
             });
         });
