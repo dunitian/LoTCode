@@ -135,7 +135,8 @@ namespace LoTData.Core
         /// <returns></returns>
         public static async Task<string> PageLoadAsync<T>(string sql, object p = null, string sqlTotal = "", object p2 = null)
         {
-            var rows = await QueryAsync<T>(sql.ToString(), p);
+            var rows = await QueryAsync(sql.ToString(), p);
+            //var rows = await QueryAsync<T>(sql.ToString(), p);
             var total = rows.Count();
             if (!sqlTotal.IsNullOrWhiteSpace()) { total = await ExecuteScalarAsync<int>(sqlTotal, p2); }
             return new { rows = rows, total = total }.ObjectToJson();

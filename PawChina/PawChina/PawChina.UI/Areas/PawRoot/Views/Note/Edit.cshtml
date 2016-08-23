@@ -116,6 +116,7 @@
     </div>
     <!--表单提交-->
     <div class="form-group">
+        <input type="hidden" id="createTime" value="@Model.NCreateTime" />
         <label class="col-sm-2"></label>
         <div class="col-sm-6">
             <button id="form-success" class="btn btn-success lot-form-btn">提 交</button>
@@ -188,13 +189,15 @@
             var seoKeywords = $('#seoKeywords').val();
             //SEO详细描述
             var seodescription = $('#seodescription').val();
-            console.log(title, author, hitCount, push, displayPic, ueHtml, ueText, seoKeywords, seodescription)
-            $.post('@Url.Action("Edit")', { NId: nId, NTitle: title, NContent: ueHtml, NAuthor: author, NHitCount: hitCount, NDisplayPic: displayPic, NPush: push, NDataStatus: dataStatus, NSeoId: seoId, SeoInfo: { Id: seoId, SeoKeywords: seoKeywords, Sedescription: seodescription } }, function (data) {
-                if (data.status) {
+            //创建时间
+            var createTime = $('#createTime').val();
+            //更新时间
+            var updateTime = new Date().getTime();
+            $.post('@Url.Action("Edit")', { NId: nId, NTitle: title, NContent: ueHtml, NAuthor: author, NHitCount: hitCount, NDisplayPic: displayPic, NPush: push, NCreateTime: createTime, NUpdateTime: updateTime, NDataStatus: dataStatus, NSeoId: seoId, SeoInfo: { Id: seoId, SeoKeywords: seoKeywords, Sedescription: seodescription } }, function (data) {
+                if (data.Status) {
                     alert(data.Msg);
                 }
             });
-            //console.log(title, author, hitCount, push, displayPic, ueHtml, ueText, tag, seoKeywords, seodescription)
         });
     </script>
 }

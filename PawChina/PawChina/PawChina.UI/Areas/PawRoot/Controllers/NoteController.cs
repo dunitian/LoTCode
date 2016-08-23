@@ -84,10 +84,11 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
 
             //必须保证存在数据库里面的文字是安全的
             model.NContent = model.NContent.ToUrlDecode().ToHtmlEncode();
-            model.NUpdateTime = DateTime.Now;
-            var noteInfo = await NoteInfoBLL.UpdateAsync(model);
             if (model.SeoInfo != null)
                 await SeoTKDBLL.UpdateAsync(model.SeoInfo);
+
+            var noteInfo = await NoteInfoBLL.UpdateAsync(model);
+
             if (noteInfo != null)
             {
                 obj.Status = true;
