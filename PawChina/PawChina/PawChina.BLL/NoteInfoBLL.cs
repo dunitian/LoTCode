@@ -43,13 +43,13 @@ namespace PawChina.BLL
                 pms1.NTitle = string.Format("%{0}%", model.Title);
             }
             //创建时间
-            if (DateTime.Compare(model.StartTime, DateTime.MinValue) > 0)
+            if (model.StartTime > 0)
             {
                 sqlWhere.Append(string.Format(" and NCreateTime>=@StartTime", model.StartTime));
                 pms1.StartTime = model.StartTime;
             }
             //更新时间
-            if (DateTime.Compare(model.EndTime, DateTime.MinValue) > 0 && DateTime.Compare(model.EndTime, DateTime.Now) <= 0)
+            if (model.EndTime > model.StartTime)
             {
                 sqlWhere.Append(string.Format(" and NCreateTime<=@EndTime", model.EndTime));
                 pms1.EndTime = model.EndTime;

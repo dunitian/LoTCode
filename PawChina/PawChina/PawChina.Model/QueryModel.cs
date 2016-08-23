@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PawChina.Model
+﻿namespace PawChina.Model
 {
     public class QueryModel
     {
@@ -27,11 +25,11 @@ namespace PawChina.Model
         /// <summary>
         /// 开始时间
         /// </summary>
-        public DateTime StartTime { get; set; }
+        public long StartTime { get; set; }
         /// <summary>
         /// 结束时间
         /// </summary>
-        public DateTime EndTime { get; set; }
+        public long EndTime { get; set; }
         /// <summary>
         /// 状态
         /// </summary>

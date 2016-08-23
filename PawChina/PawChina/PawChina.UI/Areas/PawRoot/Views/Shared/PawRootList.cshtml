@@ -48,7 +48,7 @@
                 <div class="col-lg-3">
                     <div class="btn-group">
                         <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-export"></i> 导出</button>
-                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-repeat"></i> 重置</button>
+                        <button class="btn btn-default" type="button" id="reset"><i class="glyphicon glyphicon-repeat"></i> 重置</button>
                         <button class="btn btn-default" type="button" id="search"><i class="glyphicon glyphicon-search"></i> 查询</button>
                     </div>
                 </div>
@@ -115,6 +115,9 @@
                 todayBtn: "linked",
                 language: "zh-CN",
                 autoclose: true
+            }).on('changeDate',function (ev) {
+                var startTime = $('#startTime').val();
+                $('#endTime').datetimepicker('setStartDate', startTime);
             });
         });
 
@@ -148,8 +151,8 @@
 
         //返回键值对数组
         function getArray(pageSize, offset, title, order) {
-            var startTime = $('#startTime').val();
-            var endTime = $('#endTime').val();
+            var startTime = $('#startTime').val().ticks();
+            var endTime = $('#endTime').val().ticks();
             var dataStatus = $('#dataStatus').val();
             if (new Date(startTime) > new Date(endTime)) {
                 showMsg("开始时间不能大于结束时间！", 500);
@@ -159,7 +162,6 @@
                 title = $('#title').val();
             }
             if (!order) {
-                console.log(order)
                 order = " ";
             }
             return { PageSize: pageSize, Offset: offset, Title: title, NTitle: title, StartTime: startTime, EndTime: endTime, DataStatus: dataStatus, OrderStr: order };
@@ -174,6 +176,12 @@
                 lotTab.bootstrapTable('removeAll');
                 lotTab.bootstrapTable('load', JSON.parse(data));
             });
+        });
+        //重置
+        $('#reset').click(function () {
+            $('#title').val('');
+            $('#startTime').val('');
+            $('#endTime').val('');
         });
     </script>
     @RenderSection("JsScript", false)

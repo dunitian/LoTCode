@@ -111,8 +111,8 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
                 obj.Msg = "参数不能为空";
                 return Json(obj);
             }
-            //起始时间大于结束时间 或者 开始时间大于现在
-            if (DateTime.Compare(model.StartTime, model.EndTime) > 0 || DateTime.Compare(model.StartTime, DateTime.Now) > 0)
+            //起始时间大于结束时间
+            if (model.StartTime > model.EndTime)
             {
                 obj.Msg = "请检查开始或结束时间！";
                 return Json(obj);
