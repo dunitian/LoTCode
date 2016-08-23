@@ -30,7 +30,7 @@ public static partial class SafeHelper
         string SqlStr = @"and|or|exec|execute|insert|select|delete|update|alter|create|drop|count|\*|chr|char|--|mid|substring|master|truncate|declare|xp_cmdshell|restore|backup|net +user|net +localgroup +administrators";
         try
         {
-            return Regex.IsMatch(input, @"\b(" + SqlStr + @")\b", RegexOptions.IgnoreCase);
+            return Regex.IsMatch(input, SqlStr, RegexOptions.IgnoreCase);
         }
         catch
         {
