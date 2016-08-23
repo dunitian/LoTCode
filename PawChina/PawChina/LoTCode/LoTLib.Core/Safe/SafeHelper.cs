@@ -18,7 +18,6 @@ public static partial class SafeHelper
     }
     #endregion
 
-
     #region 判断字符串中是否有SQL攻击代码
     /// <summary>
     /// 判断字符串中是否有SQL攻击代码
@@ -27,16 +26,24 @@ public static partial class SafeHelper
     /// <returns></returns>
     public static bool IsSQLI(this string input)
     {
-        string SqlStr = @"and|or|exec|execute|insert|select|delete|update|alter|create|drop|count|\*|chr|char|--|mid|substring|master|truncate|declare|xp_cmdshell|restore|backup|net +user|net +localgroup +administrators";
+        string SqlStr = "|exec|execute|insert|select|delete|update|alter|create|drop|/*|--|master|truncate|declare|xp_cmdshell|restore|backup|user|localgroup";
         try
         {
-            return Regex.IsMatch(input, SqlStr, RegexOptions.IgnoreCase);
+            var strs = SqlStr.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var item in strs)
+            {
+                if (input.Contains(item))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         catch
         {
-            return false;
+            return true;
         }
-    } 
+    }
     #endregion
 
     #region 获取HTML里面的中文
