@@ -15,6 +15,27 @@ public static partial class SafeHelper
         byte[] shaOneBuffer = shaOne.ComputeHash(System.Text.Encoding.UTF8.GetBytes(input));
         shaOne.Clear();
         return BitConverter.ToString(shaOneBuffer).Replace("-", "").ToLower();//另一种简单的方法
+    }
+    #endregion
+
+
+    #region 判断字符串中是否有SQL攻击代码
+    /// <summary>
+    /// 判断字符串中是否有SQL攻击代码
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    public static bool IsSQLI(this string input)
+    {
+        string SqlStr = @"and|or|exec|execute|insert|select|delete|update|alter|create|drop|count|\*|chr|char|--|mid|substring|master|truncate|declare|xp_cmdshell|restore|backup|net +user|net +localgroup +administrators";
+        try
+        {
+            return Regex.IsMatch(input, @"\b(" + SqlStr + @")\b", RegexOptions.IgnoreCase);
+        }
+        catch
+        {
+            return false;
+        }
     } 
     #endregion
 

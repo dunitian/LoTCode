@@ -60,6 +60,13 @@ namespace PawChina.BLL
             sqlStr.Append(sqlWhere.ToString());
             sqlCount.Append(sqlWhere.ToString());
 
+            //排序，没有排序或者有SQLI嫌疑的就变为默认
+            if (model.OrderStr.IsNullOrWhiteSpace() || model.OrderStr.Contains("undefined") || model.OrderStr.IsSQLI())
+            {
+                model.OrderStr = "NCreateTime desc";
+            }
+            pms2.OrderStr = model.OrderStr;
+
             #region 分页系列
             if (model.Offset == 0 && model.PageSize == 0)//不分页==》这时候两个条件是一样的
             {
@@ -72,7 +79,7 @@ namespace PawChina.BLL
             pms1.PageIndex = model.PageIndex;
             pms1.PageSize = model.PageSize;
 
-            sqlStr.Insert(0, "select * from(select row_number() over(order by NCreateTime) Id,* from (");
+            sqlStr.Insert(0, string.Format("select * from(select row_number() over(order by {0}) Id,* from (", model.OrderStr));
             sqlStr.Append(") TempA) as TempInfo where Id<= @PageIndex * @PageSize and Id>(@PageIndex-1)*@PageSize");
             return await PageLoadAsync(sqlStr.ToString(), pms1, sqlCount.ToString(), pms2);
             #endregion

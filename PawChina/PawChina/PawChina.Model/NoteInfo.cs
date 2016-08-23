@@ -9,6 +9,10 @@ namespace PawChina.Model
     public class NoteInfo
     {
         /// <summary>
+        /// Row–Ú∫≈
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
         /// ±‡∫≈
         /// </summary>
         [Key]

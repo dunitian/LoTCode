@@ -9,34 +9,38 @@
                 checkbox: true
             },
             {
+                field: 'Id',
+                title: '序号',
+                align: 'center'
+            },
+            {
                 field: 'NId',
                 title: '编号',
                 align: 'center',
-                //sortable: true
+                sortable: true
             },
             {
                 field: 'NTitle',
                 title: '标题',
-                align: 'center',
-                //sortable: true,
+                align: 'center'
             },
             {
                 field: 'NAuthor',
                 title: '作者',
                 align: 'center',
-                //sortable: true
+                sortable: true
             },
             {
                 field: 'NHitCount',
                 title: '浏览量',
                 align: 'center',
-                //sortable: true
+                sortable: true
             },
             {
                 field: 'NCreateTime',                      //字段名字
                 title: '创建时间',                         //标题名字
                 align: 'center',                           //对齐方式
-                //sortable: true,                            //支持排序
+                sortable: true,                            //支持排序
                 formatter: function (value, row, index) {  //格式方法
                     return getDate(value);
                 }
@@ -45,7 +49,7 @@
                 field: 'NUpdateTime',
                 title: '更新时间',
                 align: 'center',
-                //sortable: true,
+                sortable: true,
                 formatter: function (value, row, index) {
                     return getDate(value);
                 }
@@ -54,7 +58,7 @@
                 field: 'NPush',
                 title: '推送主页',
                 align: 'center',
-                //sortable: true,
+                sortable: true,
                 formatter: function (value, row, index) {
                     if (value == true) {
                         return '<font style="color:red;">推送</font>';
@@ -67,7 +71,6 @@
                 field: 'NDataStatus',
                 title: '状态',
                 align: 'center',
-                //sortable: true,
                 formatter: function (value, row, index) {
                     if (value == 99) {
                         return '<font style="color:red">已删</font>'
