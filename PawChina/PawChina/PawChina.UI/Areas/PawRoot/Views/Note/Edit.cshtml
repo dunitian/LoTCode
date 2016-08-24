@@ -130,12 +130,13 @@
         //实例化上传控件
         $.lotuploader({
             lotDocId: 'lot-uploader',
-            lotUrl: '服务器地址',
+            lotUrl: '@Url.Action("Upload", "File")',
             oneFile: true,
             fileSize: 1024 * 1024 * 5,
             btnStr: '点我就上传默认展图',
             lotSuccessFunc: function (data) {
-                $('#displayPic').attr('src', data);
+                console.log(data)
+                $('#displayPic').attr('src', data.msg);
             },
             lotErrorFunc: function (msg) {
                 $('#lot-uploader').append('<div class="lot-temp" style="color:red">' + msg + '</div> ');
