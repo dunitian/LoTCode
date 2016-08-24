@@ -1,7 +1,7 @@
 ﻿(function ($) {
     //Id,Url,回调函数,是否是单个文件,文件数量,文件大小,按钮文本,
     $.lotuploader = function (lotdata) {
-        window.console.log('LoTUploader V1.0.1 By dunitian QQ:1054186320 WebSite:dnt.dkill.net');
+        window.console.log('LoTUploader V1.0.2 By dunitian QQ:1054186320 WebSite:dnt.dkill.net');
         $(document).ready(function () {
             var lotDocId = lotdata.lotDocId, serverUrl = lotdata.lotUrl, oneFile = lotdata.oneFile, fileCount = lotdata.fileCount, fileSize = lotdata.fileSize, btnStr = lotdata.btnStr, lotSuccessFunc = lotdata.lotSuccessFunc, lotErrorFunc = lotdata.lotErrorFunc;
             var lotdomstr = "#" + lotDocId + "";
@@ -98,11 +98,12 @@
                         uploader.removeFile(file);
                     }, 2000);
                 });
-            } else {
+            } else { //单文件上传
                 //上传成功处理
                 uploader.on('uploadSuccess', function (file, data) {
                     if (data.status) {
                         lotSuccessFunc(data);
+                        uploader.removeFile(file);
                     } else {
                         lotErrorFunc(data.msg);
                         uploader.removeFile(file);
