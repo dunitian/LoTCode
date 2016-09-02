@@ -140,9 +140,17 @@
         //提交表单
         $('#form-success').click(function () {
             //标题
-            var title = $('#title').val();
+            var title = $.trim($('#title').val());
+            if (title.length < 1) {
+                showMsg('文章标题不能为空！');
+                return fals;
+            }
             //作者
-            var author = $('#author').val();
+            var author = $.trim($('#author').val());
+            if (author.length < 1) {
+                showMsg('文章作者不能为空！');
+                return fals;
+            }
             //浏览量
             var hitCount = $('#hitCount').val();
             //是否推送到主页
@@ -157,7 +165,8 @@
                 ueText = ue.getContentTxt();
                 ue.execCommand("clearlocaldata");//清空草稿箱
             } else {
-                //alert('文章主体内容不能为空！');
+                showMsg('文章内容不能为空！');
+                return fals;
             }
             ////标签
             //var tags = $.map($('#tag').select2("data"), function (row) {
@@ -166,13 +175,19 @@
             //var tag = tags.join(',');
             //console.log(tag);
             //SEO关键词
-            var seoKeywords = $('#seoKeywords').val();
+            var seoKeywords = $.trim($('#seoKeywords').val());
+            if (seoKeywords.length < 1) {
+                showMsg('SEO关键词不能为空！');
+                return fals;
+            }
             //SEO详细描述
-            var seodescription = $('#seodescription').val();
+            var seodescription = $.trim($('#seodescription').val());
+            if (seoKeywords.length < 1) {
+                showMsg('SEO描述不能为空！');
+                return fals;
+            }
             //创建时间
             var createTime = new Date().getTime();
-
-          
 
             $.post('@Url.Action("Add")', { NTitle: title, NContent: ueHtml, NContentText: ueText, NAuthor: author, NHitCount: hitCount, NDisplayPic: displayPic, NPush: push, NCreateTime: createTime, NUpdateTime: createTime, SeoInfo: { SeoKeywords: seoKeywords, Sedescription: seodescription } }, function (data) {
                 if (data.Status) {
