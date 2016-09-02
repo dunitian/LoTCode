@@ -34,6 +34,28 @@
     <script src="//cdn.bootcss.com/select2/4.0.3/js/select2.js"></script>
     @RenderSection("JsScript", false)
     <script type="text/javascript">
+        //实例化上传控件
+        $.lotuploader({
+            lotDocId: 'lot-uploader',
+            lotUrl: '@Url.Action("Upload", "File")',
+            oneFile: true,
+            fileSize: 1024 * 1024 * 5,
+            btnStr: '点我就上传默认展图',
+            lotSuccessFunc: function (data) {
+                console.log(data)
+                $('#displayPic').attr('src', data.msg);
+            },
+            lotErrorFunc: function (msg) {
+                $('#lot-uploader').append('<div class="lot-temp" style="color:red">' + msg + '</div> ');
+                setTimeout(function () {
+                    $('.lot-temp').remove();
+                }, 2000);
+            }
+        });
+
+        //实例化编辑器
+        var ue = UE.getEditor('container');
+
         //消息提醒
         function showMsg(obj, time) {
             if (obj) {
