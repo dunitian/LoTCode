@@ -55,7 +55,7 @@
         </div>
     </div>
     <!--Tag标签-->
-    <div class="form-group">
+    @*<div class="form-group">
         <label class="col-sm-2 control-label">Tag 标签：</label>
         <div class="col-sm-6">
             <select id="tag" class="lot-tagSelect form-control" multiple>
@@ -73,7 +73,7 @@
                 </optgroup>
             </select>
         </div>
-    </div>
+    </div>*@
     <!--SEO关键字-->
     <div class="form-group">
         <label class="col-sm-2 control-label">SEO Key：</label>
@@ -123,11 +123,11 @@
         //实例化编辑器
         var ue = UE.getEditor('container');
 
-        //实例化Tag标签
-        $('#tag').select2({
-            tags: true,
-            tokenSeparators: [',', ' ']
-        });
+        ////实例化Tag标签
+        //$('#tag').select2({
+        //    tags: true,
+        //    tokenSeparators: [',', ' ']
+        //});
 
         //人性化提示
         $('#title').keyup(function () {
@@ -159,12 +159,12 @@
             } else {
                 //alert('文章主体内容不能为空！');
             }
-            //标签
-            var tags = $.map($('#tag').select2("data"), function (row) {
-                return row.text;
-            });
-            var tag = tags.join(',');
-            console.log(tag);
+            ////标签
+            //var tags = $.map($('#tag').select2("data"), function (row) {
+            //    return row.text;
+            //});
+            //var tag = tags.join(',');
+            //console.log(tag);
             //SEO关键词
             var seoKeywords = $('#seoKeywords').val();
             //SEO详细描述
