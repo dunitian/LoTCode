@@ -30,6 +30,56 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<JsonResult> Add(NoteInfo model)
+        {
+            AjaxOption<object> obj = new AjaxOption<object>();
+
+            #region 验证系列
+            if (model == null)
+            {
+                obj.Msg = "参数不能为空";
+                return Json(obj);
+            }
+            if (model.NTitle.IsNullOrWhiteSpace() || model.NTitle.Length > 100)
+            {
+                obj.Msg = "标题不能为空且不能大于100个字符";
+                return Json(obj);
+            }
+            if (model.NAuthor.IsNullOrWhiteSpace() || model.NAuthor.Length > 50)
+            {
+                obj.Msg = "作者名不能为空且不能大于50个字符";
+                return Json(obj);
+            }
+            if (model.NContent.IsNullOrWhiteSpace())
+            {
+                obj.Msg = "内容不能为空";
+                return Json(obj);
+            }
+            #endregion
+            model.NDataStatus = StatusEnum.Normal;
+            model.NContent = model.NContent.ToUrlDecode();
+            //纯文本内容为空则手动赋值（为前端准备）
+            if (model.NContentText.IsNullOrWhiteSpace())
+            {
+                model.NContentText = model.NContent.GetChinese();
+            }
+
+            if (model.SeoInfo != null)
+            {
+                model.NSeoId = await SeoTKDBLL.InsertAsync(model.SeoInfo);
+            }
+
+            var noteId = await NoteInfoBLL.InsertAsync(model);
+
+            if (noteId > 0)
+            {
+                obj.Status = true;
+                obj.Msg = "添加成功";
+            }
+            return Json(obj);
+        }
+
         /// <summary>
         /// 编辑页面
         /// </summary>
@@ -82,6 +132,12 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             #endregion
 
             model.NContent = model.NContent.ToUrlDecode();
+            //纯文本内容为空则手动赋值（为前端准备）
+            if (model.NContentText.IsNullOrWhiteSpace())
+            {
+                model.NContentText = model.NContent.GetChinese();
+            }
+
             if (model.SeoInfo != null)
                 await SeoTKDBLL.UpdateAsync(model.SeoInfo);
 

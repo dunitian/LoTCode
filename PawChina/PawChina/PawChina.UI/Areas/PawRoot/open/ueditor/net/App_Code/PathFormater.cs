@@ -18,10 +18,11 @@ public static class PathFormatter
         originFileName = invalidPattern.Replace(originFileName, "");
 
         string extension = Path.GetExtension(originFileName);
+        if (string.IsNullOrEmpty(extension)) { extension = ".jpg"; }//针对有些网站图片是：xxx.jpg?xxx/xxx/xxx（设置默认格式）
         string filename = Path.GetFileNameWithoutExtension(originFileName);
 
         pathFormat = pathFormat.Replace("{filename}", filename);
-        pathFormat = new Regex(@"\{rand(\:?)(\d+)\}", RegexOptions.Compiled).Replace(pathFormat, new MatchEvaluator(delegate(Match match)
+        pathFormat = new Regex(@"\{rand(\:?)(\d+)\}", RegexOptions.Compiled).Replace(pathFormat, new MatchEvaluator(delegate (Match match)
         {
             var digit = 6;
             if (match.Groups.Count > 2)

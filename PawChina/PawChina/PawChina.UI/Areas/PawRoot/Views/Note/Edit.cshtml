@@ -79,26 +79,6 @@
             </script>
         </div>
     </div>
-    <!--Tag标签-->
-    @*<div class="form-group">
-            <label class="col-sm-2 control-label">Tag 标签：</label>
-            <div class="col-sm-6">
-                <select id="tag" class="lot-tagSelect form-control" multiple>
-                    <optgroup label="SQL">
-                        <option>MySql</option>
-                        <option>Sqlite</option>
-                        <option>SQLServer</option>
-                    </optgroup>
-                    <optgroup label="Other">
-                        <option>C#</option>
-                        <option>EF</option>
-                        <option>MVC</option>
-                        <option>Dapper</option>
-                        <option>Ado.Net</option>
-                    </optgroup>
-                </select>
-            </div>
-        </div>*@
     <!--SEO关键字-->
     <div class="form-group">
         <label class="col-sm-2 control-label">SEO Key：</label>
@@ -151,12 +131,6 @@
         //实例化编辑器
         var ue = UE.getEditor('container');
 
-        ////实例化Tag标签
-        //$('#tag').select2({
-        //    tags: true,
-        //    tokenSeparators: [',', ' ']
-        //});
-
         //人性化提示
         $('#title').keyup(function () {
             RightMsg(this, 100);
@@ -186,16 +160,11 @@
             var ueText = '';
             if (ue.hasContents()) {
                 ueHtml = escape(ue.getContent());
-                ueText = ue.getContentTxt();
+                ueText = $.trim(ue.getContentTxt());
                 ue.execCommand("clearlocaldata");//清空草稿箱
             } else {
                 showMsg('文章主体内容不能为空！', 500);
             }
-            //标签
-            //var tags = $.map($('#tag').select2("data"), function (row) {
-            //    return row.text;
-            //});
-            //var tag = tags.join(',');
             //SEO关键词
             var seoKeywords = $('#seoKeywords').val();
             //SEO详细描述
@@ -204,7 +173,7 @@
             var createTime = $('#createTime').val();
             //更新时间
             var updateTime = new Date().getTime();
-            $.post('@Url.Action("Edit")', { NId: nId, NTitle: title, NContent: ueHtml, NAuthor: author, NHitCount: hitCount, NDisplayPic: displayPic, NPush: push, NCreateTime: createTime, NUpdateTime: updateTime, NDataStatus: dataStatus, NSeoId: seoId, SeoInfo: { Id: seoId, SeoKeywords: seoKeywords, Sedescription: seodescription } }, function (data) {
+            $.post('@Url.Action("Edit")', { NId: nId, NTitle: title, NContent: ueHtml, NContentText: ueText, NAuthor: author, NHitCount: hitCount, NDisplayPic: displayPic, NPush: push, NCreateTime: createTime, NUpdateTime: updateTime, NDataStatus: dataStatus, NSeoId: seoId, SeoInfo: { Id: seoId, SeoKeywords: seoKeywords, Sedescription: seodescription } }, function (data) {
                 if (data.Status) {
                     showMsg(data.Msg, 500);
                     setTimeout(function () {

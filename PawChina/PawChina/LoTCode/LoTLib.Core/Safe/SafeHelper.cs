@@ -47,7 +47,7 @@ public static partial class SafeHelper
     #endregion
 
     #region 获取HTML里面的中文
-    public static string GetChinese(string Htmlstring)
+    public static string GetChinese(this string Htmlstring)
     {
         //删除脚本   
         Htmlstring = Regex.Replace(Htmlstring, @"<script[^>]*?>.*?</script>", "", RegexOptions.IgnoreCase);

@@ -56,24 +56,24 @@
     </div>
     <!--Tag标签-->
     @*<div class="form-group">
-        <label class="col-sm-2 control-label">Tag 标签：</label>
-        <div class="col-sm-6">
-            <select id="tag" class="lot-tagSelect form-control" multiple>
-                <optgroup label="SQL">
-                    <option>MySql</option>
-                    <option>Sqlite</option>
-                    <option>SQLServer</option>
-                </optgroup>
-                <optgroup label="Other">
-                    <option>C#</option>
-                    <option>EF</option>
-                    <option>MVC</option>
-                    <option>Dapper</option>
-                    <option>Ado.Net</option>
-                </optgroup>
-            </select>
-        </div>
-    </div>*@
+            <label class="col-sm-2 control-label">Tag 标签：</label>
+            <div class="col-sm-6">
+                <select id="tag" class="lot-tagSelect form-control" multiple>
+                    <optgroup label="SQL">
+                        <option>MySql</option>
+                        <option>Sqlite</option>
+                        <option>SQLServer</option>
+                    </optgroup>
+                    <optgroup label="Other">
+                        <option>C#</option>
+                        <option>EF</option>
+                        <option>MVC</option>
+                        <option>Dapper</option>
+                        <option>Ado.Net</option>
+                    </optgroup>
+                </select>
+            </div>
+        </div>*@
     <!--SEO关键字-->
     <div class="form-group">
         <label class="col-sm-2 control-label">SEO Key：</label>
@@ -105,7 +105,7 @@
         //实例化上传控件
         $.lotuploader({
             lotDocId: 'lot-uploader',
-            lotUrl: '服务器地址',
+            lotUrl: '@Url.Action("Upload", "File")',
             oneFile: true,
             fileSize: 1024 * 1024 * 5,
             btnStr: '点我就上传默认展图',
@@ -153,7 +153,7 @@
             var ueHtml = '';
             var ueText = '';
             if (ue.hasContents()) {
-                ueHtml = ue.getContent();
+                ueHtml = escape(ue.getContent());
                 ueText = ue.getContentTxt();
                 ue.execCommand("clearlocaldata");//清空草稿箱
             } else {
@@ -169,7 +169,20 @@
             var seoKeywords = $('#seoKeywords').val();
             //SEO详细描述
             var seodescription = $('#seodescription').val();
-            console.log(title, author, hitCount, push, displayPic, ueHtml, ueText, tag, seoKeywords, seodescription)
-        });        
+            //创建时间
+            var createTime = $('#createTime').val();
+            //更新时间
+            var updateTime = new Date().getTime();
+            $.post('@Url.Action("Add")', { NTitle: title, NContent: ueHtml, NContentText: ueText, NAuthor: author, NHitCount: hitCount, NDisplayPic: displayPic, NPush: push, NCreateTime: createTime, NUpdateTime: updateTime, SeoInfo: { SeoKeywords: seoKeywords, Sedescription: seodescription } }, function (data) {
+                if (data.Status) {
+                    showMsg(data.Msg, 500);
+                    setTimeout(function () {
+                        window.location.href = '@Url.Action("Index")';
+                    }, 1000)
+                } else {
+                    showMsg(data.Msg);
+                }
+            });
+        });
     </script>
 }

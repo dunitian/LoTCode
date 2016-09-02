@@ -9,10 +9,6 @@ namespace PawChina.Model
     public class NoteInfo
     {
         /// <summary>
-        /// Row序号（已经用动态类型查询，所以这个可以省去了）
-        /// </summary>
-        //public int Id { get; set; }
-        /// <summary>
         /// 编号
         /// </summary>
         [Key]
@@ -25,6 +21,10 @@ namespace PawChina.Model
         /// 内容
         /// </summary>
         public string NContent { get; set; }
+        /// <summary>
+        /// 纯文本内容
+        /// </summary>
+        public string NContentText { get; set; }
         /// <summary>
         /// 作者
         /// </summary>
