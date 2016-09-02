@@ -56,7 +56,7 @@ public static partial class ValidationHelper
 
     #region 数字字符串检查
     /// <summary>
-    /// 是否数字字符串(包括小数)
+    /// 是否数字字符串(>=0 包括小数)
     /// </summary>
     /// <param name="objStr">输入字符串</param>
     /// <returns></returns>

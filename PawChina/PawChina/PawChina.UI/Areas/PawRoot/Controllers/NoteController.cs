@@ -13,6 +13,53 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         public static INoteInfoBLL NoteInfoBLL = Container.Resolve<INoteInfoBLL>();
 
         /// <summary>
+        /// NoteInfo验证
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public string GetErrorMsg(NoteInfo model)
+        {
+            string msg = string.Empty;
+            #region 验证系列
+            if (model == null)
+            {
+                return "参数不能为空";
+            }
+            if (model.NTitle.IsNullOrWhiteSpace() || model.NTitle.Length > 100)
+            {
+                return "标题不能为空且不能，且大于100个字符";
+            }
+            if (model.NAuthor.IsNullOrWhiteSpace() || model.NAuthor.Length > 50)
+            {
+                return "作者名不能为空且，且不能大于50个字符";
+            }
+            if (model.NContent.IsNullOrWhiteSpace())
+            {
+                return "内容不能为空";
+            }
+
+            #region SEO相关
+            //理论上是不可能出现SeoInfo==null的现象的，防止黑客手动传null
+            if (model.SeoInfo == null)
+            {
+                //todo:一次危险记录
+                return "SEO信息不能为空";
+            }
+            if (model.SeoInfo.SeoKeywords.IsNullOrWhiteSpace() || model.SeoInfo.SeoKeywords.Length > 149)
+            {
+                return "SEO关键词不能为空，且不能大于149个字符";
+            }
+            if (model.SeoInfo.Sedescription.IsNullOrWhiteSpace() || model.SeoInfo.Sedescription.Length > 249)
+            {
+                return "SEO描述不能为空，且不能大于249个字符";
+            }
+            #endregion
+
+            #endregion
+            return msg;
+        }
+
+        /// <summary>
         /// 列表页面
         /// </summary>
         /// <returns></returns>
@@ -35,37 +82,30 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         {
             AjaxOption<object> obj = new AjaxOption<object>();
 
-            #region 验证系列
-            if (model == null)
+            //验证相关
+            obj.Msg = GetErrorMsg(model);
+            //有错误信息
+            if (!obj.Msg.IsNullOrWhiteSpace())
             {
-                obj.Msg = "参数不能为空";
                 return Json(obj);
             }
-            if (model.NTitle.IsNullOrWhiteSpace() || model.NTitle.Length > 100)
-            {
-                obj.Msg = "标题不能为空且不能大于100个字符";
-                return Json(obj);
-            }
-            if (model.NAuthor.IsNullOrWhiteSpace() || model.NAuthor.Length > 50)
-            {
-                obj.Msg = "作者名不能为空且不能大于50个字符";
-                return Json(obj);
-            }
-            if (model.NContent.IsNullOrWhiteSpace())
-            {
-                obj.Msg = "内容不能为空";
-                return Json(obj);
-            }
-            #endregion
+
             model.NDataStatus = StatusEnum.Normal;
+            model.SeoInfo.DataStatus = StatusEnum.Normal;
             model.NContent = model.NContent.ToUrlDecode();
+            //todo:默认展图
+            if (model.NDisplayPic.IsNullOrWhiteSpace())
+            {
+                model.NDisplayPic = "";
+            }
+
             //纯文本内容为空则手动赋值（为前端准备）
             if (model.NContentText.IsNullOrWhiteSpace())
             {
                 model.NContentText = model.NContent.GetChinese();
             }
 
-            if (model.SeoInfo != null)
+            if (model.SeoInfo != null && !model.SeoInfo.SeoKeywords.IsNullOrWhiteSpace() && !model.SeoInfo.Sedescription.IsNullOrWhiteSpace())
             {
                 model.NSeoId = await SeoTKDBLL.InsertAsync(model.SeoInfo);
             }
@@ -86,12 +126,15 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// <returns></returns>
         public async Task<ActionResult> Edit(string id)
         {
-            if (!id.IsNumber())
+            int modelId;
+            int.TryParse(id, out modelId);
+            if (modelId <= 0)
             {
                 return RedirectToAction("Add");
             }
             var model = await NoteInfoBLL.GetAsync(id);
             model.SeoInfo = await SeoTKDBLL.GetAsync(model.NSeoId);
+            //防止编辑页面出错
             if (model.SeoInfo == null)
             {
                 model.SeoInfo = new SeoTKD() { SeoKeywords = "", Sedescription = "" };
@@ -104,42 +147,38 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             AjaxOption<object> obj = new AjaxOption<object>();
 
             #region 验证系列
-            if (model == null)
-            {
-                obj.Msg = "参数不能为空";
-                return Json(obj);
-            }
             if (model.NId <= 0)
             {
                 obj.Msg = "笔记编号必须大于0";
                 return Json(obj);
             }
-            if (model.NTitle.IsNullOrWhiteSpace() || model.NTitle.Length > 100)
+            obj.Msg = GetErrorMsg(model);
+            //有错误信息
+            if (!obj.Msg.IsNullOrWhiteSpace())
             {
-                obj.Msg = "标题不能为空且不能大于100个字符";
-                return Json(obj);
-            }
-            if (model.NAuthor.IsNullOrWhiteSpace() || model.NAuthor.Length > 50)
-            {
-                obj.Msg = "作者名不能为空且不能大于50个字符";
-                return Json(obj);
-            }
-            if (model.NContent.IsNullOrWhiteSpace())
-            {
-                obj.Msg = "内容不能为空";
                 return Json(obj);
             }
             #endregion
 
             model.NContent = model.NContent.ToUrlDecode();
+            //todo:默认展图
+            if (model.NDisplayPic.IsNullOrWhiteSpace())
+            {
+                model.NDisplayPic = "";
+            }
+
             //纯文本内容为空则手动赋值（为前端准备）
             if (model.NContentText.IsNullOrWhiteSpace())
             {
                 model.NContentText = model.NContent.GetChinese();
             }
 
-            if (model.SeoInfo != null)
-                await SeoTKDBLL.UpdateAsync(model.SeoInfo);
+            if (model.SeoInfo != null && !model.SeoInfo.SeoKeywords.IsNullOrWhiteSpace() && !model.SeoInfo.Sedescription.IsNullOrWhiteSpace())
+            {
+                var seoInfo = await SeoTKDBLL.UpdateAsync(model.SeoInfo);
+                if (seoInfo != null)
+                    model.NSeoId = seoInfo.Id;
+            }
 
             var noteInfo = await NoteInfoBLL.UpdateAsync(model);
 

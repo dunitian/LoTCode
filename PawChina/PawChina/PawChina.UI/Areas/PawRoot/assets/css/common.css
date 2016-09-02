@@ -5,7 +5,7 @@ article.panel-body .row:last-child{padding-bottom:0;}
 .form-group label{padding-top: 5px;}
 .checkbox label{padding-top:0px;}
 .lot-red{color:red;}
-.lot-blue{color:#4787ed;}
+.lot-blue{color:#4787ed;padding-left: 15px;}
 .lot-form-btn{padding: 12px 33px;margin-right:40px;}
 /*easydialog*/
 button::-moz-focus-inner{ border:0; padding:0; margin:0; }

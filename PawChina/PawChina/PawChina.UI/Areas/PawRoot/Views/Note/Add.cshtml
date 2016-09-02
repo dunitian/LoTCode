@@ -170,12 +170,13 @@
             //SEO详细描述
             var seodescription = $('#seodescription').val();
             //创建时间
-            var createTime = $('#createTime').val();
-            //更新时间
-            var updateTime = new Date().getTime();
-            $.post('@Url.Action("Add")', { NTitle: title, NContent: ueHtml, NContentText: ueText, NAuthor: author, NHitCount: hitCount, NDisplayPic: displayPic, NPush: push, NCreateTime: createTime, NUpdateTime: updateTime, SeoInfo: { SeoKeywords: seoKeywords, Sedescription: seodescription } }, function (data) {
+            var createTime = new Date().getTime();
+
+          
+
+            $.post('@Url.Action("Add")', { NTitle: title, NContent: ueHtml, NContentText: ueText, NAuthor: author, NHitCount: hitCount, NDisplayPic: displayPic, NPush: push, NCreateTime: createTime, NUpdateTime: createTime, SeoInfo: { SeoKeywords: seoKeywords, Sedescription: seodescription } }, function (data) {
                 if (data.Status) {
-                    showMsg(data.Msg, 500);
+                    showMsg(data.Msg);
                     setTimeout(function () {
                         window.location.href = '@Url.Action("Index")';
                     }, 1000)
