@@ -11,6 +11,7 @@
         <div class="col-sm-6">
             <input type="text" class="form-control" id="title" placeholder="请输入标题名...">
         </div>
+        <label class="lot-blue">最佳长度: 10 ~ 30 字符</label>
     </div>
     <!--笔记作者-->
     <div class="form-group">
@@ -18,6 +19,7 @@
         <div class="col-sm-6">
             <input type="text" class="form-control" id="author" placeholder="请输入作者名...">
         </div>
+        <label class="lot-blue"></label>
     </div>
     <!--页面浏览-->
     <div class="form-group">
@@ -78,7 +80,7 @@
         <div class="col-sm-6">
             <input type="text" class="form-control" id="seoKeywords" placeholder="关键词1,关键词2,关键词3">
         </div>
-        <label class="lot-blue">本篇文章的关键词（一般都是搜索关键词）</label>
+        <label class="lot-blue">本文的搜索关键词（4~5个高度相关的关键词）</label>
     </div>
     <!--SEO关键字-->
     <div class="form-group">
@@ -86,7 +88,7 @@
         <div class="col-sm-6">
             <input type="text" class="form-control" id="seodescription" placeholder="请输入Seo详细描述...">
         </div>
-        <label class="lot-blue">本篇文章大概内容（尽量控制在150字内）</label>
+        <label class="lot-blue">本篇文章大概内容（最佳长度: 50 ~ 160 字符）</label>
     </div>
     <!--表单提交-->
     <div class="form-group">
@@ -127,6 +129,14 @@
             tokenSeparators: [',', ' ']
         });
 
+        //人性化提示
+        $('#title').keyup(function () {
+            RightMsg(this, 100);
+        });
+        $('#author').keyup(function () {
+            RightMsg(this, 50);
+        });
+
         //提交表单
         $('#form-success').click(function () {
             //标题
@@ -154,11 +164,22 @@
                 return row.text;
             });
             var tag = tags.join(',');
+            console.log(tag);
             //SEO关键词
             var seoKeywords = $('#seoKeywords').val();
             //SEO详细描述
             var seodescription = $('#seodescription').val();
-            console.log(title,author,hitCount,push,displayPic,ueHtml,ueText,tag,seoKeywords,seodescription)
+            console.log(title, author, hitCount, push, displayPic, ueHtml, ueText, tag, seoKeywords, seodescription)
         });
+
+        //右边人性化提示，obj:当前对象，n:最多多少字符
+        function RightMsg(obj, n) {
+            var str = $.trim(obj.value);
+            if (str.length > n) {
+                str = str.substring(0, n);
+                $(obj).val(str);
+            }
+            $(obj).parent().parent().find('.lot-blue').text('剩余字符数：' + (n - str.length));
+        }
     </script>
 }

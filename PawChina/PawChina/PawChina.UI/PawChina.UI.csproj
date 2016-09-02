@@ -414,7 +414,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\PawRoot\Views\File\" />
     <Folder Include="assets\css\" />
     <Folder Include="assets\js\" />
     <Folder Include="Controllers\" />
