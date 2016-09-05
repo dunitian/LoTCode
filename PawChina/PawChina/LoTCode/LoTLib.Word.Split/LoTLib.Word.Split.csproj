@@ -31,12 +31,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="JiebaNet.Analyser, Version=0.37.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\jieba.NET.0.38.1\lib\net45\JiebaNet.Analyser.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\jieba.NET.0.38.2\lib\net45\JiebaNet.Analyser.dll</HintPath>
     </Reference>
     <Reference Include="JiebaNet.Segmenter, Version=0.38.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\jieba.NET.0.38.1\lib\net45\JiebaNet.Segmenter.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\jieba.NET.0.38.2\lib\net45\JiebaNet.Segmenter.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>

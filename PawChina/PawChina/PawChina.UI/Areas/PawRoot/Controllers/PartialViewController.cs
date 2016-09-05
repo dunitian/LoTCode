@@ -62,7 +62,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
                 obj.Status = true;
                 obj.Msg = content;
             }
-            catch(Exception ex)
+            catch
             {
                 obj.Msg = "分词出了点小问题，您可以再试一下，或者手动分下~";
                 return Json(obj);
