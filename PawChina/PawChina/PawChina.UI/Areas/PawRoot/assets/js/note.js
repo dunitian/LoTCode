@@ -1,10 +1,4 @@
 ﻿$(document).ready(function () {
-    //推出遮罩模式
-    $(document).on("click", "#overlay", function () {
-        $(this).fadeOut(200);
-        easyDialog.close();
-    });
-
     //人性化提示
     $('#title').keyup(function () {
         RightMsg(this, 100);
@@ -29,7 +23,18 @@
     //autoD有差异需要自定义
     //自动分词
     $('#autoE').click(function () {
-
+        if (ue.hasContents()) {
+            $.post('/PawRoot/PartialView/JieBaSplit', { content: ue.getContentTxt() }, function (data) {
+                if (data.Status) {
+                    $('#seoKeywords').val(data.Msg);
+                } else {
+                    showMsg(data.Msg);
+                }
+                console.log(data.Status);
+            });
+        } else {
+            showMsg('文章内容不能为空！');
+        }
     });
     //返回Index
     $('#form-gohome').click(function () {
@@ -37,13 +42,6 @@
     });
 });
 
-//消息提醒
-function showMsg(obj, time) {
-    if (obj) {
-        if (!time) { time = 1000; }
-        easyDialog.open({ container: { content: obj }, autoClose: time });
-    }
-}
 //右边人性化提示，obj:当前对象，n:最多多少字符
 function RightMsg(obj, n) {
     var str = $.trim(obj.value);

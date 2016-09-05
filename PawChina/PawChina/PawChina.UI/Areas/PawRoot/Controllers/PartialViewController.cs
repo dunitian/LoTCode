@@ -2,11 +2,14 @@
 using System.IO;
 using System.Web;
 using System.Web.Mvc;
+using LoTLib.Word.Split;
+using PawChina.Model;
 
 namespace PawChina.UI.Areas.PawRoot.Controllers
 {
     public class PartialViewController : Controller
     {
+        #region 图片上传
         /// <summary>
         /// 图片上传
         /// </summary>
@@ -42,5 +45,30 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             catch { return Json(new { status = false, msg = "图片保存失败" }); }
             return Json(new { status = true, msg = sqlPath });
         }
+        #endregion
+
+        #region 结巴分词
+        /// <summary>
+        /// 结巴分词
+        /// </summary>
+        /// <param name="content">内容分词</param>
+        /// <returns></returns>
+        public JsonResult JieBaSplit(string content)
+        {
+            AjaxOption<object> obj = new AjaxOption<object>();
+            try
+            {
+                content = content.GetArticleKeywordStr();
+                obj.Status = true;
+                obj.Msg = content;
+            }
+            catch(Exception ex)
+            {
+                obj.Msg = "分词出了点小问题，您可以再试一下，或者手动分下~";
+                return Json(obj);
+            }
+            return Json(obj);
+        }
+        #endregion
     }
 }

@@ -52,7 +52,25 @@
             }
         });
         //实例化编辑器
-        var ue = UE.getEditor('container');        
+        var ue = UE.getEditor('container');
+
+        //消息提醒
+        function showMsg(obj, time) {
+            if (obj) {
+                if (!time) { time = 1000; }
+                easyDialog.open({ container: { content: obj }, autoClose: time });
+            }
+        }
+        //选择对话框
+        function showYesNoMsg(obj, myFunc) {
+            if (obj) {
+                easyDialog.open({ container: { content: obj, yesFn: myFunc, noFn: true } });
+            }
+        }
+        $(document).on("click", "#overlay", function () {
+            $(this).fadeOut(200);
+            easyDialog.close();
+        });
     </script>
     @RenderSection("JsScript", false)
 </body>
