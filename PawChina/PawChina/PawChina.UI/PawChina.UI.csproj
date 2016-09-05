@@ -106,6 +106,7 @@
     <Content Include="Areas\PawRoot\assets\js\common.min.js" />
     <Content Include="Areas\PawRoot\assets\js\datapattern.js" />
     <Content Include="Areas\PawRoot\assets\js\login.js" />
+    <Content Include="Areas\PawRoot\assets\js\note.js" />
     <Content Include="Areas\PawRoot\open\lotUploader\lotuploader.swf" />
     <Content Include="Areas\PawRoot\open\lotUploader\lotuploader1.0.2.js" />
     <Content Include="Areas\PawRoot\open\lotUploader\lotuploader1.0.1.min.css" />

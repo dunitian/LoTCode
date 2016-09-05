@@ -79,6 +79,17 @@
             </script>
         </div>
     </div>
+    @*半自动化*@
+    <div class="form-group">
+        <label class="col-sm-2 control-label">半自动化：</label>
+        <div class="col-sm-6">
+            <button class="btn btn-primary" id="autoA">默认作者（笔记作者）</button>&nbsp;&nbsp;
+            <button class="btn btn-warning" id="autoB">随机浏览（页面浏览）</button>&nbsp;&nbsp;
+            <button class="btn btn-success" id="autoC">重置展图（展览小图）</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" id="autoD">更新时间（创建时间）</button>&nbsp;&nbsp;
+            <button class="btn btn-danger" id="autoE">自动分词（SEO Key）</button>
+        </div>
+    </div>
     <!--SEO关键字-->
     <div class="form-group">
         <label class="col-sm-2 control-label">SEO Key：</label>
@@ -109,13 +120,34 @@
 
 @section JsScript{
     <script type="text/javascript">
-       
         //人性化提示
         $('#title').keyup(function () {
             RightMsg(this, 100);
         });
         $('#author').keyup(function () {
             RightMsg(this, 50);
+        });
+
+        //半自动化操作
+        //默认作者
+        $('#autoA').click(function () {
+            $('#author').val('PawChina');
+        });
+        //随机浏览
+        $('#autoB').click(function () {
+            $('#hitCount').val(Math.floor(Math.random() * 1000));
+        });
+        //重置展图
+        $('#autoC').click(function () {
+            $('#displayPic').attr('src', '');
+        });
+        //更新时间
+        $('#autoD').click(function () {
+            $('#createTime').val(new Date().getTime());
+        });
+        //自动分词
+        $('#autoE').click(function () {
+
         });
 
         //提交表单
