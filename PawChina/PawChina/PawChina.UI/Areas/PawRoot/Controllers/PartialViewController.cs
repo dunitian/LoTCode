@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace PawChina.UI.Areas.PawRoot.Controllers
 {
-    public class FileController : Controller
+    public class PartialViewController : Controller
     {
         /// <summary>
         /// 图片上传

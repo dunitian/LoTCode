@@ -82,7 +82,7 @@
             <button class="btn btn-warning" id="autoB">随机浏览（页面浏览）</button>&nbsp;&nbsp;
             <button class="btn btn-success" id="autoC">重置展图（展览小图）</button>&nbsp;&nbsp;
             <button class="btn btn-primary" id="autoD">清空编辑器（笔记内容）</button>&nbsp;&nbsp;
-            <button class="btn btn-danger"  id="autoE">自动分词（SEO Key）</button>
+            <button class="btn btn-danger" id="autoE">自动分词（SEO Key）</button>
         </div>
     </div>
     <!--SEO关键字-->
@@ -110,7 +110,7 @@
         </div>
     </div>
 </div>
-
+<script src="/Areas/PawRoot/assets/js/note.js" async></script>
 @section JsScript{
     <script type="text/javascript">
         ////实例化Tag标签
@@ -118,98 +118,13 @@
         //    tags: true,
         //    tokenSeparators: [',', ' ']
         //});
-        //人性化提示
-        $('#title').keyup(function () {
-            RightMsg(this, 100);
-        });
-        $('#author').keyup(function () {
-            RightMsg(this, 50);
-        });
-
-        //半自动化操作
-        //默认作者
-        $('#autoA').click(function () {
-            $('#author').val('PawChina');
-        });
-        //随机浏览
-        $('#autoB').click(function () {
-            $('#hitCount').val(Math.floor(Math.random() * 1000));
-        });
-        //重置展图
-        $('#autoC').click(function () {
-            $('#displayPic').attr('src','');
-        });
         //清空编辑器
         $('#autoD').click(function () {
             ue.setContent('');
         });
-        //自动分词
-        $('#autoE').click(function () {
-
-        });
-
         //提交表单
         $('#form-success').click(function () {
-            //标题
-            var title = $.trim($('#title').val());
-            if (title.length < 1) {
-                showMsg('文章标题不能为空！');
-                return fals;
-            }
-            //作者
-            var author = $.trim($('#author').val());
-            if (author.length < 1) {
-                showMsg('文章作者不能为空！');
-                return fals;
-            }
-            //浏览量
-            var hitCount = $('#hitCount').val();
-            //是否推送到主页
-            var push = $('#push').is(':checked');
-            //文章展览小图
-            var displayPic = $('#displayPic').attr('src');
-            //编辑器内容
-            var ueHtml = '';
-            var ueText = '';
-            if (ue.hasContents()) {
-                ueHtml = escape(ue.getContent());
-                ueText = ue.getContentTxt();
-                ue.execCommand("clearlocaldata");//清空草稿箱
-            } else {
-                showMsg('文章内容不能为空！');
-                return fals;
-            }
-            ////标签
-            //var tags = $.map($('#tag').select2("data"), function (row) {
-            //    return row.text;
-            //});
-            //var tag = tags.join(',');
-            //console.log(tag);
-            //SEO关键词
-            var seoKeywords = $.trim($('#seoKeywords').val());
-            if (seoKeywords.length < 1) {
-                showMsg('SEO关键词不能为空！');
-                return fals;
-            }
-            //SEO详细描述
-            var seodescription = $.trim($('#seodescription').val());
-            if (seoKeywords.length < 1) {
-                showMsg('SEO描述不能为空！');
-                return fals;
-            }
-            //创建时间
-            var createTime = new Date().getTime();
-
-            $.post('@Url.Action("Add")', { NTitle: title, NContent: ueHtml, NContentText: ueText, NAuthor: author, NHitCount: hitCount, NDisplayPic: displayPic, NPush: push, NCreateTime: createTime, NUpdateTime: createTime, SeoInfo: { SeoKeywords: seoKeywords, Sedescription: seodescription } }, function (data) {
-                if (data.Status) {
-                    showMsg(data.Msg);
-                    setTimeout(function () {
-                        window.location.href = '@Url.Action("Index")';
-                    }, 1000)
-                } else {
-                    showMsg(data.Msg);
-                }
-            });
+            AjaxToNote(false);
         });
     </script>
 }

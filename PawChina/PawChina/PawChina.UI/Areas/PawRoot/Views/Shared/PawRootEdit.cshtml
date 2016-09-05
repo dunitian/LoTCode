@@ -10,6 +10,7 @@
     <link href="/Areas/PawRoot/assets/css/common.css" rel="stylesheet" />
     <link href="/Areas/PawRoot/open/lotUploader/lotuploader1.0.1.min.css" rel="stylesheet" />
     <link href="//cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet">
+    <script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -25,7 +26,6 @@
             </div>
         </article>
     </header>
-    <script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
     <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="/Areas/PawRoot/assets/js/common.min.js"></script>
     <script src="/Areas/PawRoot/open/lotUploader/lotuploader1.0.2.min.js"></script>
@@ -36,7 +36,7 @@
         //实例化上传控件
         $.lotuploader({
             lotDocId: 'lot-uploader',
-            lotUrl: '@Url.Action("Upload", "File")',
+            lotUrl: '@Url.Action("Upload", "PartialView")',
             oneFile: true,
             fileSize: 1024 * 1024 * 5,
             btnStr: '点我就上传默认展图',
@@ -51,30 +51,8 @@
                 }, 2000);
             }
         });
-
         //实例化编辑器
-        var ue = UE.getEditor('container');
-
-        //消息提醒
-        function showMsg(obj, time) {
-            if (obj) {
-                if (!time) { time = 1000; }
-                easyDialog.open({ container: { content: obj }, autoClose: time });
-            }
-        }
-        $(document).on("click", "#overlay", function () {
-            $(this).fadeOut(200);
-            easyDialog.close();
-        });
-        //右边人性化提示，obj:当前对象，n:最多多少字符
-        function RightMsg(obj, n) {
-            var str = $.trim(obj.value);
-            if (str.length > n) {
-                str = str.substring(0, n);
-                $(obj).val(str);
-            }
-            $(obj).parent().parent().find('.lot-blue').text('剩余字符数：' + (n - str.length));
-        }
+        var ue = UE.getEditor('container');        
     </script>
     @RenderSection("JsScript", false)
 </body>

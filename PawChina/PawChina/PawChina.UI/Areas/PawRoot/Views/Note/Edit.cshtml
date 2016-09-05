@@ -112,88 +112,21 @@
         <input type="hidden" id="createTime" value="@Model.NCreateTime" />
         <label class="col-sm-2"></label>
         <div class="col-sm-6">
-            <button id="form-success" class="btn btn-success lot-form-btn">提 交</button>
-            <button id="form-gohome" class="btn btn-success lot-form-btn">返 回</button>
+            <button id="form-success" class="btn btn-success lot-form-btn">提 交 文 章</button>
+            <button id="form-gohome" class="btn btn-success lot-form-btn">返 回 列 表</button>
         </div>
     </div>
 </div>
-
+<script src="/Areas/PawRoot/assets/js/note.js" async></script>
 @section JsScript{
     <script type="text/javascript">
-        //人性化提示
-        $('#title').keyup(function () {
-            RightMsg(this, 100);
-        });
-        $('#author').keyup(function () {
-            RightMsg(this, 50);
-        });
-
-        //半自动化操作
-        //默认作者
-        $('#autoA').click(function () {
-            $('#author').val('PawChina');
-        });
-        //随机浏览
-        $('#autoB').click(function () {
-            $('#hitCount').val(Math.floor(Math.random() * 1000));
-        });
-        //重置展图
-        $('#autoC').click(function () {
-            $('#displayPic').attr('src', '');
-        });
         //更新时间
         $('#autoD').click(function () {
             $('#createTime').val(new Date().getTime());
         });
-        //自动分词
-        $('#autoE').click(function () {
-
-        });
-
         //提交表单
         $('#form-success').click(function () {
-            var nId = $('#nId').val();
-            var seoId = $('#seoId').val();
-            //标题
-            var title = $('#title').val();
-            //作者
-            var author = $('#author').val();
-            //浏览量
-            var hitCount = $('#hitCount').val();
-            //数据状态
-            var dataStatus = $('#dataStatus').val();
-            //是否推送到主页
-            var push = $('#push').is(':checked');
-            //文章展览小图
-            var displayPic = $('#displayPic').attr('src');
-            //编辑器内容
-            var ueHtml = '';
-            var ueText = '';
-            if (ue.hasContents()) {
-                ueHtml = escape(ue.getContent());
-                ueText = $.trim(ue.getContentTxt());
-                ue.execCommand("clearlocaldata");//清空草稿箱
-            } else {
-                showMsg('文章主体内容不能为空！', 500);
-            }
-            //SEO关键词
-            var seoKeywords = $('#seoKeywords').val();
-            //SEO详细描述
-            var seodescription = $('#seodescription').val();
-            //创建时间
-            var createTime = $('#createTime').val();
-            //更新时间
-            var updateTime = new Date().getTime();
-            $.post('@Url.Action("Edit")', { NId: nId, NTitle: title, NContent: ueHtml, NContentText: ueText, NAuthor: author, NHitCount: hitCount, NDisplayPic: displayPic, NPush: push, NCreateTime: createTime, NUpdateTime: updateTime, NDataStatus: dataStatus, NSeoId: seoId, SeoInfo: { Id: seoId, SeoKeywords: seoKeywords, Sedescription: seodescription } }, function (data) {
-                if (data.Status) {
-                    showMsg(data.Msg, 500);
-                    setTimeout(function () {
-                        window.location.href = '@Url.Action("Index")';
-                    }, 1000)
-                } else {
-                    showMsg(data.Msg);
-                }
-            });
+            AjaxToNote(true);           
         });
     </script>
 }

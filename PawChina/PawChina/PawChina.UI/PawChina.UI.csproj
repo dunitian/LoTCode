@@ -388,7 +388,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\PawRoot\Controllers\BaseController.cs" />
-    <Compile Include="Areas\PawRoot\Controllers\FileController.cs" />
+    <Compile Include="Areas\PawRoot\Controllers\PartialViewController.cs" />
     <Compile Include="Areas\PawRoot\Controllers\ManagerController.cs" />
     <Compile Include="Areas\PawRoot\Controllers\NoteController.cs" />
     <Compile Include="Areas\PawRoot\Models\ChineseViewModel.cs" />
