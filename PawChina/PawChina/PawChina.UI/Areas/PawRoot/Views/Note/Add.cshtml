@@ -3,7 +3,6 @@
 }
 @section HeadCss{
 }
-
 <div class="form-horizontal">
     <!--笔记标题-->
     <div class="form-group">
@@ -54,26 +53,6 @@
             </script>
         </div>
     </div>
-    <!--Tag标签-->
-    @*<div class="form-group">
-            <label class="col-sm-2 control-label">Tag 标签：</label>
-            <div class="col-sm-6">
-                <select id="tag" class="lot-tagSelect form-control" multiple>
-                    <optgroup label="SQL">
-                        <option>MySql</option>
-                        <option>Sqlite</option>
-                        <option>SQLServer</option>
-                    </optgroup>
-                    <optgroup label="Other">
-                        <option>C#</option>
-                        <option>EF</option>
-                        <option>MVC</option>
-                        <option>Dapper</option>
-                        <option>Ado.Net</option>
-                    </optgroup>
-                </select>
-            </div>
-        </div>*@
     @*半自动化*@
     <div class="form-group">
         <label class="col-sm-2 control-label">半自动化：</label>
@@ -113,11 +92,6 @@
 <script src="/Areas/PawRoot/assets/js/note.js" async></script>
 @section JsScript{
     <script type="text/javascript">
-        ////实例化Tag标签
-        //$('#tag').select2({
-        //    tags: true,
-        //    tokenSeparators: [',', ' ']
-        //});
         //清空编辑器
         $('#autoD').click(function () {
             ue.setContent('');
