@@ -32,7 +32,6 @@
     <script src="/Areas/PawRoot/open/ueditor/ueditor.config.js"></script>
     <script src="/Areas/PawRoot/open/ueditor/ueditor.all.min.js"></script>
     <script src="//cdn.bootcss.com/select2/4.0.3/js/select2.js"></script>
-    @RenderSection("JsScript", false)
     <script type="text/javascript">
         //实例化上传控件
         $.lotuploader({
@@ -77,5 +76,6 @@
             $(obj).parent().parent().find('.lot-blue').text('剩余字符数：' + (n - str.length));
         }
     </script>
+    @RenderSection("JsScript", false)
 </body>
 </html>
