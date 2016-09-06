@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PawChina.UI.Areas.PawRoot.Controllers
 {
-    public class NoteController : Controller //: BaseController
+    public class NoteController : BaseController
     {
 
         public static ISeoTKDBLL SeoTKDBLL = Container.Resolve<ISeoTKDBLL>();

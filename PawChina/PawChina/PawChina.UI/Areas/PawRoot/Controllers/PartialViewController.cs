@@ -7,7 +7,7 @@ using PawChina.Model;
 
 namespace PawChina.UI.Areas.PawRoot.Controllers
 {
-    public class PartialViewController : Controller
+    public class PartialViewController : BaseController
     {
         #region 图片上传
         /// <summary>
