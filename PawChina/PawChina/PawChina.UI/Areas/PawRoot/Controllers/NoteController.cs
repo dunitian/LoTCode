@@ -124,11 +124,9 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// 编辑页面
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> Edit(string id)
+        public async Task<ActionResult> Edit(int id = 0)
         {
-            int modelId;
-            int.TryParse(id, out modelId);
-            if (modelId <= 0)
+            if (id <= 0)
             {
                 return RedirectToAction("Add");
             }
