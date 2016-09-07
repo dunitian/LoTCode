@@ -103,7 +103,10 @@
     <Content Include="Areas\PawRoot\assets\img\backgrounds\2.jpg" />
     <Content Include="Areas\PawRoot\assets\img\backgrounds\3.jpg" />
     <Content Include="Areas\PawRoot\assets\img\logo.jpg" />
-    <Content Include="Areas\PawRoot\assets\js\common.min.js" />
+    <Content Include="Areas\PawRoot\assets\js\common.js" />
+    <Content Include="Areas\PawRoot\assets\js\common.min.js">
+      <DependentUpon>common.js</DependentUpon>
+    </Content>
     <Content Include="Areas\PawRoot\assets\js\datapattern.js" />
     <Content Include="Areas\PawRoot\assets\js\datapattern.min.js">
       <DependentUpon>datapattern.js</DependentUpon>
@@ -452,6 +455,7 @@
     <Content Include="Areas\PawRoot\open\ueditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="Areas\PawRoot\open\ueditor\third-party\video-js\font\vjs.woff" />
     <Content Include="Areas\PawRoot\Views\Manager\Total.cshtml" />
+    <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\PawChina.pubxml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>

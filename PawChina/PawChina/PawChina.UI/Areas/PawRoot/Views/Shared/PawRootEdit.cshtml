@@ -11,6 +11,7 @@
     <link href="/Areas/PawRoot/open/lotUploader/lotuploader1.0.1.min.css" rel="stylesheet" />
     <link href="//cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet">
     <script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/Areas/PawRoot/assets/js/common.min.js"></script>
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -27,7 +28,6 @@
         </article>
     </header>
     <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="/Areas/PawRoot/assets/js/common.min.js"></script>
     <script src="/Areas/PawRoot/open/lotUploader/lotuploader1.0.2.min.js"></script>
     <script src="/Areas/PawRoot/open/ueditor/ueditor.config.js"></script>
     <script src="/Areas/PawRoot/open/ueditor/ueditor.all.min.js"></script>
@@ -53,24 +53,6 @@
         });
         //实例化编辑器
         var ue = UE.getEditor('container');
-
-        //消息提醒
-        function showMsg(obj, time) {
-            if (obj) {
-                if (!time) { time = 1000; }
-                easyDialog.open({ container: { content: obj }, autoClose: time });
-            }
-        }
-        //选择对话框
-        function showYesNoMsg(obj, myFunc) {
-            if (obj) {
-                easyDialog.open({ container: { content: obj, yesFn: myFunc, noFn: true } });
-            }
-        }
-        $(document).on("click", "#overlay", function () {
-            $(this).fadeOut(200);
-            easyDialog.close();
-        });
     </script>
     @RenderSection("JsScript", false)
 </body>

@@ -30,7 +30,6 @@
                 } else {
                     showMsg(data.Msg);
                 }
-                console.log(data.Status);
             });
         } else {
             showMsg('文章内容不能为空！');

@@ -1,0 +1,26 @@
+[
+  {
+    "outputFileName": "Areas/PawRoot/assets/js/common.min.js",
+    "inputFiles": [
+      "Areas/PawRoot/assets/js/common.js"
+    ]
+  },
+  {
+    "outputFileName": "Areas/PawRoot/assets/js/datapattern.min.js",
+    "inputFiles": [
+      "Areas/PawRoot/assets/js/datapattern.js"
+    ]
+  },
+  {
+    "outputFileName": "Areas/PawRoot/assets/js/login.min.js",
+    "inputFiles": [
+      "Areas/PawRoot/assets/js/login.js"
+    ]
+  },
+  {
+    "outputFileName": "Areas/PawRoot/assets/js/note.min.js",
+    "inputFiles": [
+      "Areas/PawRoot/assets/js/note.js"
+    ]
+  }
+]
