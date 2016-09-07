@@ -1,4 +1,6 @@
-﻿using PawChina.IBLL;
+﻿using System;
+using System.Linq;
+using PawChina.IBLL;
 using PawChina.IOC;
 using PawChina.Model;
 using System.Web.Mvc;
@@ -188,6 +190,29 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             return Json(obj);
         }
 
+        /// <summary>
+        /// 批量更新~恢复或者删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public async Task<JsonResult> UpdateList(string ids, StatusEnum status)
+        {
+            AjaxOption<object> obj = new AjaxOption<object>();
+            if (ids.IsNullOrWhiteSpace())
+            {
+                obj.Msg = "选中项不能为空";
+                return Json(obj);
+            }
+            int i = await NoteInfoBLL.ExecuteAsync("update NoteInfo set NDataStatus=@NDataStatus where NId in @NIds", new
+            {
+                NDataStatus = status,
+                NIds = ids.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(s => { int n; int.TryParse(s, out n); return n; }).Distinct()
+            });
+            obj.Status = true;
+            obj.Msg = string.Format("更新了 {0} 条数据", i);
+            return Json(obj);
+        }
         /// <summary>
         /// 查询笔记页面
         /// </summary>

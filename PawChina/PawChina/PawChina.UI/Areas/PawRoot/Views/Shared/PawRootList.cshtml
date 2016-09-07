@@ -115,7 +115,7 @@
                 todayBtn: "linked",
                 language: "zh-CN",
                 autoclose: true
-            }).on('changeDate',function (ev) {
+            }).on('changeDate', function (ev) {
                 var startTime = $('#startTime').val();
                 $('#endTime').datetimepicker('setStartDate', startTime);
             });
@@ -183,6 +183,40 @@
             $('#startTime').val('');
             $('#endTime').val('');
         });
+
+        //批量更新系列
+        //批量恢复
+        $('#lotrerecover').click(function () {
+            var ids = getSelectIds();
+            if (ids) {
+                updateData(ids, 1);
+            }
+        });
+        //批量删除
+        $('#lotremove').click(function () {
+            var ids = getSelectIds();
+            if (ids) {
+                updateData(ids, 99);
+            }
+        });
+        //批量更新数据
+        function updateData(ids, status) {
+            //更新数据库
+            $.post('@Url.Action("UpdateList")', { ids: ids, status: status }, function (data) {
+                showMsg(data.Msg);
+                if (data.Status) {
+                    //刷新表格
+                    lotTab.bootstrapTable('refresh');
+                }
+            });
+        }
+        //获取选中项Ids
+        function getSelectIds() {
+            var ids = $.map(lotTab.bootstrapTable('getSelections'), function (row) {
+                return row.NId;
+            });
+            return ids.join(',');
+        }
     </script>
     @RenderSection("JsScript", false)
 </body>
