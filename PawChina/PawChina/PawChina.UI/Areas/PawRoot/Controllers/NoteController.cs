@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using PawChina.IBLL;
+﻿using PawChina.IBLL;
 using PawChina.IOC;
 using PawChina.Model;
 using System.Web.Mvc;
@@ -207,12 +205,13 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             int i = await NoteInfoBLL.ExecuteAsync("update NoteInfo set NDataStatus=@NDataStatus where NId in @NIds", new
             {
                 NDataStatus = status,
-                NIds = ids.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(s => { int n; int.TryParse(s, out n); return n; }).Distinct()
+                NIds = ids.SplitToIntList()
             });
             obj.Status = true;
             obj.Msg = string.Format("更新了 {0} 条数据", i);
             return Json(obj);
         }
+
         /// <summary>
         /// 查询笔记页面
         /// </summary>

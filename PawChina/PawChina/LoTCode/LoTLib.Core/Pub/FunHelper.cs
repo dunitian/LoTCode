@@ -22,8 +22,23 @@ public static partial class FunHelper
     public static long ToLong(this DateTime time)
     {
         return time.Ticks;
-    } 
+    }
     #endregion
+
+    /// <summary>
+    /// 字符串按指定字符串分割（默认--> ,）
+    /// </summary>
+    /// <param name="objStr">1,2,3,4</param>
+    /// <param name="strs"></param>
+    /// <returns></returns>
+    public static IEnumerable<int> SplitToIntList(this string objStr, params string[] strs)
+    {
+        if (strs == null || strs.Length < 1)
+        {
+            strs = new string[] { "," };
+        }
+        return objStr.Split(strs, StringSplitOptions.RemoveEmptyEntries).Select(s => { int n; int.TryParse(s, out n); return n; }).Distinct();
+    }
 
     /// <summary>  
     /// 判断字符串input 在 input字符串中出现的次数(递归调用)

@@ -201,21 +201,16 @@
         });
         //批量更新数据
         function updateData(ids, status) {
-            //更新数据库
-            $.post('@Url.Action("UpdateList")', { ids: ids, status: status }, function (data) {
-                showMsg(data.Msg);
-                if (data.Status) {
-                    //刷新表格
-                    lotTab.bootstrapTable('refresh');
-                }
+            showYesNoMsg('确定批量操作？', function () {
+                //更新数据库
+                $.post('@Url.Action("UpdateList")', { ids: ids, status: status }, function (data) {
+                    showMsg(data.Msg);
+                    if (data.Status) {
+                        //刷新表格
+                        lotTab.bootstrapTable('refresh');
+                    }
+                });
             });
-        }
-        //获取选中项Ids
-        function getSelectIds() {
-            var ids = $.map(lotTab.bootstrapTable('getSelections'), function (row) {
-                return row.NId;
-            });
-            return ids.join(',');
         }
     </script>
     @RenderSection("JsScript", false)

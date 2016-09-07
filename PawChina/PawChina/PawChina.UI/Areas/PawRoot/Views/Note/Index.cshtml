@@ -98,5 +98,13 @@
             ];
             initTable(columns);
         });
+
+        //获取选中项Ids（每个表的ID字段不一样，所以得单独定义）
+        function getSelectIds() {
+            var ids = $.map(lotTab.bootstrapTable('getSelections'), function (row) {
+                return row.NId;
+            });
+            return ids.join(',');
+        }
     </script>
 }
