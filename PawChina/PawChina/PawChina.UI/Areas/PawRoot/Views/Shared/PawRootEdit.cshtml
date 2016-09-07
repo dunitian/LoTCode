@@ -53,6 +53,14 @@
         });
         //实例化编辑器
         var ue = UE.getEditor('container');
+
+        //消息提醒（不知道为啥，去掉则添加页面和编辑页面就没有弹窗口了【估计是common.js在这个之后了】）
+        function showMsg(obj, time) {
+            if (obj) {
+                if (!time) { time = 1000; }
+                easyDialog.open({ container: { content: obj }, autoClose: time });
+            }
+        }
     </script>
     @RenderSection("JsScript", false)
 </body>
