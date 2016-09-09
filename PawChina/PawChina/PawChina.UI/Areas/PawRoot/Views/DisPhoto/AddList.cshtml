@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>批量上传</title>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/Areas/PawRoot/open/lotUploader/lotuploader1.0.1.min.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <header class="panel panel-default">
+        <div class="panel-heading">表单页面</div>
+        <article class="panel-body">
+            <div class="row">
+                <div class="form-horizontal">
+                    <!--展图标题-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">展图标题：</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="title" placeholder="不填代表默认标题...">
+                        </div>
+                        <label class="lot-blue">最大长度: 50 字符</label>
+                    </div>
+                    <!--展览小图-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" style="padding-top:13px;">展览小图：</label>
+                        <div class="col-sm-5">
+                            <span style="float:left;width:160px;"><span id="lot-uploader"></span></span><img id="displayPic" style="width:60px;height:33px;" />
+                        </div>
+                    </div>
+                    <!--表单提交-->
+                    <div class="form-group">
+                        <label class="col-sm-2"></label>
+                        <div class="col-sm-6">
+                            <button id="form-success" class="btn btn-primary lot-form-btn">批 量 提 交</button>
+                            <button id="form-gohome" class="btn btn-primary lot-form-btn">返 回 列 表</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </header>
+    <script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="/Areas/PawRoot/open/lotUploader/lotuploader1.0.2.min.js"></script>
+    <script type="text/javascript">
+        //实例化上传控件
+        $.lotuploader({
+            lotDocId: 'lot-uploader',
+            lotUrl: '@Url.Action("Upload", "PartialView")',
+            oneFile: false,
+            fileSize: 1024 * 1024 * 5,
+            btnStr: '点我就上传默认展图',
+            lotSuccessFunc: function (data) {
+                $('#displayPic').attr('src', data.msg);
+            },
+            lotErrorFunc: function (msg) {
+                $('#lot-uploader').append('<div class="lot-temp" style="color:red">' + msg + '</div> ');
+                setTimeout(function () {
+                    $('.lot-temp').remove();
+                }, 2000);
+            }
+        });
+
+        //提交表单
+        $('#form-success').click(function () {
+            //标题
+            var title = $.trim($('#title').val());
+            if (title.length < 1) {
+                title = "笔记默认展图";
+            }
+
+        });
+    </script>
+</body>
+</html>

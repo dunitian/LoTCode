@@ -11,24 +11,6 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         public static INoteDisPlayImgBLL NoteDisPlayImgBLL = Container.Resolve<INoteDisPlayImgBLL>();
 
         /// <summary>
-        /// 列表页面
-        /// </summary>
-        /// <returns></returns>
-        public override ActionResult Index()
-        {
-            return View();
-        }
-
-        /// <summary>
-        /// 添加页面
-        /// </summary>
-        /// <returns></returns>
-        public override ActionResult Add()
-        {
-            return View();
-        }
-
-        /// <summary>
         /// 验证错误
         /// </summary>
         /// <param name="model"></param>
@@ -47,6 +29,24 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             }
             #endregion
             return msg;
+        }
+
+        /// <summary>
+        /// 列表页面
+        /// </summary>
+        /// <returns></returns>
+        public override ActionResult Index()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 添加页面
+        /// </summary>
+        /// <returns></returns>
+        public override ActionResult Add()
+        {
+            return View();
         }
 
         [HttpPost]
@@ -74,6 +74,15 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
                 obj.Msg = "添加成功";
             }
             return Json(obj);
+        }
+
+        /// <summary>
+        /// 批量上传
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AddList()
+        {
+            return View();
         }
 
         /// <summary>
