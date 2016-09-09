@@ -3,7 +3,6 @@ using PawChina.IBLL;
 using System.Web.Mvc;
 using PawChina.Model;
 using System.Threading.Tasks;
-using System;
 
 namespace PawChina.UI.Areas.PawRoot.Controllers
 {
@@ -65,7 +64,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             if (model.DTitle.IsNullOrWhiteSpace())
             {
                 model.DTitle = "笔记默认展图";
-            } 
+            }
             #endregion
             model.DataStatus = StatusEnum.Normal;
             var modelId = await NoteDisPlayImgBLL.InsertAsync(model);
@@ -104,12 +103,16 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
                 obj.Msg = "编号必须大于0";
                 return Json(obj);
             }
+            if (model.DataStatus == StatusEnum.Init)
+            {
+                model.DataStatus = StatusEnum.Normal;
+            }
             obj.Msg = GetErrorMsg(model);
             //有错误信息
             if (!obj.Msg.IsNullOrWhiteSpace())
             {
                 return Json(obj);
-            } 
+            }
             #endregion
             var noteDisPlayImg = await NoteDisPlayImgBLL.UpdateAsync(model);
             if (noteDisPlayImg != null)
@@ -134,13 +137,13 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
                 obj.Msg = "选中项不能为空";
                 return Json(obj);
             }
-            //int i = await NoteDisPlayImgBLL.ExecuteAsync("update NoteInfo set NDataStatus=@NDataStatus where NId in @NIds", new
-            //{
-            //    NDataStatus = status,
-            //    NIds = ids.SplitToIntList()
-            //});
-            //obj.Status = true;
-            //obj.Msg = string.Format("更新了 {0} 条数据", i);
+            int i = await NoteDisPlayImgBLL.ExecuteAsync("update NoteDisPlayImg set DataStatus=@DataStatus where DId in @DIds", new
+            {
+                DataStatus = status,
+                DIds = ids.SplitToIntList()
+            });
+            obj.Status = true;
+            obj.Msg = string.Format("更新了 {0} 条数据", i);
             return Json(obj);
         }
 

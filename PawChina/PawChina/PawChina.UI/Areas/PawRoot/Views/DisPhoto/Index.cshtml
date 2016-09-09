@@ -17,7 +17,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row" style="display:none">
     <div class="col-lg-1"></div>
     <div class="col-lg-3">
         <div class="input-group"><span class="input-group-addon">开始时间</span><input type="text" class="form-control lot-time" id="startTime" placeholder="请选择开始时间..."></div>
@@ -36,3 +36,74 @@
         </div>
     </div>
 </div>
+@section JsScript{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var columns = [{
+                field: 'State',
+                checkbox: true
+            },
+            {
+                field: 'Id',
+                title: '序号',
+                align: 'center',
+                formatter: function (value, row, index) {  //格式方法
+                    if (value) {
+                        return value;
+                    } else {
+                        return index + 1;
+                    }
+                }
+            },
+            {
+                field: 'DId',
+                title: '编号',
+                align: 'center',
+                sortable: true
+            },
+            {
+                field: 'DTitle',
+                title: '标题',
+                align: 'center',
+                sortable: true
+            },
+            {
+                field: 'DataStatus',
+                title: '状态',
+                align: 'center',
+                formatter: function (value, row, index) {
+                    if (value == 99) {
+                        return '<font style="color:red">已删</font>'
+                    } else {
+                        return '正常';
+                    }
+                }
+            },
+            {
+                title: '单操作',
+                align: 'center',
+                formatter: function (value, row, index) {
+                    return '<a href="#' + row.DId + '" class="edit glyphicon glyphicon-pencil"></a>&nbsp;&nbsp;<a href="#" class="remove glyphicon glyphicon-trash"></a>';
+                },
+                events: {
+                    'click .edit': function (e, value, row, index) {
+                        location.href = '/PawRoot/DisPhoto/Edit?id=' + row.DId;
+                    },
+                    'click .remove': function (e, value, row, index) {
+                        updateData(row.DId, 99);
+                    }
+                }
+            }
+            ];
+            initTable(columns);
+        });
+
+        //获取选中项Ids（每个表的ID字段不一样，所以得单独定义）
+        function getSelectIds() {
+            var ids = $.map(lotTab.bootstrapTable('getSelections'), function (row) {
+                return row.DId;
+            });
+            return ids.join(',');
+        }
+    </script>
+}

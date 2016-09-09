@@ -14,7 +14,7 @@
     if (isEdit) {
         var dId = $('#dId').val();
         var dataStatus = $('#dataStatus').val(); //数据状态
-        $.post('/PawRoot/DisPhoto/Edit', { DId: dId, DTitle: title, DPicUrl: displayPic, NDataStatus: dataStatus }, function (data) {
+        $.post('/PawRoot/DisPhoto/Edit', { DId: dId, DTitle: title, DPicUrl: displayPic, DataStatus: dataStatus }, function (data) {
             if (data.Status) {
                 showMsg(data.Msg, 500);
                 setTimeout(function () {
