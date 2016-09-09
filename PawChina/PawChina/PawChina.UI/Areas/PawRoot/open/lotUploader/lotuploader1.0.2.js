@@ -10,7 +10,7 @@
             if (!fileSize) { fileSize = 10485760; }
             if (!btnStr) { btnStr = '选择图片'; }
             if (oneFile) { fileCount = 1; preFile = false; }
-            $(lotdomstr).html('<div id="lot-filelist"></div><div class="lot-btns"><a id="lot-picker">' + btnStr + '</a></div>');
+            $(lotdomstr).html('<ul id="lot-filelist"></ul><div class="lot-btns"><a id="lot-picker">' + btnStr + '</a></div>');
             console.log('初始化完毕：', '队列数量：', fileCount, '文件大小：', Math.floor(fileSize / 1024), '（kb）')
             //1.uploader初始化
             var uploader = WebUploader.create({
@@ -34,11 +34,11 @@
                 //2.文件添加时，添加样式和缩略图
                 uploader.on('fileQueued', function (file) {
                     var $li = $(
-                            '<div id="' + file.id + '" class="file-item thumbnail">' +
+                            '<li id="' + file.id + '" class="file-item thumbnail">' +
                                 '<img>' +
                                 '<div class="info info-top">Szie：' + Math.floor(file.size / 1024) + 'kb' + '</div>' +
                                 '<div class="info info-bot">' + file.name + '</div>' +
-                            '</div>'
+                            '</li>'
                             ),
                         $img = $li.find('img');
                     $('#lot-filelist').append($li);
@@ -80,7 +80,7 @@
                 uploader.on('error', function (log) {
                     switch (log) {
                         case 'F_EXCEED_SIZE':
-                            addMsg('文件10M以内'); break;
+                            addMsg('图片文件太大了'); break;
                         case 'Q_EXCEED_NUM_LIMIT':
                             addMsg('已超最大上传数'); break;
                         case 'Q_TYPE_DENIED':
@@ -113,7 +113,7 @@
                 uploader.on('error', function (log) {
                     switch (log) {
                         case 'F_EXCEED_SIZE':
-                            lotErrorFunc('文件10M以内'); break;
+                            lotErrorFunc('图片文件太大了'); break;
                         case 'Q_EXCEED_NUM_LIMIT':
                             lotErrorFunc('已超最大上传数'); break;
                         case 'Q_TYPE_DENIED':
@@ -145,7 +145,7 @@ function showMsg(file, msg) {
 }
 //错误信息提示
 function addMsg(msg) {
-    $('#lot-uploader').prepend('<h3 class="temp-log" style="color:red;">' + msg + '</h3>')
+    $('#lot-uploader').prepend('<h4 class="temp-log" style="color:red;font-family:微软雅黑;">' + msg + '</h4>')
     setTimeout(function () {
         $('.temp-log').remove();
     }, 2000);

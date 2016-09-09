@@ -7,6 +7,7 @@
     <title>批量上传</title>
     <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/Areas/PawRoot/assets/css/common.css" rel="stylesheet" />
     <link href="/Areas/PawRoot/open/lotUploader/lotuploader1.0.1.min.css" rel="stylesheet" />
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -31,15 +32,16 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" style="padding-top:13px;">展览小图：</label>
                         <div class="col-sm-5">
-                            <span style="float:left;width:160px;"><span id="lot-uploader"></span></span><img id="displayPic" style="width:60px;height:33px;" />
+                            <span id="lot-uploader"></span>
                         </div>
+                        <label class="lot-blue">单张图片: 2M以内（每次批量上传最多100张）</label>
                     </div>
                     <!--表单提交-->
                     <div class="form-group">
                         <label class="col-sm-2"></label>
-                        <div class="col-sm-6">
-                            <button id="form-success" class="btn btn-primary lot-form-btn">批 量 提 交</button>
-                            <button id="form-gohome" class="btn btn-primary lot-form-btn">返 回 列 表</button>
+                        <div class="col-sm-5">
+                            <button id="form-success" class="btn btn-danger lot-form-btn">批 量 提 交</button>
+                            <button id="form-gohome" class="btn btn-danger lot-form-btn">返 回 列 表</button>
                         </div>
                     </div>
                 </div>
@@ -54,20 +56,10 @@
         $.lotuploader({
             lotDocId: 'lot-uploader',
             lotUrl: '@Url.Action("Upload", "PartialView")',
-            oneFile: false,
-            fileSize: 1024 * 1024 * 5,
-            btnStr: '点我就上传默认展图',
-            lotSuccessFunc: function (data) {
-                $('#displayPic').attr('src', data.msg);
-            },
-            lotErrorFunc: function (msg) {
-                $('#lot-uploader').append('<div class="lot-temp" style="color:red">' + msg + '</div> ');
-                setTimeout(function () {
-                    $('.lot-temp').remove();
-                }, 2000);
-            }
+            btnStr: '批量上传默认展图',
+            fileSize: 1024 * 1024 * 2,
+            fileCount: 100
         });
-
         //提交表单
         $('#form-success').click(function () {
             //标题
