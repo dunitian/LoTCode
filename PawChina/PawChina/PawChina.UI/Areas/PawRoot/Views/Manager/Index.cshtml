@@ -53,8 +53,8 @@
                                 <i class="fa fa-lg arrow"></i>
                             </a>
                             <ul class="collapse">
-                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">访客统计</a></li>
                                 <li><a href="#" lot-url="@Url.Action("Total","Manager")">日常统计</a></li>
+                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">访客统计</a></li>
                                 <li><a href="#" lot-url="@Url.Action("Total","Manager")">安全统计</a></li>
                             </ul>
                         </li>
@@ -92,26 +92,41 @@
                             </a>
                             <ul class="collapse">
                                 <li><a href="#" lot-url="@Url.Action("Total","Manager")">网站 SEO</a></li>
-                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">笔记 SEO</a></li>
+                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">文章 SEO</a></li>
                             </ul>
                         </li>
-                        <!--顶级分类-->
-                        <li class="active">
+                        <!--顶级分类 固定配置-->
+                        <li>
                             <a href="#">
                                 <i class="sidebar-nav-icon fa fa-sitemap fa-lg"></i>
                                 <span class="sidebar-nav-item">固定配置</span>
                                 <i class="fa fa-lg arrow"></i>
                             </a>
                             <ul class="collapse">
-                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">首页配置</a></li>
                                 <li><a href="#" lot-url="@Url.Action("Total","Manager")">账号信息</a></li>
                                 <li>
-                                    <a href="#"><span>其他系列</span><i class="fa arrow"></i></a>
+                                    <a href="#"><span>备份还原</span><i class="fa arrow"></i></a>
                                     <ul>
-                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">其他系列</a></li>
-                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">其他系列</a></li>
+                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">数据备份</a></li>
+                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">数据还原</a></li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <a href="#"><span>初始设置</span><i class="fa arrow"></i></a>
+                                    <ul>
+                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">首页配置</a></li>
+                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">水印配置</a></li>
+                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">邮件报警</a></li>
+                                    </ul>
+                                </li>
+                                @*<li>
+                                    <a href="#"><span>开发管理</span><i class="fa arrow"></i></a>
+                                    <ul>
+                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">百度地图</a></li>
+                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">畅言插件</a></li>
+                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">前端插件</a></li>
+                                    </ul>
+                                </li>*@
                             </ul>
                         </li>
                     </ul>
