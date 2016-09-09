@@ -131,6 +131,10 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
                 return RedirectToAction("Add");
             }
             var model = await NoteInfoBLL.GetAsync(id);
+            if (model == null)
+            {
+                return RedirectToAction("Add");
+            }
             model.SeoInfo = await SeoTKDBLL.GetAsync(model.NSeoId);
             //防止编辑页面出错
             if (model.SeoInfo == null)

@@ -459,6 +459,7 @@
     <Content Include="Areas\PawRoot\Views\Manager\Total.cshtml" />
     <Content Include="Areas\PawRoot\Views\DisPhoto\Add.cshtml" />
     <Content Include="Areas\PawRoot\Views\DisPhoto\Index.cshtml" />
+    <Content Include="Areas\PawRoot\Views\DisPhoto\Edit.cshtml" />
     <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\PawChina.pubxml" />
     <None Include="web.Debug.config">

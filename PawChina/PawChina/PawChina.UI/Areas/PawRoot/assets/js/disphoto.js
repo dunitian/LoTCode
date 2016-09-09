@@ -1,9 +1,4 @@
-﻿$(document).ready(function () {
-
-
-});
-
-function ajaxToDisPhoto(isEdit) {
+﻿function ajaxToDisPhoto(isEdit) {
     //标题
     var title = $.trim($('#title').val());
     if (title.length < 1) {
@@ -17,7 +12,7 @@ function ajaxToDisPhoto(isEdit) {
     }
     //是否是编辑页面
     if (isEdit) {
-        var nId = $('#dId').val();
+        var dId = $('#dId').val();
         var dataStatus = $('#dataStatus').val(); //数据状态
         $.post('/PawRoot/DisPhoto/Edit', { DId: dId, DTitle: title, DPicUrl: displayPic, NDataStatus: dataStatus }, function (data) {
             if (data.Status) {

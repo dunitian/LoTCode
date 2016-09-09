@@ -54,8 +54,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         public override async Task<JsonResult> Add(NoteDisPlayImg model)
         {
             AjaxOption<object> obj = new AjaxOption<object>();
-
-            //验证相关
+            #region 验证相关
             obj.Msg = GetErrorMsg(model);
             //有错误信息
             if (!obj.Msg.IsNullOrWhiteSpace())
@@ -66,9 +65,9 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             if (model.DTitle.IsNullOrWhiteSpace())
             {
                 model.DTitle = "笔记默认展图";
-            }
+            } 
+            #endregion
             model.DataStatus = StatusEnum.Normal;
-
             var modelId = await NoteDisPlayImgBLL.InsertAsync(model);
             if (modelId > 0)
             {
@@ -77,8 +76,6 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             }
             return Json(obj);
         }
-
-
 
         /// <summary>
         /// 编辑页面
@@ -91,13 +88,35 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
                 return RedirectToAction("Add");
             }
             var model = await NoteDisPlayImgBLL.GetAsync(id);
+            if (model == null)
+            {
+                return RedirectToAction("Add");
+            }
             return View(model);
         }
         [HttpPost]
         public override async Task<JsonResult> Edit(NoteDisPlayImg model)
         {
             AjaxOption<object> obj = new AjaxOption<object>();
-
+            #region 验证相关
+            if (model.DId <= 0)
+            {
+                obj.Msg = "编号必须大于0";
+                return Json(obj);
+            }
+            obj.Msg = GetErrorMsg(model);
+            //有错误信息
+            if (!obj.Msg.IsNullOrWhiteSpace())
+            {
+                return Json(obj);
+            } 
+            #endregion
+            var noteDisPlayImg = await NoteDisPlayImgBLL.UpdateAsync(model);
+            if (noteDisPlayImg != null)
+            {
+                obj.Status = true;
+                obj.Msg = "更新成功";
+            }
             return Json(obj);
         }
 
