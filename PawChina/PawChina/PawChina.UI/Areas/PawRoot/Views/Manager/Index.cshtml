@@ -45,76 +45,71 @@
                                 </ul>
                             </div>
                         </li>
-                        <!--顶级分类-->
+                        <!--顶级分类 常用统计-->
+                        <li class="active">
+                            <a href="#">
+                                <i class="sidebar-nav-icon fa fa-bar-chart-o fa-lg"></i>
+                                <span class="sidebar-nav-item">常用统计</span>
+                                <i class="fa fa-lg arrow"></i>
+                            </a>
+                            <ul class="collapse">
+                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">访客统计</a></li>
+                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">日常统计</a></li>
+                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">安全统计</a></li>
+                            </ul>
+                        </li>
+                        <!--顶级分类 产品相关-->
+                        <li class="active">
+                            <a href="#">
+                                <i class="sidebar-nav-icon fa fa-shopping-cart fa-lg"></i>
+                                <span class="sidebar-nav-item">产品相关</span>
+                                <i class="fa fa-lg arrow"></i>
+                            </a>
+                            <ul class="collapse">
+                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">Paw 分类</a></li>
+                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">Paw 产品</a></li>
+                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">Paw 配件</a></li>
+                            </ul>
+                        </li>
+                        <!--顶级分类 笔记相关-->
+                        <li class="active">
+                            <a href="#">
+                                <i class="sidebar-nav-icon fa fa-edit fa-lg"></i>
+                                <span class="sidebar-nav-item">笔记相关</span>
+                                <i class="fa fa-lg arrow"></i>
+                            </a>
+                            <ul class="collapse">
+                                <li><a href="#" lot-url="@Url.Action("Index","Note")">Paw 笔记</a></li>
+                                <li><a href="#" lot-url="@Url.Action("Index","DisPhoto")">Paw 展图</a></li>
+                            </ul>
+                        </li>
+                        <!--顶级分类 SEO 优化-->
                         <li>
                             <a href="#">
-                                <i class="sidebar-nav-icon fa fa-home fa-lg"></i>
-                                <span class="sidebar-nav-item">dotNet</span>
+                                <i class="sidebar-nav-icon fa fa-flask fa-lg"></i>
+                                <span class="sidebar-nav-item">SEO 优化</span>
                                 <i class="fa fa-lg arrow"></i>
                             </a>
-                            <ul class="collapse" style="height: 0px;">
-                                <li>
-                                    <a href="#">
-                                        <span>Web</span>
-                                        <span class="fa arrow"></span>
-                                    </a>
-                                    <ul class="collapse">
-                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">MVC</a></li>
-                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">WebApi</a></li>
-                                    </ul>
-                                </li>
+                            <ul class="collapse">
+                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">网站 SEO</a></li>
+                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">笔记 SEO</a></li>
                             </ul>
                         </li>
                         <!--顶级分类-->
                         <li class="active">
                             <a href="#">
-                                <i class="sidebar-nav-icon fa fa-columns fa-lg"></i>
-                                <span class="sidebar-nav-item">SQL</span>
+                                <i class="sidebar-nav-icon fa fa-sitemap fa-lg"></i>
+                                <span class="sidebar-nav-item">固定配置</span>
                                 <i class="fa fa-lg arrow"></i>
                             </a>
                             <ul class="collapse">
-                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">MySql</a></li>
-                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">SqlServer</a></li>
-                            </ul>
-                        </li>
-                        <!--顶级分类-->
-                        <li class="active">
-                            <a href="#">
-                                <i class="sidebar-nav-icon fa fa-bar-chart-o fa-lg"></i>
-                                <span class="sidebar-nav-item">Server</span>
-                                <i class="fa fa-lg arrow"></i>
-                            </a>
-                            <ul class="collapse">
-                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">Linux</a></li>
+                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">首页配置</a></li>
+                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">账号信息</a></li>
                                 <li>
-                                    <a href="#">
-                                        <span>Windows</span>
-                                        <i class="fa arrow"></i>
-                                    </a>
+                                    <a href="#"><span>其他系列</span><i class="fa arrow"></i></a>
                                     <ul>
-                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">Windows 10</a></li>
-                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">Windows xp</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <!--顶级分类-->
-                        <li class="active">
-                            <a href="#">
-                                <i class="sidebar-nav-icon fa fa-bar-chart-o fa-lg"></i>
-                                <span class="sidebar-nav-item">常用功能</span>
-                                <i class="fa fa-lg arrow"></i>
-                            </a>
-                            <ul class="collapse">
-                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">统计页面</a></li>
-                                <li>
-                                    <a href="#">
-                                        <span>表单系列</span>
-                                        <i class="fa arrow"></i>
-                                    </a>
-                                    <ul>
-                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Index","Note")">列表页面</a></li>
-                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Edit","Note")">编辑页面</a></li>
+                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">其他系列</a></li>
+                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">其他系列</a></li>
                                     </ul>
                                 </li>
                             </ul>
