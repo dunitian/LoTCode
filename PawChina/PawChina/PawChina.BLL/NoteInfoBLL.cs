@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using PawChina.IDal;
+﻿using PawChina.IDal;
 using PawChina.Model;
 using System.Threading.Tasks;
 
@@ -24,7 +22,7 @@ namespace PawChina.BLL
         /// <returns></returns>
         public async Task<string> QueryAsync(QueryModel model)
         {
-            StringBuilder sqlWhere = new StringBuilder();
+            var sqlWhere = new System.Text.StringBuilder();
             dynamic pms1 = new System.Dynamic.ExpandoObject();
             dynamic pms2 = new System.Dynamic.ExpandoObject();
 

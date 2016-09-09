@@ -182,8 +182,8 @@ namespace PawChina.BLL
         /// <returns></returns>
         public async Task<string> PageLoadAsync(Model.QueryModel model, string tableName, string sqlWhere, dynamic pms1, dynamic pms2)
         {
-            System.Text.StringBuilder sqlStr = new System.Text.StringBuilder("select * from ");
-            System.Text.StringBuilder sqlCount = new System.Text.StringBuilder("select count(1) from ");
+            var sqlStr = new System.Text.StringBuilder("select * from ");
+            var sqlCount = new System.Text.StringBuilder("select count(1) from ");
 
             sqlStr.Append(tableName);
             sqlCount.Append(tableName);
