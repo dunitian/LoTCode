@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PawChina.UI.Areas.PawRoot.Controllers
 {
-    public class NoteController : BaseController
+    public class NoteController : AdminController<NoteInfo>
     {
 
         public static ISeoTKDBLL SeoTKDBLL = Container.Resolve<ISeoTKDBLL>();
@@ -63,7 +63,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// 列表页面
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
+        public override ActionResult Index()
         {
             return View();
         }
@@ -72,13 +72,13 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// 添加页面
         /// </summary>
         /// <returns></returns>
-        public ActionResult Add()
+        public override ActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<JsonResult> Add(NoteInfo model)
+        public override async Task<JsonResult> Add(NoteInfo model)
         {
             AjaxOption<object> obj = new AjaxOption<object>();
 
@@ -124,7 +124,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// 编辑页面
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> Edit(int id = 0)
+        public override async Task<ActionResult> Edit(int id = 0)
         {
             if (id <= 0)
             {
@@ -140,7 +140,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<JsonResult> Edit(NoteInfo model)
+        public override async Task<JsonResult> Edit(NoteInfo model)
         {
             AjaxOption<object> obj = new AjaxOption<object>();
 
@@ -194,7 +194,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// <param name="ids"></param>
         /// <param name="status"></param>
         /// <returns></returns>
-        public async Task<JsonResult> UpdateList(string ids, StatusEnum status)
+        public override async Task<JsonResult> UpdateList(string ids, StatusEnum status)
         {
             AjaxOption<object> obj = new AjaxOption<object>();
             if (ids.IsNullOrWhiteSpace())
@@ -218,7 +218,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult> Query(QueryModel model)
+        public override async Task<ActionResult> Query(QueryModel model)
         {
             var obj = new AjaxOption<object>();
             if (model == null)

@@ -90,7 +90,7 @@ function AjaxToNote(isEdit) {
     }
     //SEO详细描述
     var seodescription = $.trim($('#seodescription').val());
-    if (seoKeywords.length < 1) {
+    if (seodescription.length < 1) {
         showMsg('SEO描述不能为空！');
         return false;
     }

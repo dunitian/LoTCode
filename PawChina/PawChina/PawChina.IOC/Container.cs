@@ -45,7 +45,8 @@ namespace PawChina.IOC
             builder.RegisterType<ChineseInfoBLL>().As<IChineseInfoBLL>().InstancePerLifetimeScope();
             builder.RegisterType<NoteInfoBLL>().As<INoteInfoBLL>().InstancePerLifetimeScope();
             builder.RegisterType<SeoTKDBLL>().As<ISeoTKDBLL>().InstancePerLifetimeScope();
-            
+            builder.RegisterType<NoteDisPlayImgBLL>().As<INoteDisPlayImgBLL>().InstancePerLifetimeScope();
+
             container = builder.Build();
         }
     }

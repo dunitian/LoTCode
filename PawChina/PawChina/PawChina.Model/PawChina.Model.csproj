@@ -50,6 +50,7 @@
     <Compile Include="CRecordInfo.cs" />
     <Compile Include="Enum\ProductEnum.cs" />
     <Compile Include="Enum\StatusEnum.cs" />
+    <Compile Include="NoteDisPlayImg.cs" />
     <Compile Include="NoteInfo.cs" />
     <Compile Include="PawBaseInfo.cs" />
     <Compile Include="ProductInfo.cs" />

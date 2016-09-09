@@ -46,9 +46,11 @@ namespace PawChina.Factory
             builder.RegisterType<ChineseInfoDal>().As<IChineseInfoDal>().InstancePerLifetimeScope();
             //笔记信息
             builder.RegisterType<NoteInfoDal>().As<INoteInfoDal>().InstancePerLifetimeScope();
-            // SEO信息
+            //SEO信息
             builder.RegisterType<SeoTKDDal>().As<ISeoTKDDal>().InstancePerLifetimeScope();
-            
+            //笔记展图
+            builder.RegisterType<NoteDisPlayImgDal>().As<INoteDisPlayImgDal>().InstancePerLifetimeScope();
+
             container = builder.Build();
         }
     }

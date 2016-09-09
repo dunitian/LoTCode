@@ -2,7 +2,7 @@
 
 namespace PawChina.IBLL
 {
-    public interface INoteInfoBLL : IBaseBLL<Model.NoteInfo>
+    public interface INoteDisPlayImgBLL : IBaseBLL<Model.NoteDisPlayImg>
     {
         /// <summary>
         /// 根据模型查询数据
