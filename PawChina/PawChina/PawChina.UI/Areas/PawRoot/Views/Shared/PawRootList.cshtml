@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>列表页面</title>
     <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <!--bootstrap-table-->
     <link href="//cdn.bootcss.com/bootstrap-table/1.10.1/bootstrap-table.min.css" rel="stylesheet">
     <link href="//cdn.bootcss.com/smalot-bootstrap-datetimepicker/2.3.11/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="/Areas/PawRoot/assets/css/common.css" rel="stylesheet" />
@@ -21,40 +20,7 @@
     <header class="panel panel-default">
         <div class="panel-heading">条件查询</div>
         <article class="panel-body">
-            <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-3">
-                    <div class="input-group"><span class="input-group-addon">笔记标题</span><input type="text" class="form-control" id="title" placeholder="请输入标题名..."></div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="input-group">
-                        <span class="input-group-addon">数据状态</span>
-                        <select class="form-control" id="dataStatus">
-                            <option value="1">正常数据</option>
-                            <option value="99">已删数据</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-3">
-                    <div class="input-group"><span class="input-group-addon">开始时间</span><input type="text" class="form-control lot-time" id="startTime" placeholder="请选择开始时间..."></div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="input-group"><span class="input-group-addon">结束时间</span><input type="text" class="form-control lot-time" id="endTime" placeholder="请选择结束时间..."></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-3">
-                    <div class="btn-group">
-                        <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-export"></i> 导出</button>
-                        <button class="btn btn-default" type="button" id="reset"><i class="glyphicon glyphicon-repeat"></i> 重置</button>
-                        <button class="btn btn-default" type="button" id="search"><i class="glyphicon glyphicon-search"></i> 查询</button>
-                    </div>
-                </div>
-            </div>
+            @RenderBody()
         </article>
     </header>
     <footer class="panel panel-default">

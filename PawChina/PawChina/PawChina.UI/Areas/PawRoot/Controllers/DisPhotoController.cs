@@ -1,9 +1,9 @@
-﻿using PawChina.Model;
-using System.Web.Mvc;
-using System.Threading.Tasks;
-using PawChina.IOC;
+﻿using PawChina.IOC;
 using PawChina.IBLL;
-using System;
+using System.Web.Mvc;
+using PawChina.Model;
+using System.Threading.Tasks;
+
 
 namespace PawChina.UI.Areas.PawRoot.Controllers
 {

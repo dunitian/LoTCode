@@ -430,7 +430,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\PawRoot\Views\Admin\" />
-    <Folder Include="Areas\PawRoot\Views\DisPhoto\" />
     <Folder Include="assets\css\" />
     <Folder Include="assets\js\" />
     <Folder Include="Controllers\" />
@@ -457,6 +456,8 @@
     <Content Include="Areas\PawRoot\open\ueditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="Areas\PawRoot\open\ueditor\third-party\video-js\font\vjs.woff" />
     <Content Include="Areas\PawRoot\Views\Manager\Total.cshtml" />
+    <Content Include="Areas\PawRoot\Views\DisPhoto\Add.cshtml" />
+    <Content Include="Areas\PawRoot\Views\DisPhoto\Index.cshtml" />
     <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\PawChina.pubxml" />
     <None Include="web.Debug.config">
