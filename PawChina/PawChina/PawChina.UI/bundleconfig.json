@@ -28,5 +28,11 @@
     "inputFiles": [
       "Areas/PawRoot/open/lotUploader/lotuploader1.0.2.js"
     ]
+  },
+  {
+    "outputFileName": "Areas/PawRoot/assets/js/disphoto.min.js",
+    "inputFiles": [
+      "Areas/PawRoot/assets/js/disphoto.js"
+    ]
   }
 ]

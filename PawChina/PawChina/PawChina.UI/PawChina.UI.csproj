@@ -112,6 +112,9 @@
       <DependentUpon>datapattern.js</DependentUpon>
     </Content>
     <Content Include="Areas\PawRoot\assets\js\disphoto.js" />
+    <Content Include="Areas\PawRoot\assets\js\disphoto.min.js">
+      <DependentUpon>disphoto.js</DependentUpon>
+    </Content>
     <Content Include="Areas\PawRoot\assets\js\login.js" />
     <Content Include="Areas\PawRoot\assets\js\login.min.js">
       <DependentUpon>login.js</DependentUpon>

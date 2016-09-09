@@ -10,7 +10,7 @@
             if (!fileSize) { fileSize = 10485760; }
             if (!btnStr) { btnStr = '选择图片'; }
             if (oneFile) { fileCount = 1; preFile = false; }
-            $(lotdomstr).html('<ul id="lot-filelist"></ul><div class="lot-btns"><a id="lot-picker">' + btnStr + '</a></div>');
+            $(lotdomstr).append('<div class="lot-btns"><a id="lot-picker">' + btnStr + '</a></div><ul id="lot-filelist"></ul>');
             console.log('初始化完毕：', '队列数量：', fileCount, '文件大小：', Math.floor(fileSize / 1024), '（kb）')
             //1.uploader初始化
             var uploader = WebUploader.create({
