@@ -54,9 +54,9 @@
                 pageSize: 10,                               //每页条数
                 pageList: [20, 50, 100, 200, 500],          //显示条数
                 sidePagination: "server",                   //控件类型（默认是客户类型）
-                search: true,                               //启用搜索
-                searchOnEnterKey: true,                     //回车搜索
-                //strictSearch: false,                      //精确搜索（默认模糊）
+                //search: true,                               //启用搜索（后端模式下不建议开启搜索，有bug）
+                //searchOnEnterKey: true,                     //回车搜索（后端模式下不建议开启搜索，有bug）
+                //strictSearch: false,                        //精确搜索（默认模糊）
                 showColumns: true,                          //内容选框
                 showRefresh: true,                          //启用刷新
                 clickToSelect: true,                        //单行选中
@@ -112,7 +112,7 @@
             if (!order) {
                 order = " ";
             }
-            return { PageSize: pageSize, Offset: offset, Title: title, NTitle: title, StartTime: startTime, EndTime: endTime, DataStatus: dataStatus, OrderStr: order };
+            return { PageSize: pageSize, Offset: offset, Title: title, StartTime: startTime, EndTime: endTime, DataStatus: dataStatus, OrderStr: order };
         }
 
         //条件查询
