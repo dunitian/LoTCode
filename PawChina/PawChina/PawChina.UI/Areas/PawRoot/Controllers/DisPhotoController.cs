@@ -3,6 +3,7 @@ using PawChina.IBLL;
 using System.Web.Mvc;
 using PawChina.Model;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace PawChina.UI.Areas.PawRoot.Controllers
 {
@@ -83,6 +84,44 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         public ActionResult AddList()
         {
             return View();
+        }
+        [HttpPost]
+        public async Task<JsonResult> AddList(string title, string[] imgs)
+        {
+            AjaxOption<object> obj = new AjaxOption<object>();
+            if (imgs == null)
+            {
+                obj.Msg = "文件列表为空";
+                return Json(obj);
+            }
+            if (title.IsNullOrWhiteSpace())
+            {
+                title = "笔记默认展图";
+            }
+            var list = new List<NoteDisPlayImg>();
+            System.Array.ForEach(imgs, (imgsrc) =>
+            {
+                if (!imgsrc.IsNullOrWhiteSpace() && imgsrc.Length > 5)
+                {
+                    list.Add(new NoteDisPlayImg()
+                    {
+                        DTitle = title,
+                        DPicUrl = imgsrc,
+                        DataStatus = StatusEnum.Normal
+                    });
+                }
+            });
+            var count = await NoteDisPlayImgBLL.ExecuteAsync("insert into NoteDisPlayImg(DTitle,DPicUrl,DataStatus) values(@DTitle,@DPicUrl,@DataStatus)", list);//.InsertAsync(list);
+            if (count > 0)
+            {
+                obj.Status = true;
+                obj.Msg = string.Format("成功添加了 {0} 个图片", count);
+            }
+            else
+            {
+                obj.Msg = "操作失败，请重试";
+            }
+            return Json(obj);
         }
 
         /// <summary>

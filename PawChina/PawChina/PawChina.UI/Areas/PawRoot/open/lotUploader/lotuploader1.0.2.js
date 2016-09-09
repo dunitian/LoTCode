@@ -1,4 +1,5 @@
 ﻿(function ($) {
+    var files = [];//文件组
     //Id,Url,回调函数,是否是单个文件,文件数量,文件大小,按钮文本,
     $.lotuploader = function (lotdata) {
         window.console.log('LoTUploader V1.0.2 By dunitian QQ:1054186320 WebSite:dnt.dkill.net');
@@ -67,6 +68,7 @@
                 uploader.on('uploadSuccess', function (file, data) {
                     if (data.status) {
                         $('#' + file.id).addClass('upload-state-done');
+                        files.push(data.msg);
                     } else {
                         showMsg(file, data.msg);
                         setTimeout(function () {
@@ -132,6 +134,8 @@
             }
         });
     };
+    //获取文件组
+    $.lotuploader.getFiles = function () { return files; };
 })(jQuery);
 
 //错误信息显示
@@ -143,6 +147,7 @@ function showMsg(file, msg) {
     }
     $error.text(msg);
 }
+
 //错误信息提示
 function addMsg(msg) {
     $('#lot-uploader').prepend('<h4 class="temp-log" style="color:red;font-family:微软雅黑;">' + msg + '</h4>')
@@ -151,6 +156,7 @@ function addMsg(msg) {
     }, 2000);
 }
 
+//webuploader
 (function (root, factory) {
     var modules = {},
 

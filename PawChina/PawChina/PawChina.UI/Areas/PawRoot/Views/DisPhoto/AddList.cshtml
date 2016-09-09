@@ -67,7 +67,17 @@
             if (title.length < 1) {
                 title = "笔记默认展图";
             }
-
+            $.post('/PawRoot/DisPhoto/AddList', { title: title, imgs: $.lotuploader.getFiles() }, function (data) {
+                if (data.Status) {
+                    showMsg(data.Msg, 500);
+                    setTimeout(function () {
+                        window.location.href = '/PawRoot/DisPhoto/Index';
+                    }, 1000)
+                } else {
+                    showMsg(data.Msg);
+                }
+            });
+            console.log();
         });
     </script>
 </body>
