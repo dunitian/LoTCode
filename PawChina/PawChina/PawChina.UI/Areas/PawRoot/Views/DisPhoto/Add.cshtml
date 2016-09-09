@@ -2,5 +2,52 @@
     Layout = "~/Areas/PawRoot/Views/Shared/PawRootEdit.cshtml";
 }
 
-<h2>Add</h2>
+@section HeadCss{
+}
 
+<div class="form-horizontal">
+    <!--展图标题-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label">展图标题：</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="title" placeholder="不填代表默认标题...">
+        </div>
+        <label class="lot-blue">最大长度: 50 字符</label>
+    </div>
+    <!--展览小图-->
+    <div class="form-group">
+        <label class="col-sm-2 control-label" style="padding-top:13px;">展览小图：</label>
+        <div class="col-sm-6">
+            <span style="float:left;width:160px;"><span id="lot-uploader"></span></span><img id="displayPic" style="width:60px;height:33px;" />
+        </div>
+    </div>
+    @*半自动化*@
+    <div class="form-group">
+        <label class="col-sm-2 control-label">半自动化：</label>
+        <div class="col-sm-6">
+            <button class="btn btn-primary" id="autoA">默认作者名</button>&nbsp;&nbsp;
+            <button class="btn btn-warning" id="autoB">随机浏览量</button>&nbsp;&nbsp;
+            <button class="btn btn-success" id="autoC">重置展览图</button>&nbsp;&nbsp;
+            <button class="btn btn-primary" id="autoD">清空编辑器</button>&nbsp;&nbsp;
+            <button class="btn btn-danger" id="autoE">自动分词（SEO Key）</button>
+        </div>
+    </div>
+    <!--表单提交-->
+    <div class="form-group">
+        <label class="col-sm-2"></label>
+        <div class="col-sm-6">
+            <button id="form-success" class="btn btn-success lot-form-btn">提 交 文 章</button>
+            <button id="form-gohome" class="btn btn-success lot-form-btn">返 回 列 表</button>
+        </div>
+    </div>
+</div>
+
+@section JsScript{
+    <script src="/Areas/PawRoot/assets/js/note.min.js" async></script>
+    <script type="text/javascript">
+        //提交表单
+        $('#form-success').click(function () {
+            AjaxToNote(false);
+        });
+    </script>
+}

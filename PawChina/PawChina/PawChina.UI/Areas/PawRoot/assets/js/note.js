@@ -1,4 +1,7 @@
-﻿$(document).ready(function () {
+﻿//实例化编辑器
+var ue = UE.getEditor('container');
+
+$(document).ready(function () {
     //人性化提示
     $('#title').keyup(function () {
         RightMsg(this, 100);
