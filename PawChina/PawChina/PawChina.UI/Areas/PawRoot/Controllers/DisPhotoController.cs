@@ -3,7 +3,7 @@ using PawChina.IBLL;
 using System.Web.Mvc;
 using PawChina.Model;
 using System.Threading.Tasks;
-
+using System;
 
 namespace PawChina.UI.Areas.PawRoot.Controllers
 {
@@ -29,13 +29,56 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 验证错误
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        private string GetErrorMsg(NoteDisPlayImg model)
+        {
+            string msg = string.Empty;
+            #region 验证系列
+            if (model == null)
+            {
+                return "参数不能为空";
+            }
+            if (model.DPicUrl.IsNullOrWhiteSpace())
+            {
+                return "上传图片不能为空";
+            }
+            #endregion
+            return msg;
+        }
+
         [HttpPost]
         public override async Task<JsonResult> Add(NoteDisPlayImg model)
         {
             AjaxOption<object> obj = new AjaxOption<object>();
 
+            //验证相关
+            obj.Msg = GetErrorMsg(model);
+            //有错误信息
+            if (!obj.Msg.IsNullOrWhiteSpace())
+            {
+                return Json(obj);
+            }
+
+            if (model.DTitle.IsNullOrWhiteSpace())
+            {
+                model.DTitle = "笔记默认展图";
+            }
+            model.DataStatus = StatusEnum.Normal;
+
+            var modelId = await NoteDisPlayImgBLL.InsertAsync(model);
+            if (modelId > 0)
+            {
+                obj.Status = true;
+                obj.Msg = "添加成功";
+            }
             return Json(obj);
         }
+
+
 
         /// <summary>
         /// 编辑页面

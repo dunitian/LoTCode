@@ -4,10 +4,10 @@ var ue = UE.getEditor('container');
 $(document).ready(function () {
     //人性化提示
     $('#title').keyup(function () {
-        RightMsg(this, 100);
+        rightMsg(this, 100);
     });
     $('#author').keyup(function () {
-        RightMsg(this, 50);
+        rightMsg(this, 50);
     });
 
     //半自动化操作
@@ -45,7 +45,7 @@ $(document).ready(function () {
 });
 
 //右边人性化提示，obj:当前对象，n:最多多少字符
-function RightMsg(obj, n) {
+function rightMsg(obj, n) {
     var str = $.trim(obj.value);
     if (str.length > n) {
         str = str.substring(0, n);
@@ -55,7 +55,7 @@ function RightMsg(obj, n) {
 }
 
 //add and edit post to note
-function AjaxToNote(isEdit) {
+function ajaxToNote(isEdit) {
     //标题
     var title = $.trim($('#title').val());
     if (title.length < 1) {

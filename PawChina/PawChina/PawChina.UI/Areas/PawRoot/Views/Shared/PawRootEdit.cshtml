@@ -29,8 +29,6 @@
     </header>
     <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="/Areas/PawRoot/open/lotUploader/lotuploader1.0.2.min.js"></script>
-    <script src="/Areas/PawRoot/open/ueditor/ueditor.config.js"></script>
-    <script src="/Areas/PawRoot/open/ueditor/ueditor.all.min.js"></script>
     <script src="//cdn.bootcss.com/select2/4.0.3/js/select2.js"></script>
     <script type="text/javascript">
         //实例化上传控件
@@ -41,7 +39,6 @@
             fileSize: 1024 * 1024 * 5,
             btnStr: '点我就上传默认展图',
             lotSuccessFunc: function (data) {
-                console.log(data)
                 $('#displayPic').attr('src', data.msg);
             },
             lotErrorFunc: function (msg) {

@@ -117,6 +117,8 @@
     </div>
 </div>
 @section JsScript{
+    <script src="/Areas/PawRoot/open/ueditor/ueditor.config.js"></script>
+    <script src="/Areas/PawRoot/open/ueditor/ueditor.all.min.js"></script>
     <script src="/Areas/PawRoot/assets/js/note.min.js" async></script>
     <script type="text/javascript">
         //更新时间
@@ -125,7 +127,7 @@
         });
         //提交表单
         $('#form-success').click(function () {
-            AjaxToNote(true);
+            ajaxToNote(true);
         });
     </script>
 }

@@ -9,7 +9,7 @@
     <!--展图标题-->
     <div class="form-group">
         <label class="col-sm-2 control-label">展图标题：</label>
-        <div class="col-sm-6">
+        <div class="col-sm-5">
             <input type="text" class="form-control" id="title" placeholder="不填代表默认标题...">
         </div>
         <label class="lot-blue">最大长度: 50 字符</label>
@@ -17,37 +17,45 @@
     <!--展览小图-->
     <div class="form-group">
         <label class="col-sm-2 control-label" style="padding-top:13px;">展览小图：</label>
-        <div class="col-sm-6">
+        <div class="col-sm-5">
             <span style="float:left;width:160px;"><span id="lot-uploader"></span></span><img id="displayPic" style="width:60px;height:33px;" />
         </div>
     </div>
-    @*半自动化*@
     <div class="form-group">
-        <label class="col-sm-2 control-label">半自动化：</label>
-        <div class="col-sm-6">
-            <button class="btn btn-primary" id="autoA">默认作者名</button>&nbsp;&nbsp;
-            <button class="btn btn-warning" id="autoB">随机浏览量</button>&nbsp;&nbsp;
-            <button class="btn btn-success" id="autoC">重置展览图</button>&nbsp;&nbsp;
-            <button class="btn btn-primary" id="autoD">清空编辑器</button>&nbsp;&nbsp;
-            <button class="btn btn-danger" id="autoE">自动分词（SEO Key）</button>
+        <label class="col-sm-2 control-label">网站尺寸：</label>
+        <div class="col-sm-5">
+            <label style="padding-right:1em" class="control-label lot-red">185*166</label>
+            <label style="padding-right:1em" class="control-label">445*293</label>
+            <label style="padding-right:1em" class="control-label lot-red">652*428</label>
+            <label style="padding-right:1em" class="control-label">765*500</label>
+            <button id="seeImg" class="btn btn-primary">点我预览图片</button>
         </div>
+        <label class="lot-blue">图片没有太大变形即可提交</label>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label"></label>
+        <div class="col-sm-5" id="imgview"></div>
     </div>
     <!--表单提交-->
     <div class="form-group">
         <label class="col-sm-2"></label>
         <div class="col-sm-6">
-            <button id="form-success" class="btn btn-success lot-form-btn">提 交 文 章</button>
+            <button id="form-success" class="btn btn-success lot-form-btn">提 交 图 片</button>
             <button id="form-gohome" class="btn btn-success lot-form-btn">返 回 列 表</button>
         </div>
     </div>
 </div>
 
 @section JsScript{
-    <script src="/Areas/PawRoot/assets/js/note.min.js" async></script>
+    <script src="/Areas/PawRoot/assets/js/disphoto.js" async></script>
     <script type="text/javascript">
+        $('#seeImg').click(function () {
+            var imgSrc = $('#displayPic').attr('src');
+            $('#imgview').html('<div><img src="' + imgSrc + '" alt="185*166" style="width:185px;height:166px;" /></div><div><img src="' + imgSrc + '" alt="445*293" style="width:445px;height:293px;" /></div><div><img src="' + imgSrc + '" alt="652*428" style="width:652px;height:428px;" /></div><div><img src="' + imgSrc + '" alt="765*500" style="width:765px;height:500px;" /></div>');
+        });
         //提交表单
         $('#form-success').click(function () {
-            AjaxToNote(false);
+            ajaxToDisPhoto(false);
         });
     </script>
 }

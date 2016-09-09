@@ -17,7 +17,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public string GetErrorMsg(NoteInfo model)
+        private string GetErrorMsg(NoteInfo model)
         {
             string msg = string.Empty;
             #region 验证系列
