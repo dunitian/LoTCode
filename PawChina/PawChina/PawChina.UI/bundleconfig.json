@@ -34,5 +34,11 @@
     "inputFiles": [
       "Areas/PawRoot/assets/js/disphoto.js"
     ]
+  },
+  {
+    "outputFileName": "Areas/PawRoot/assets/js/protypeinfo.min.js",
+    "inputFiles": [
+      "Areas/PawRoot/assets/js/protypeinfo.js"
+    ]
   }
 ]

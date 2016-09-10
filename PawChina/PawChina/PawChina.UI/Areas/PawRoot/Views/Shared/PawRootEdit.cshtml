@@ -5,11 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>详细页面</title>
-    <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/Areas/PawRoot/assets/css/common.css" rel="stylesheet" />
-    <link href="/Areas/PawRoot/open/lotUploader/lotuploader1.0.1.min.css" rel="stylesheet" />
-    <link href="//cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Areas/PawRoot/assets/css/common.css" />
+    <link rel="stylesheet" href="/Areas/PawRoot/open/lotUploader/lotuploader1.0.1.min.css" />
     <script src="//cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
     <script src="/Areas/PawRoot/assets/js/common.min.js"></script>
     <!--[if lt IE 9]>
@@ -29,7 +28,6 @@
     </header>
     <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="/Areas/PawRoot/open/lotUploader/lotuploader1.0.2.min.js"></script>
-    <script src="//cdn.bootcss.com/select2/4.0.3/js/select2.js"></script>
     <script type="text/javascript">
         //实例化上传控件
         $.lotuploader({
@@ -47,7 +45,7 @@
                     $('.lot-temp').remove();
                 }, 2000);
             }
-        });        
+        });
 
         //消息提醒（不知道为啥，去掉则添加页面和编辑页面就没有弹窗口了）
         function showMsg(obj, time) {

@@ -14,7 +14,7 @@
             <input type="hidden" id="nId" value="@Model.NId" />
             <input type="text" class="form-control" id="title" placeholder="请输入标题名..." value="@Model.NTitle">
         </div>
-        <label class="lot-blue">最佳长度: 10 ~ 30 字符</label>
+        <label class="lot-blue">最大长度: 100 字符</label>
     </div>
     <!--笔记作者-->
     <div class="form-group">
@@ -28,7 +28,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">页面浏览：</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" id="hitCount" placeholder="请输入浏览量..." value="@Model.NHitCount">
+            <input type="number" class="form-control" id="hitCount" placeholder="请输入浏览量..." value="@Model.NHitCount">
         </div>
     </div>
     <!--数据状态-->

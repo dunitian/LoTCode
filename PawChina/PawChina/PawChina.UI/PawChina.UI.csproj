@@ -123,6 +123,10 @@
     <Content Include="Areas\PawRoot\assets\js\note.min.js">
       <DependentUpon>note.js</DependentUpon>
     </Content>
+    <Content Include="Areas\PawRoot\assets\js\protypeinfo.js" />
+    <Content Include="Areas\PawRoot\assets\js\protypeinfo.min.js">
+      <DependentUpon>protypeinfo.js</DependentUpon>
+    </Content>
     <Content Include="Areas\PawRoot\open\lotUploader\lotuploader.swf" />
     <Content Include="Areas\PawRoot\open\lotUploader\lotuploader1.0.2.js" />
     <Content Include="Areas\PawRoot\open\lotUploader\lotuploader1.0.1.min.css" />
