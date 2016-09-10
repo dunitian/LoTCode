@@ -83,7 +83,7 @@
                 if (data.Status) {
                     showMsg(data.Msg, 500);
                     setTimeout(function () {
-                        window.location.href = '/PawRoot/DisPhoto/Index';
+                        window.location.href = '@Url.Action("Index")';
                     }, 1000)
                 } else {
                     showMsg(data.Msg);
