@@ -411,6 +411,7 @@
     <Compile Include="Areas\PawRoot\Controllers\PartialViewController.cs" />
     <Compile Include="Areas\PawRoot\Controllers\ManagerController.cs" />
     <Compile Include="Areas\PawRoot\Controllers\NoteController.cs" />
+    <Compile Include="Areas\PawRoot\Controllers\ProductController.cs" />
     <Compile Include="Areas\PawRoot\Models\ChineseViewModel.cs" />
     <Compile Include="Areas\PawRoot\open\ueditor\net\App_Code\Config.cs" />
     <Compile Include="Areas\PawRoot\open\ueditor\net\App_Code\ConfigHandler.cs" />
@@ -466,6 +467,9 @@
     <Content Include="Areas\PawRoot\Views\DisPhoto\Index.cshtml" />
     <Content Include="Areas\PawRoot\Views\DisPhoto\Edit.cshtml" />
     <Content Include="Areas\PawRoot\Views\DisPhoto\AddList.cshtml" />
+    <Content Include="Areas\PawRoot\Views\Product\Add.cshtml" />
+    <Content Include="Areas\PawRoot\Views\Product\Edit.cshtml" />
+    <Content Include="Areas\PawRoot\Views\Product\Index.cshtml" />
     <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\PawChina.pubxml" />
     <None Include="web.Debug.config">

@@ -127,6 +127,12 @@ namespace PawChina.IBLL
         /// <param name="p2">Total动态参数</param>
         /// <returns></returns>
         Task<string> PageLoadAsync(string sql, object p = null, string sqlTotal = "", object p2 = null);
+        /// <summary>
+        /// 根据模型查询数据~~~非通用（PawChina专用）
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        Task<string> PageLoadAsync(Model.QueryModel model, string tableName, string sqlWhere, dynamic pms1, dynamic pms2);
         #endregion
 
         #endregion
