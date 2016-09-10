@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="BaseDal.cs" />
     <Compile Include="NoteDisPlayImgDal.cs" />
+    <Compile Include="ProductInfoDal.cs" />
+    <Compile Include="ProTypeInfoDal.cs" />
     <Compile Include="SeoTKDDal.cs" />
     <Compile Include="NoteInfoDal.cs" />
     <Compile Include="ChineseInfoDal.cs" />

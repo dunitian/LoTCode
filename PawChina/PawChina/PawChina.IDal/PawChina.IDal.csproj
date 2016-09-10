@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="IBaseDal.cs" />
     <Compile Include="INoteDisPlayImgDal.cs" />
+    <Compile Include="IProductInfoDal.cs" />
+    <Compile Include="IProTypeInfoDal.cs" />
     <Compile Include="ISeoTKDDal.cs" />
     <Compile Include="INoteInfoDal.cs" />
     <Compile Include="IChineseInfoDal.cs" />

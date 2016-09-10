@@ -66,9 +66,9 @@
                                 <i class="fa fa-lg arrow"></i>
                             </a>
                             <ul class="collapse">
-                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">Paw 分类</a></li>
-                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">Paw 产品</a></li>
-                                <li><a href="#" lot-url="@Url.Action("Total","Manager")">Paw 配件</a></li>
+                                <li><a href="#" lot-url="@Url.Action("Index","ProType")">Paw 分类</a></li>
+                                <li><a href="#" lot-url="@Url.Action("Index", "Product", new { PGroupType = 1 })">Paw 产品</a></li>
+                                <li><a href="#" lot-url="@Url.Action("Index", "Product", new { PGroupType = 2 })">Paw 配件</a></li>
                             </ul>
                         </li>
                         <!--顶级分类 笔记相关-->
@@ -120,13 +120,13 @@
                                     </ul>
                                 </li>
                                 @*<li>
-                                    <a href="#"><span>开发管理</span><i class="fa arrow"></i></a>
-                                    <ul>
-                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">百度地图</a></li>
-                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">畅言插件</a></li>
-                                        <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">前端插件</a></li>
-                                    </ul>
-                                </li>*@
+                                        <a href="#"><span>开发管理</span><i class="fa arrow"></i></a>
+                                        <ul>
+                                            <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">百度地图</a></li>
+                                            <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">畅言插件</a></li>
+                                            <li class="sidebar-nav-item"><a href="#" lot-url="@Url.Action("Total","Manager")">前端插件</a></li>
+                                        </ul>
+                                    </li>*@
                             </ul>
                         </li>
                     </ul>

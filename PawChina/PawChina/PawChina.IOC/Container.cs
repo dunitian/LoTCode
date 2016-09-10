@@ -16,7 +16,7 @@ namespace PawChina.IOC
         /// <summary>
         /// 获取 IBLL 的实例化对象
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">接口</typeparam>
         /// <returns></returns>
         public static T Resolve<T>()
         {
@@ -46,7 +46,8 @@ namespace PawChina.IOC
             builder.RegisterType<NoteInfoBLL>().As<INoteInfoBLL>().InstancePerLifetimeScope();
             builder.RegisterType<SeoTKDBLL>().As<ISeoTKDBLL>().InstancePerLifetimeScope();
             builder.RegisterType<NoteDisPlayImgBLL>().As<INoteDisPlayImgBLL>().InstancePerLifetimeScope();
-
+            builder.RegisterType<ProductInfoBLL>().As<IProductInfoBLL>().InstancePerLifetimeScope();
+            builder.RegisterType<ProTypeInfoBLL>().As<IProTypeInfoBLL>().InstancePerLifetimeScope();
             container = builder.Build();
         }
     }

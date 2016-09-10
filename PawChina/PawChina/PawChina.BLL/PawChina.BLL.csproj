@@ -45,7 +45,9 @@
     <Compile Include="ChineseInfoBLL.cs" />
     <Compile Include="NoteDisPlayImgBLL.cs" />
     <Compile Include="NoteInfoBLL.cs" />
+    <Compile Include="ProductInfoBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProTypeInfoBLL.cs" />
     <Compile Include="SeoTKDBLL.cs" />
   </ItemGroup>
   <ItemGroup>

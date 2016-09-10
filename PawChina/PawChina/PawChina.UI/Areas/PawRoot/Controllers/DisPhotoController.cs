@@ -196,7 +196,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         }
 
         /// <summary>
-        /// 查询笔记页面
+        /// 模型查询
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>

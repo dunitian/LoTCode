@@ -16,7 +16,7 @@ namespace PawChina.Factory
         /// <summary>
         /// 获取 IDal 的实例化对象
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">接口</typeparam>
         /// <returns></returns>
         public static T Resolve<T>()
         {
@@ -50,6 +50,10 @@ namespace PawChina.Factory
             builder.RegisterType<SeoTKDDal>().As<ISeoTKDDal>().InstancePerLifetimeScope();
             //笔记展图
             builder.RegisterType<NoteDisPlayImgDal>().As<INoteDisPlayImgDal>().InstancePerLifetimeScope();
+            //商品信息
+            builder.RegisterType<ProductInfoDal>().As<IProductInfoDal>().InstancePerLifetimeScope();
+            //商品分类
+            builder.RegisterType<ProTypeInfoDal>().As<IProTypeInfoDal>().InstancePerLifetimeScope();
 
             container = builder.Build();
         }

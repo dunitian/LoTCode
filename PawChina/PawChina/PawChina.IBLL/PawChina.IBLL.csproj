@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="IBaseBLL.cs" />
     <Compile Include="INoteDisPlayImgBLL.cs" />
+    <Compile Include="IProductInfoBLL.cs" />
+    <Compile Include="IProTypeInfoBLL.cs" />
     <Compile Include="ISeoTKDBLL.cs" />
     <Compile Include="INoteInfoBLL.cs" />
     <Compile Include="IChineseInfoBLL.cs" />
