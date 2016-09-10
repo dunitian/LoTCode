@@ -438,7 +438,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\PawRoot\Views\Admin\" />
-    <Folder Include="Areas\PawRoot\Views\ProType\" />
     <Folder Include="assets\css\" />
     <Folder Include="assets\js\" />
     <Folder Include="Controllers\" />
@@ -472,6 +471,9 @@
     <Content Include="Areas\PawRoot\Views\Product\Add.cshtml" />
     <Content Include="Areas\PawRoot\Views\Product\Edit.cshtml" />
     <Content Include="Areas\PawRoot\Views\Product\Index.cshtml" />
+    <Content Include="Areas\PawRoot\Views\ProType\Add.cshtml" />
+    <Content Include="Areas\PawRoot\Views\ProType\Edit.cshtml" />
+    <Content Include="Areas\PawRoot\Views\ProType\Index.cshtml" />
     <None Include="bundleconfig.json" />
     <None Include="Properties\PublishProfiles\PawChina.pubxml" />
     <None Include="web.Debug.config">
