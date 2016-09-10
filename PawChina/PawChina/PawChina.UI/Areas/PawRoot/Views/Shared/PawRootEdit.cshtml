@@ -54,6 +54,11 @@
                 easyDialog.open({ container: { content: obj }, autoClose: time });
             }
         }
+
+        //返回Index
+        $('#form-gohome').click(function () {
+            window.location.href = '@Url.Action("Index")';
+        });
     </script>
     @RenderSection("JsScript", false)
 </body>

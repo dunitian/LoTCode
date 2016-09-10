@@ -38,10 +38,6 @@ $(document).ready(function () {
             showMsg('文章内容不能为空！');
         }
     });
-    //返回Index
-    $('#form-gohome').click(function () {
-        window.location.href = '/PawRoot/Note/Index';
-    });
 });
 
 //右边人性化提示，obj:当前对象，n:最多多少字符

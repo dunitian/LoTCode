@@ -61,13 +61,17 @@
             fileSize: 1024 * 1024 * 2,
             fileCount: 100
         });
-        //消息提醒（不知道为啥，去掉则添加页面和编辑页面就没有弹窗口了）
+        //todo:消息提醒（不知道为啥，去掉则添加页面和编辑页面就没有弹窗口了）
         function showMsg(obj, time) {
             if (obj) {
                 if (!time) { time = 1000; }
                 easyDialog.open({ container: { content: obj }, autoClose: time });
             }
         }
+        //返回Index
+        $('#form-gohome').click(function () {
+            window.location.href = '@Url.Action("Index")';
+        });
         //提交表单
         $('#form-success').click(function () {
             //标题
