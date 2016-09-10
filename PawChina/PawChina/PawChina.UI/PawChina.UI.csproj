@@ -412,6 +412,7 @@
     <Compile Include="Areas\PawRoot\Controllers\ManagerController.cs" />
     <Compile Include="Areas\PawRoot\Controllers\NoteController.cs" />
     <Compile Include="Areas\PawRoot\Controllers\ProductController.cs" />
+    <Compile Include="Areas\PawRoot\Controllers\ProTypeController.cs" />
     <Compile Include="Areas\PawRoot\Models\ChineseViewModel.cs" />
     <Compile Include="Areas\PawRoot\open\ueditor\net\App_Code\Config.cs" />
     <Compile Include="Areas\PawRoot\open\ueditor\net\App_Code\ConfigHandler.cs" />
@@ -437,6 +438,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\PawRoot\Views\Admin\" />
+    <Folder Include="Areas\PawRoot\Views\ProType\" />
     <Folder Include="assets\css\" />
     <Folder Include="assets\js\" />
     <Folder Include="Controllers\" />

@@ -6,20 +6,16 @@ using System.Threading.Tasks;
 
 namespace PawChina.UI.Areas.PawRoot.Controllers
 {
-    /// <summary>
-    /// 不需要继承Admin（每一个控制器都和他不一样，太麻烦）
-    /// </summary>
-    public class ProductController : BaseController
+    public class ProTypeController : AdminController<ProTypeInfo>
     {
         public static IProTypeInfoBLL ProTypeInfoBLL = Container.Resolve<IProTypeInfoBLL>();
-        public static IProductInfoBLL ProductInfoBLL = Container.Resolve<IProductInfoBLL>();
 
         /// <summary>
         /// 验证错误
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        private string GetErrorMsg(ProductInfo model)
+        private string GetErrorMsg(ProTypeInfo model)
         {
             string msg = string.Empty;
             #region 验证系列
@@ -39,14 +35,8 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// 列表页面
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
+        public override ActionResult Index()
         {
-            string pType = Request["PGroupType"];
-            if (pType.IsNullOrWhiteSpace())
-            {
-
-            }
-
             return View();
         }
 
@@ -54,13 +44,13 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// 添加页面
         /// </summary>
         /// <returns></returns>
-        public ActionResult Add()
+        public override ActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<JsonResult> Add(ProductInfo model)
+        public override async Task<JsonResult> Add(ProTypeInfo model)
         {
             AjaxOption<object> obj = new AjaxOption<object>();
             //#region 验证相关
@@ -77,7 +67,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             ////}
             //#endregion
             //model.PDataStatus = StatusEnum.Normal;
-            //var modelId = await ProductInfoBLL.InsertAsync(model);
+            //var modelId = await ProTypeInfoBLL.InsertAsync(model);
             //if (modelId > 0)
             //{
             //    obj.Status = true;
@@ -90,13 +80,13 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// 编辑页面
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> Edit(int id = 0)
+        public override async Task<ActionResult> Edit(int id = 0)
         {
             if (id <= 0)
             {
                 return RedirectToAction("Add");
             }
-            var model = await ProductInfoBLL.GetAsync(id);
+            var model = await ProTypeInfoBLL.GetAsync(id);
             if (model == null)
             {
                 return RedirectToAction("Add");
@@ -104,7 +94,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<JsonResult> Edit(ProductInfo model)
+        public override async Task<JsonResult> Edit(ProTypeInfo model)
         {
             AjaxOption<object> obj = new AjaxOption<object>();
             #region 验证相关
@@ -124,8 +114,8 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             //    return Json(obj);
             //}
             #endregion
-            //var ProductInfo = await ProductInfoBLL.UpdateAsync(model);
-            //if (ProductInfo != null)
+            //var ProTypeInfo = await ProTypeInfoBLL.UpdateAsync(model);
+            //if (ProTypeInfo != null)
             //{
             //    obj.Status = true;
             //    obj.Msg = "更新成功";
@@ -139,7 +129,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// <param name="ids"></param>
         /// <param name="status"></param>
         /// <returns></returns>
-        public async Task<JsonResult> UpdateList(string ids, StatusEnum status)
+        public override async Task<JsonResult> UpdateList(string ids, StatusEnum status)
         {
             AjaxOption<object> obj = new AjaxOption<object>();
             //if (ids.IsNullOrWhiteSpace())
@@ -147,7 +137,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             //    obj.Msg = "选中项不能为空";
             //    return Json(obj);
             //}
-            //int i = await ProductInfoBLL.ExecuteAsync("update ProductInfo set DataStatus=@DataStatus where DId in @DIds", new
+            //int i = await ProTypeInfoBLL.ExecuteAsync("update ProTypeInfo set DataStatus=@DataStatus where DId in @DIds", new
             //{
             //    DataStatus = status,
             //    DIds = ids.SplitToIntList()
@@ -163,7 +153,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult> Query(QueryModel model)
+        public override async Task<ActionResult> Query(QueryModel model)
         {
             var obj = new AjaxOption<object>();
             if (model == null)
@@ -177,7 +167,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
                 obj.Msg = "请检查开始或结束时间！";
                 return Json(obj);
             }
-            return Content(await ProductInfoBLL.QueryAsync(model));
+            return Content(await ProTypeInfoBLL.QueryAsync(model));
         }
     }
 }
