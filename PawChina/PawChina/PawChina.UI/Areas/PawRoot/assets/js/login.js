@@ -29,9 +29,14 @@ jQuery(document).ready(function () {
             });
             return false;
         }
+        var url = $('#returnUrl').val();
+        alert(url);
+        if (url == '' || url.length < 9) {
+            url = '/PawRoot/Manager/Index'
+        }
         $.post('/PawRoot/Manager/LoginOn', { PawName: username, PawPass: password }, function (data) {
             if (data.Status) {
-                location.href = '/PawRoot/Manager/Index'
+                location.href = url;
             } else {
                 easyDialog.open({ container: { content: data.Msg }, autoClose: 2000 });
             }

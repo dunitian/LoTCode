@@ -17,8 +17,21 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         /// 登录页面
         /// </summary>
         /// <returns></returns>
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
+            if (returnUrl.IsNullOrWhiteSpace())
+            {
+                returnUrl = Url.Action("Index", "Manager");
+            }
+            else
+            {
+                //防止域名劫持
+                if(DomainHelper.IsOtherDomain(Request, new System.Uri(returnUrl)))
+                {
+                    returnUrl = Url.Action("Index", "Manager");
+                }
+            }
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
         [HttpPost]

@@ -33,7 +33,8 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
                 }
                 else
                 {
-                    filterContext.Result = RedirectToAction("Login", "Manager");
+                    //filterContext.Result = RedirectToAction("Login", "Manager");
+                    filterContext.Result = RedirectToAction("Login", "Manager", new { returnUrl = filterContext.HttpContext.Request.Url });
                 }
             }
         }
