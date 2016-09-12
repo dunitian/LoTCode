@@ -10,23 +10,27 @@
     //半自动化操作
     //商品分类
     $('#autoA').click(function () {
-        $('#groupType').find("option[value='1']").attr("selected", true)
+        $('#groupType').find("option[value='1']").attr("selected", true);
     });
     //配件分类
     $('#autoB').click(function () {
-        $('#groupType').find("option[value='2']").attr("selected", true)
+        $('#groupType').find("option[value='2']").attr("selected", true);
     });
     //一级分类
     $('#autoC').click(function () {
-        $('#floor').find("option[value='1']").attr("selected", true)
+        $('#floor').find("option[value='1']").attr("selected", true);
+        $('#ptype').css('display', 'none');
+        $('.lot-tagSelect').selectpicker('val', '');
     });
     //二级分类
     $('#autoD').click(function () {
-        $('#floor').find("option[value='2']").attr("selected", true)
+        $('#floor').find("option[value='2']").attr("selected", true);
+        $('#ptype').css('display', '');
     });
     //三级分类
     $('#autoE').click(function () {
-        $('#floor').find("option[value='3']").attr("selected", true)
+        $('#floor').find("option[value='3']").attr("selected", true);
+        $('#ptype').css('display', '');
     });
 });
 
@@ -43,13 +47,13 @@ function rightMsg(obj, n) {
 function ajaxToProType(isEdit) {
     var name = $('#name').val();
     var gtype = $('#groupType').val();
-    var floor = $('#floor');
-    var pid = $('#pid').val();
+    var floor = $('#floor').val();
+    var pid = $('.lot-tagSelect').selectpicker('val');
     var sortnum = $('#sort').val();
     var displayPic = $('#displayPic').attr('src');
     var container = $('#container').val();
     var updateTime = new Date().getTime();
-
+    console.log(pid);
     //是否是编辑页面
     if (isEdit) {
         var dId = $('#tId').val();
@@ -65,9 +69,9 @@ function ajaxToProType(isEdit) {
             }
         });
     } else {
-        $.post('/PawRoot/ProType/Add', { TName: name, TContent: container, TPid: pid, TSort: sortnum, TFloor: floor, TUpdateTime: updateTime, TGroupType: gtype, TDisplayPic: displayPic, TDataStatus: dataStatus }, function (data) {
+        $.post('/PawRoot/ProType/Add', { TName: name, TContent: container, TPid: pid, TSort: sortnum, TFloor: floor, TUpdateTime: updateTime, TGroupType: gtype, TDisplayPic: displayPic }, function (data) {
             if (data.Status) {
-                showMsg(data.Msg);
+                showMsg(data.Msg, 1500);
                 setTimeout(function () {
                     window.location.href = '/PawRoot/ProType/Index';
                 }, 1000)

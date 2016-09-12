@@ -23,10 +23,34 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             {
                 return "参数不能为空";
             }
-            //if (model.DPicUrl.IsNullOrWhiteSpace())
-            //{
-            //    return "上传图片不能为空";
-            //}
+            if (model.TName.IsNullOrWhiteSpace())
+            {
+                return "分类名称不能为空";
+            }
+            if (model.TGroupType != ProductEnum.IsProduct && model.TGroupType != ProductEnum.IsProductPart)
+            {
+                return "请选择分类类别（商品分类 | 配件分类）";
+            }
+            if (model.TFloor != 1 && model.TFloor != 2 && model.TFloor != 3)
+            {
+                return "请选择该分类所属级别（1，2，3）";
+            }
+            if (model.TPid < 0)
+            {
+                return "请选择正确的所属分类";
+            }
+            if (model.TSort > short.MaxValue)
+            {
+                return "不能超过32767";
+            }
+            if (model.TDisplayPic.IsNullOrWhiteSpace())
+            {
+                return "上传图片不能为空";
+            }
+            if (model.TContent.IsNullOrWhiteSpace())
+            {
+                return "分类简介不能为空";
+            }
             #endregion
             return msg;
         }
@@ -53,26 +77,22 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
         public override async Task<JsonResult> Add(ProTypeInfo model)
         {
             AjaxOption<object> obj = new AjaxOption<object>();
-            //#region 验证相关
-            //obj.Msg = GetErrorMsg(model);
-            ////有错误信息
-            //if (!obj.Msg.IsNullOrWhiteSpace())
-            //{
-            //    return Json(obj);
-            //}
+            #region 验证相关
+            obj.Msg = GetErrorMsg(model);
+            //有错误信息
+            if (!obj.Msg.IsNullOrWhiteSpace())
+            {
+                return Json(obj);
+            }
+            #endregion
+            model.TDataStatus = StatusEnum.Normal;
 
-            ////if (model.DTitle.IsNullOrWhiteSpace())
-            ////{
-            ////    model.DTitle = "笔记默认展图";
-            ////}
-            //#endregion
-            //model.PDataStatus = StatusEnum.Normal;
-            //var modelId = await ProTypeInfoBLL.InsertAsync(model);
-            //if (modelId > 0)
-            //{
-            //    obj.Status = true;
-            //    obj.Msg = "添加成功";
-            //}
+            var modelId = await ProTypeInfoBLL.InsertAsync(model);
+            if (modelId > 0)
+            {
+                obj.Status = true;
+                obj.Msg = "添加成功";
+            }
             return Json(obj);
         }
 
