@@ -10,7 +10,7 @@
     //半自动化操作
     //商品分类
     $('#autoA').click(function () {
-        $('#groupType').find("option[value='1']").attr("selected",true)
+        $('#groupType').find("option[value='1']").attr("selected", true)
     });
     //配件分类
     $('#autoB').click(function () {
@@ -41,11 +41,20 @@ function rightMsg(obj, n) {
 }
 
 function ajaxToProType(isEdit) {
+    var name = $('#name').val();
+    var gtype = $('#groupType').val();
+    var floor = $('#floor');
+    var pid = $('#pid').val();
+    var sortnum = $('#sort').val();
+    var displayPic = $('#displayPic').attr('src');
+    var container = $('#container').val();
+    var updateTime = new Date().getTime();
+
     //是否是编辑页面
     if (isEdit) {
         var dId = $('#tId').val();
         var dataStatus = $('#dataStatus').val(); //数据状态
-        $.post('/PawRoot/ProType/Edit', { TId: tId, TTitle: title, DPicUrl: displayPic, TDataStatus: dataStatus }, function (data) {
+        $.post('/PawRoot/ProType/Edit', { TId: tId, TName: name, TContent: container, TPid: pid, TSort: sortnum, TFloor: floor, TUpdateTime: updateTime, TGroupType: gtype, TDisplayPic: displayPic, TDataStatus: dataStatus }, function (data) {
             if (data.Status) {
                 showMsg(data.Msg, 500);
                 setTimeout(function () {
@@ -56,7 +65,7 @@ function ajaxToProType(isEdit) {
             }
         });
     } else {
-        $.post('/PawRoot/ProType/Add', { DTitle: title, DPicUrl: displayPic }, function (data) {
+        $.post('/PawRoot/ProType/Add', { TName: name, TContent: container, TPid: pid, TSort: sortnum, TFloor: floor, TUpdateTime: updateTime, TGroupType: gtype, TDisplayPic: displayPic, TDataStatus: dataStatus }, function (data) {
             if (data.Status) {
                 showMsg(data.Msg);
                 setTimeout(function () {

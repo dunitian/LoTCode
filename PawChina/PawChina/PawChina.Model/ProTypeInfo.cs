@@ -12,7 +12,7 @@ namespace PawChina.Model
         /// 编号
         /// </summary>
         [Key]
-		public int TId { get; set; }
+        public int TId { get; set; }
         /// <summary>
         /// 分类名
         /// </summary>
@@ -34,9 +34,9 @@ namespace PawChina.Model
         /// </summary>
 		public short TFloor { get; set; }
         /// <summary>
-        /// 创建时间
+        /// 创建时间--时间轴
         /// </summary>
-		public System.DateTime TCreateTime { get; set; }
+		public long TUpdateTime { get; set; }
         /// <summary>
         /// 分类类型
         /// </summary>
