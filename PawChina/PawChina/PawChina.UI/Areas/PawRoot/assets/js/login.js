@@ -30,7 +30,6 @@ jQuery(document).ready(function () {
             return false;
         }
         var url = $('#returnUrl').val();
-        alert(url);
         if (url == '' || url.length < 9) {
             url = '/PawRoot/Manager/Index'
         }

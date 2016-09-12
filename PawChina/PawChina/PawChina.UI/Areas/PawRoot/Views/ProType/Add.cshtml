@@ -11,7 +11,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">分类名称：</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" id="title" placeholder="请输入分类名...">
+            <input type="text" class="form-control" id="name" placeholder="请输入分类名...">
         </div>
         <label class="lot-blue">最大长度: 100 字符</label>
     </div>
@@ -25,7 +25,7 @@
                 <option value="2">配件分类</option>
             </select>
         </div>
-        <label class="lot-blue">商品分类 | 配件分类</label>
+        <label class="lot-blue"><a id="autoA" href="#">商品分类</a> | <a id="autoB" href="#">配件分类</a></label>
     </div>
     <!--分类级别-->
     <div class="form-group">
@@ -38,7 +38,7 @@
                 <option value="3">三级分类</option>
             </select>
         </div>
-        <label class="lot-blue">顶级分类，二级分类，三级分类</label>
+        <label class="lot-blue"><a id="autoC" href="#">顶级分类</a>，<a id="autoD" href="#">二级分类</a>，<a id="autoE" href="#">三级分类</a></label>
     </div>
     <!--所属分类-->
     <div class="form-group" id="ptype">
@@ -75,14 +75,16 @@
         <label class="col-sm-2 control-label" style="padding-top:13px;">展览小图：</label>
         <div class="col-sm-6">
             <span style="float:left;width:160px;"><span id="lot-uploader"></span></span><img id="displayPic" style="width:60px;height:33px;" />
+            <label class="lot-red">建议大小：200*200</label>
         </div>
     </div>
     <!--分类简介-->
     <div class="form-group">
         <label class="col-sm-2 control-label">分类简介：</label>
         <div class="col-sm-6">
-            <textarea id="container" class="form-control" style="height:9em;"></textarea>
+            <textarea id="container" class="form-control" style="height:9em;" placeholder="最大长度300   中文推荐长度：50~100   英文推荐长度：100~200"></textarea>
         </div>
+        <label class="lot-blue">最大长度: 300 字符</label>
     </div>
     <!--表单提交-->
     <div class="form-group">
@@ -103,7 +105,7 @@
         });
         //提交表单
         $('#form-success').click(function () {
-            ajaxToDisPhoto(false);
+            ajaxToProType(false);
         });
     </script>
 }
