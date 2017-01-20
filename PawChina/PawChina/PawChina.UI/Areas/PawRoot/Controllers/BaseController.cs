@@ -34,6 +34,7 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
                 else
                 {
                     //filterContext.Result = RedirectToAction("Login", "Manager");
+                    //todo:加一个非本域名的判断，非本域名则跳转到主页（防跨站攻击）
                     filterContext.Result = RedirectToAction("Login", "Manager", new { returnUrl = filterContext.HttpContext.Request.Url });
                 }
             }

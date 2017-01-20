@@ -1,8 +1,10 @@
-﻿using PawChina.IOC;
+﻿using System.Linq;
+using PawChina.IOC;
 using PawChina.IBLL;
 using System.Web.Mvc;
 using PawChina.Model;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace PawChina.UI.Areas.PawRoot.Controllers
 {
@@ -188,6 +190,30 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
                 return Json(obj);
             }
             return Content(await ProTypeInfoBLL.QueryAsync(model));
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> GetProTypes(int id)
+        {
+            AjaxOption<object> obj = new AjaxOption<object>();
+            if (id != 1 && id != 2)
+            {
+                obj.Msg = "分类级别不正确";
+                return Json(obj);
+            }
+            else
+            {
+                var list = new List<IEnumerable<ProTypeInfo>>();
+                var data = await ProTypeInfoBLL.QueryAsync("select TId,TName,TFloor from ProTypeInfo where TGroupType=@TGroupType and TDataStatus<>99 and TFloor<3", new { TGroupType = id });
+                if (data.ExistsData())
+                {
+                    list.Add(data.Where(t => t.TFloor == 1));
+                    list.Add(data.Where(t => t.TFloor == 2));
+                }
+                obj.Status = true;
+                obj.Data = list;
+                return Json(obj);
+            }
         }
     }
 }
