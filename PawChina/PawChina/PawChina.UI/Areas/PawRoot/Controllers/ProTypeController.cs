@@ -192,6 +192,11 @@ namespace PawChina.UI.Areas.PawRoot.Controllers
             return Content(await ProTypeInfoBLL.QueryAsync(model));
         }
 
+        /// <summary>
+        /// 加载商品分类或者配件分类
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<JsonResult> GetProTypes(int id)
         {

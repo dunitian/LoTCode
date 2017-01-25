@@ -250,3 +250,4 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+/PawChina/PawChina/PawChina.UI/lotFiles/2017-01-25
